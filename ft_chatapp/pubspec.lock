@@ -62,25 +62,25 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_signin_button:
+    dependency: "direct main"
+    description:
+      name: flutter_signin_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
-    dependency: "direct main"
-    description:
-      name: http
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.13.3"
-  http_parser:
+  font_awesome_flutter:
     dependency: transitive
     description:
-      name: http_parser
+      name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "9.0.0"
   matcher:
     dependency: transitive
     description:
@@ -102,13 +102,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.0"
   sky_engine:
     dependency: transitive
     description: flutter
