@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'auth/android_auth_provider.dart';
-import 'widgets/message_form.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
+
+import 'auth/stub.dart'
+    if (dart.library.io) 'auth/android_auth_provider.dart'
+    if (dart.library.html) 'auth/web_auth_provider.dart';
+
+import 'widgets/message_form.dart';
 import 'widgets/message_wall.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MyHomePage(title: 'Chat app'),
+      home: MyHomePage(title: 'The Chat Crew'),
     );
   }
 }
