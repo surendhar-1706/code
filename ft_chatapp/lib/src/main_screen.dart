@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+//importing
+import 'test_encrypt/encryption.dart';
 import 'auth/stub.dart'
     if (dart.library.io) 'auth/android_auth_provider.dart'
     if (dart.library.html) 'auth/web_auth_provider.dart';
@@ -14,12 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'The Chat Crew',
+      title: 'Group Chat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MyHomePage(title: 'The Chat Crew'),
+      home: MyHomePage(title: 'Group Chat'),
     );
   }
 }
@@ -72,13 +73,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _addMessage(String value) async {
     final user = FirebaseAuth.instance.currentUser;
+    String encryptedvalue = Encryptionalgo.encryptAES(value);
     if (user != null) {
       await widget.store.add({
         'author': user.displayName ?? 'Anonymous',
         'author_id': user.uid,
         'photo_url': user.photoURL ?? 'https://placehold.it/100x100',
         'timestamp': Timestamp.now().millisecondsSinceEpoch,
-        'value': value,
+        'value': encryptedvalue,
       });
     }
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:ft_chatapp/src/test_encrypt/encryption.dart';
 
 class ChatMessage extends StatelessWidget {
   final int index;
@@ -14,6 +16,9 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String encryptedvalue = data['value'];
+    final encrypted = encrypt.Encrypted.fromBase16(encryptedvalue);
+    String newencrypted = Encryptionalgo.decryptAES(encrypted);
     return Container(
       margin: EdgeInsets.only(
         top: hasPadding == true ? 15 : 5,
@@ -36,7 +41,7 @@ class ChatMessage extends StatelessWidget {
               vertical: 12,
             ),
             child: Text(
-              data['value'],
+              newencrypted,
               style: TextStyle(color: Colors.white),
             ),
           )

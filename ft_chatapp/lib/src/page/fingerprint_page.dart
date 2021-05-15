@@ -14,7 +14,7 @@ class FingerprintPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildAvailability(context),
+                // buildAvailability(context),
                 SizedBox(height: 24),
                 buildAuthenticate(context),
               ],
@@ -23,31 +23,31 @@ class FingerprintPage extends StatelessWidget {
         ),
       );
 
-  Widget buildAvailability(BuildContext context) => buildButton(
-        text: 'Check Availability',
-        icon: Icons.event_available,
-        onClicked: () async {
-          final isAvailable = await LocalAuthApi.hasBiometrics();
-          final biometrics = await LocalAuthApi.getBiometrics();
+  // Widget buildAvailability(BuildContext context) => buildButton(
+  //       text: 'Check Availability',
+  //       icon: Icons.event_available,
+  //       onClicked: () async {
+  //         final isAvailable = await LocalAuthApi.hasBiometrics();
+  //         final biometrics = await LocalAuthApi.getBiometrics();
 
-          final hasFingerprint = biometrics.contains(BiometricType.fingerprint);
+  //         final hasFingerprint = biometrics.contains(BiometricType.fingerprint);
 
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Availability'),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  buildText('Biometrics', isAvailable),
-                  buildText('Fingerprint', hasFingerprint),
-                ],
-              ),
-            ),
-          );
-        },
-      );
+  //         showDialog(
+  //           context: context,
+  //           builder: (context) => AlertDialog(
+  //             title: Text('Availability'),
+  //             content: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 buildText('Biometrics', isAvailable),
+  //                 buildText('Fingerprint', hasFingerprint),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     );
 
   Widget buildText(String text, bool checked) => Container(
         margin: EdgeInsets.symmetric(vertical: 8),

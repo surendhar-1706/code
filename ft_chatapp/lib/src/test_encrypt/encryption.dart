@@ -11,12 +11,13 @@ class Encryptionalgo {
     print(encrypted.bytes);
     print(encrypted.base16);
     print(encrypted.base64);
-    return encrypted;
+    return encrypted.base16.toString();
   }
 
   static decryptAES(text) {
     final decrypted = encrypter.decrypt(text, iv: iv);
     print(decrypted);
-    return decrypted;
+    print('hello world');
+    return decrypted.toString();
   }
 }
