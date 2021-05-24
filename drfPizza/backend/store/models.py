@@ -38,7 +38,10 @@ class Product(models.Model):
             "name":{
                 "max_length":_("Please enter less than 99")
             }
-        }
+        },
+        max_digits=5,
+        decimal_places=2
+
     )
     discount_price = models.DecimalField(
         verbose_name=_("Discount Price"),
@@ -47,7 +50,10 @@ class Product(models.Model):
             "name":{
                 "max_length":_("Discounted")
             }
-        }
+        },
+        max_digits=5,
+        decimal_places=2
+
 
 
     )
@@ -55,7 +61,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True,editable=False)
     updated_at = models.DateTimeField(auto_now_add=True, null=True)
     class Meta:
-        ordering = ('-created_at')
+        ordering = ('-created_at',)
 
     def get_absolute_url(self):
         return reverse("store:category list",args=[self.slug])
@@ -71,9 +77,9 @@ class ProductSpecificationValue(models.Model):
     def __str__(self):
         return self.value
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product,related_name='product_image')
-    image = models.ImageField(upload_to='images')
-    default='default.png'
+    product = models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images', default='default.png')
+   
     alt_text = models.CharField(max_length=200,blank=True,null=True)
     is_feautre = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True,editable=False)
