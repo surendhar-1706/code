@@ -6,6 +6,7 @@ import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Create from './components/Create';
 import ListDetails from './components/ListDetails';
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
         <Route path ='/create'><Create/></Route>
         <Route path ='/todo/:id'><ListDetails/> </Route>
+        <Route path ='*'><NotFound/></Route>
       </Switch>
     </Router>
     
