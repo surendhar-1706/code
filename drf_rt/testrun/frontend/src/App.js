@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import Create from './components/Create';
 import ListDetails from './components/ListDetails';
 import NotFound from './components/NotFound';
+import SignUp from './components/Register';
+import SignIn from './components/Login';
 
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
 
         <Route path ='/create'><Create/></Route>
         <Route path ='/todo/:id'><ListDetails/> </Route>
+        <Route path ='/signup'><SignUp/></Route>
+        <Route path ='/login'><SignIn/> </Route>
+        {/* <Route path ='/logout'><Signo </Route> */}
         <Route path ='*'><NotFound/></Route>
       </Switch>
     </Router>
