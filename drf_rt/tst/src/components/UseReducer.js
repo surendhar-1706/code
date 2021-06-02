@@ -10,28 +10,15 @@ const reducer = (state, action) => {
       return state;
   }
 };
-function App() {
+function UseReducer() {
   const [count, dispatch] = useReducer(reducer, 0);
   return (
     <div>
       <h1>Count is : {count}</h1>
-      <button
-        onClick={() => {
-          dispatch({ type: "increment" });
-        }}
-      >
-        Increment
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: "decrement" });
-        }}
-      >
-        Decrement
-      </button>
-      hey man
+      <button onClick={dispatch({ type: "increment" })}>Increment</button>
+      <button onClick={dispatch({ type: "decrement" })}>Decrement</button>
     </div>
   );
 }
 
-export default App;
+export default UseReducer;
