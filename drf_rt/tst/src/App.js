@@ -1,35 +1,35 @@
-import React, { useReducer } from "react";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "increment":
-      return state + 1;
-    case "decrement":
-      return state - 1;
-    default:
-      return state;
-  }
-};
+import React, { createContext, useReducer } from "react";
+import SecondCounter from "./components/SecondCounter";
+import UseReducer_todo from "./components/UseReducer_todo";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+export const UserContext = createContext();
+export const ProffesionContext = createContext();
 function App() {
-  const [count, dispatch] = useReducer(reducer, 0);
   return (
     <div>
-      <h1>Count is : {count}</h1>
-      <button
-        onClick={() => {
-          dispatch({ type: "increment" });
-        }}
-      >
-        Increment
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: "decrement" });
-        }}
-      >
-        Decrement
-      </button>
-      hey man
+      {/* <UseReducer_todo /> */}
+      <Router>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/counter">Counter</Link>
+        <Switch>
+          <UserContext.Provider value={"Surendhar"}>
+            <ProffesionContext.Provider value={"FullStack Trader"}>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/counter">
+                <SecondCounter />
+              </Route>
+            </ProffesionContext.Provider>
+          </UserContext.Provider>
+        </Switch>
+      </Router>
     </div>
   );
 }
