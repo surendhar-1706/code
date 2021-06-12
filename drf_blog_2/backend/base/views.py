@@ -5,6 +5,12 @@ from rest_framework import generics
 
 
 # Create your views here.
-class ProductList(generics.ListAPIView):
+class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerialzier
+
+class Product(generics.RetrieveAPIView):
+    lookup_field = 'pk'
+    queryset = Product.objects.all()
+    serializer_class = ProductSerialzier
+
