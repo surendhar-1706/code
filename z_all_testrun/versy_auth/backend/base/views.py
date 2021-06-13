@@ -12,6 +12,11 @@ class ArticleList(generics.ListAPIView):
     serializer_class = ArticleSerializer
 
 
-class ArticleDetail(generics.RetrieveAPIView):
+class ArticleCreate(generics.CreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer

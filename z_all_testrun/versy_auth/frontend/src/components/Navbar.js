@@ -10,12 +10,15 @@ function Navbar({ children }) {
           </div>
           <div className="pr-2">
             <Link to="/">Home</Link>
+            <Link className="pl-2" to="/create">
+              New Blog
+            </Link>
           </div>
         </div>
       </nav>
       <div className="min-h-screen">{children}</div>
 
-      <footer className="w-full bg-gray-200 text-gray-800 py-1 flex justify-center">
+      <footer className="w-full mt-16 bg-gray-200 text-gray-800 py-1 flex justify-center">
         <h1> This is our footer</h1>
       </footer>
     </>

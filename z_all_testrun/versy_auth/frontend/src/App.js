@@ -4,6 +4,7 @@ import HomePage from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import ArticleDetail from "./components/ArticleDetail";
+import ArticleForm from "./pages/FormPage";
 function App() {
   return (
     <div>
@@ -13,8 +14,11 @@ function App() {
             <Route exact path="/">
               <HomePage />
             </Route>
-            <Route path="/:id">
+            <Route path="/article/:id">
               <ArticleDetail />
+            </Route>
+            <Route path="/create">
+              <ArticleForm />
             </Route>
           </Switch>
         </Navbar>
