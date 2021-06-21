@@ -13,6 +13,12 @@ function Navbar({ children }) {
             <Link className="pl-2" to="/create">
               New Blog
             </Link>
+            <Link className="pl-2" to="/login">
+              Login
+            </Link>
+            <Link className="pl-2" to="/register">
+              Register
+            </Link>
           </div>
         </div>
       </nav>

@@ -20,7 +20,12 @@ function ArticleForm() {
     console.log({ formstate });
     fetch("http://localhost:8000/api/article/create/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("access_token")
+          ? "JWT " + localStorage.getItem("access_token")
+          : null,
+      },
       body: JSON.stringify({
         title: formstate.title,
         content: formstate.content,
