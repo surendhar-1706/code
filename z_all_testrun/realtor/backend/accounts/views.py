@@ -10,7 +10,7 @@ User = get_user_model()
 class SignupView(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def post(self):
+    def post(self, request):
         data = self.request.data
         email = data['email']
         name = data['name']

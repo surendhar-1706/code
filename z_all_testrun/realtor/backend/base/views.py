@@ -15,7 +15,6 @@ class RealtorListView(generics.ListAPIView):
     # permission_classes = [permissions.IsAuthenticated]
     queryset = Realtor.objects.all()
     serializer_class = RealtorSerializer
-    pagination_class = None
 
 
 class RealtorView(generics.RetrieveAPIView):
@@ -27,7 +26,6 @@ class TopSellerView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = Realtor.objects.filter(top_seller=True)
     serializer_class = RealtorSerializer
-    pagination_class = None
 
 
 class ListingsView(generics.ListAPIView):

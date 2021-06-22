@@ -9,3 +9,4 @@ urlpatterns = [
     path('listing/<slug>/', ListingView.as_view()),
      path('contacts/', ContactCreateView.as_view()),
 ]
+ 
