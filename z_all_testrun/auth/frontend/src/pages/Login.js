@@ -10,7 +10,7 @@ function Login() {
   });
   const { email, password } = state;
   const onChange = (e) => {
-    return setstate({
+    return setstate({ 
       ...state,
       [e.target.name]: e.target.value,
     });

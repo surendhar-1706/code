@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 function Home() {
   const [state, setdata] = useState({ isloading: true, data: null });
   const [pagination, setpagination] = useState({ next: null, previous: null });
+  const handleclickview = () => {
+    console.log("clicked handle click");
+  };
   useEffect(async () => {
     const fetched_data = await fetch("http://localhost:8000/api/base/listing/");
     const json_data = await fetched_data.json();
@@ -47,7 +50,7 @@ function Home() {
 
   return (
     <div className=" py-20 px-20">
-      <div className="grid grid-cols-3 gap-10">
+      <div className="md:grid grid-cols-3 gap-10">
         {state.isloading
           ? "Loading "
           : state.data.results.map((d) => {
@@ -73,31 +76,43 @@ function Home() {
                       <div className="p-2">{d.sale_type}</div>
                       <div className="p-2">{d.home_type}</div>
                     </div>
+                    <div className="flex justify-center my-2">
+                      <Link to={`/listing/${d.slug}`}>
+                        <button
+                          onClick={handleclickview}
+                          className="bg-purple-300 p-1 px-4 border rounded hover:text-white hover:bg-purple-400"
+                        >
+                          View
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
             })}
       </div>
-      {pagination.previous ? (
-        <button
-          onClick={handleClickPrevious}
-          className="border p-2 bg-purple-300 hover:bg-purple-400 hover:text-white"
-        >
-          Previous
-        </button>
-      ) : (
-        console.log("")
-      )}
-      {pagination.next ? (
-        <button
-          onClick={handleClickNext}
-          className="border p-2 bg-purple-300 hover:bg-purple-400 hover:text-white"
-        >
-          Next
-        </button>
-      ) : (
-        console.log("")
-      )}
+      <div className="flex justify-center my-8 space-x-3">
+        {pagination.previous ? (
+          <button
+            onClick={handleClickPrevious}
+            className="border p-2 bg-purple-300 hover:bg-purple-400 hover:text-white"
+          >
+            Previous
+          </button>
+        ) : (
+          console.log("")
+        )}
+        {pagination.next ? (
+          <button
+            onClick={handleClickNext}
+            className="border  p-2  bg-purple-300 hover:bg-purple-400 hover:text-white"
+          >
+            Next
+          </button>
+        ) : (
+          console.log("")
+        )}
+      </div>
     </div>
   );
 }

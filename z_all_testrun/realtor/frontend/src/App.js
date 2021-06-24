@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import About from "./pages/About";
 import Listing from "./pages/Listing";
 import Contact from "./pages/Contact";
+import ListingDetails from "./pages/ListingDetails";
 import AuthContextProvider from "./context/AuthContextProvider";
 function App() {
   return (
@@ -19,19 +20,22 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
-            <Route path="/contact">
+            <Route exact path="/contact">
               <Contact />
             </Route>
-            <Route path="/about">
+            <Route exact path="/about">
               <About />
             </Route>
-            <Route path="/listing">
+            <Route exact path="/listing">
               <Listing />
             </Route>
-            <Route path="/signup">
+            <Route exact path="/listing/:slug">
+              <ListingDetails />
+            </Route>
+            <Route exact path="/signup">
               <Signup />
             </Route>
           </AuthContextProvider>

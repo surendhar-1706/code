@@ -31,7 +31,7 @@ function Login() {
     });
   };
   return (
-    <div className=" center flex items-center py-40">
+    <div className=" center flex items-center py-40 min-h-screen">
       <form>
         <label className="block">Email</label>
         <input
