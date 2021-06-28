@@ -1,15 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import AuthContextProvider from "../context/AuthContextProvider";
 import { AuthContext } from "../context/AuthContextProvider";
 
 function Login() {
+  const history = useHistory();
   const { authstate, dispatch } = useContext(AuthContext);
   const [formdata, setformdata] = useState({ email: "", password: "" });
   const [buttonstate, setbuttonstate] = useState(false);
+  useEffect(() => {
+    console.log("use effect ran in login page");
+    if (authstate.isAuthenticated) {
+      history.push("/");
+    }
+  }, []);
+  const handleLogout = () => {
+    dispatch({
+      type: "logout",
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formdata);
-    const fetched_data = await fetch("http://localhost:8000/api/token/", {
+    const fetched_data = await fetch("http://localhost:8000/auth/jwt/create", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -55,10 +68,26 @@ function Login() {
         >
           Submit
         </button>
+
+        <div>
+          {authstate.isAuthenticated ? "Authenticated" : "Not Authenticated"}
+        </div>
       </form>
-      {authstate.isAuthenticated ? "Authenticated" : "Not Authenticated"}
+      <button
+        className="border"
+        onClick={handleLogout}
+        className="block mt-2 bg-purple-300 p-2 rounded-md hover:bg-purple-400 hover:text-white"
+      >
+        Logout
+      </button>
     </div>
   );
 }
 
 export default Login;
+
+//what to do
+//1.only allow authenticated requests
+//2.Create private routes
+//3.If authenticated don't allow user to go to login or signup page
+//4.If not authenticated redirect to login page

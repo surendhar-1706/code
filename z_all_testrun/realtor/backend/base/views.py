@@ -30,7 +30,7 @@ class TopSellerView(generics.ListAPIView):
 
 class ListingsView(generics.ListAPIView):
     queryset = Listing.objects.order_by('-list_date').filter(is_published=True)
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.IsAuthenticated, )
     serializer_class = ListingSerializer
     lookup_field = 'slug'
 

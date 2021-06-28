@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
-
+import TransitionAlerts from "../components/Alert";
 function Signup() {
   const { authstate } = useContext(AuthContext);
+  const [alertstate, setalertstate] = useState(false);
   const [formdata, setformdata] = useState({
     email: "",
     name: "",
@@ -12,18 +13,23 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formdata);
-    fetch("http://localhost:8000/api/accounts/signup/", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: formdata.email,
-        name: formdata.name,
-        password: formdata.password,
-        password2: formdata.password2,
-      }),
-    });
+    if (formdata.password === formdata.password2) {
+      fetch("http://localhost:8000/api/accounts/signup/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formdata.email,
+          name: formdata.name,
+          password: formdata.password,
+          password2: formdata.password2,
+        }),
+      });
+      setalertstate(false);
+    } else {
+      setalertstate(true);
+    }
   };
   const handleChange = (e) => {
     setformdata({
@@ -32,7 +38,7 @@ function Signup() {
     });
   };
   return (
-    <div className=" center flex items-center py-40">
+    <div className="  py-40">
       <form>
         <label className="block">Email</label>
         <input
@@ -71,7 +77,36 @@ function Signup() {
           Submit
         </button>
       </form>
-      {authstate.isAuthenticated ? "Authenticated" : "Not Authenticated"}
+      <div className="block">
+        {" "}
+        {authstate.isAuthenticated ? "Authenticated" : "Not Authenticated"}
+      </div>
+      {alertstate && (
+        <div className="border transition duration-500  border-red-400  rounded p-2 relative w-60 flex items-center justify-between">
+          <span role="alert" className="text-red-500">
+            Password Not matching
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-red-400 "
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            role="button"
+            onClick={() => {
+              console.log("button svg clicked");
+              setalertstate(false);
+            }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }

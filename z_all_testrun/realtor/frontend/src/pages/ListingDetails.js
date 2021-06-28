@@ -65,7 +65,7 @@ function ListingDetails() {
           <div className="md:grid mt-4 gap-10 grid-cols-4  ">
             <div className="mb-4">
               <img
-                className="  w-full h-48  md:object-cover"
+                className="  w-full h-48 transition duration-500 ease-linear transform hover:-translate-y-5 hover:scale-110"
                 src={state.data.photo_1}
               />
             </div>
@@ -83,10 +83,16 @@ function ListingDetails() {
               />
             </div>
             <div className="mb-4">
-              <img className="w-full h-48" src={state.data.photo_4} />
+              <img
+                className="w-full h-48 transition duration-500 ease-linear transform hover:-translate-y-5 hover:scale-110"
+                src={state.data.photo_4}
+              />
             </div>
             <div className="mb-4">
-              <img className="w-full h-48 " src={state.data.photo_5} />
+              <img
+                className="w-full h-48 transition duration-500 ease-linear transform hover:-translate-y-5 hover:scale-110-48 "
+                src={state.data.photo_5}
+              />
             </div>
           </div>
         </div>
