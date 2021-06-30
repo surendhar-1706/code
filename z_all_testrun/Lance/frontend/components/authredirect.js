@@ -1,18 +1,51 @@
-import React from "react";
 import { useRouter } from "next/router";
-function authredirect(WrappedComponent) {
-  return () => {
-    if (typeof window !== "undefined") {
-      const router = useRouter();
+import { useContext, useEffect, useState } from "react";
+import login from "../pages/login";
+import { AuthContext } from "../context/AuthContext";
+import Empty from "./empty";
+const withAuth = (WrappedComponent) => {
+  return (props) => {
+    const { authstate } = useContext(AuthContext);
+    const Router = useRouter();
+    const [verified, setVerified] = useState(false);
+
+    useEffect(async () => {
       const accessToken = localStorage.getItem("access_token");
-      if (accessToken) {
-        router.replace("/");
-        return null;
+
+      if (!accessToken) {
+        Router.replace("/login");
+      } else {
+        const fetched_data = await fetch(
+          "http://localhost:8000/auth/jwt/verify",
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: accessToken,
+            }),
+          }
+        );
+        const json_data = await fetched_data.json();
+        // if token was verified we set the state.
+        if (json_data.code !== "token_not_valid") {
+          setVerified(true);
+          Router.replace("/");
+        } else {
+          // If the token was fraud we first remove it from localStorage and then redirect to "/"
+          localStorage.removeItem("accessToken");
+          Router.replace("/login");
+        }
       }
+    }, []);
+
+    if (authstate.isAuthenticated) {
+      return <Empty />;
+    } else {
       return <WrappedComponent {...props} />;
     }
-    return null;
   };
-}
+};
 
-export default authredirect;
+export default withAuth;

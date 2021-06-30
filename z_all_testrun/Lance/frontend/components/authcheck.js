@@ -1,25 +1,46 @@
 import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+
+import login from "../pages/login";
 const withAuth = (WrappedComponent) => {
   return (props) => {
-    // checks whether we are on client / browser or server.
-    if (typeof window !== "undefined") {
-      const Router = useRouter();
+    const Router = useRouter();
+    const [verified, setVerified] = useState(false);
 
+    useEffect(async () => {
       const accessToken = localStorage.getItem("access_token");
-
-      // If there is no access token we redirect to "/" page.
       if (!accessToken) {
         Router.replace("/login");
-        return null;
+      } else {
+        const fetched_data = await fetch(
+          "http://localhost:8000/auth/jwt/verify",
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: accessToken,
+            }),
+          }
+        );
+        const json_data = await fetched_data.json();
+        // if token was verified we set the state.
+        if (json_data.code !== "token_not_valid") {
+          setVerified(true);
+        } else {
+          // If the token was fraud we first remove it from localStorage and then redirect to "/"
+          localStorage.removeItem("accessToken");
+          Router.replace("/login");
+        }
       }
+    }, []);
 
-      // If this is an accessToken we just render the component that was passed with all its props
-
+    if (verified) {
       return <WrappedComponent {...props} />;
+    } else {
+      return null;
     }
-
-    // If we are on server, return null
-    return null;
   };
 };
 
