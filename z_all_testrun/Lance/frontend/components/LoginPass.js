@@ -36,10 +36,7 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
   };
   return (
     <div>
-      <nav className="p-4 text-green-500 relative font-bold text-xl pl-36">
-        <p className=" ">upwork</p>
-      </nav>
-      <hr className="mt-2"></hr>
+      
       <div className="flex justify-center pt-40  pb-20">
         <div className=" border rounded px-20  pt-10 pb-20 ">
           <div className="font-semibold text-2xl text-center">Welcome</div>
@@ -84,13 +81,6 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
           </div>
         </div>
       </div>
-
-      <footer className="bg-gray-800  text-white text-center ">
-        <div className=" pt-4 mb-2">© 2015 - 2021 Upwork® Global Inc.</div>
-        <div>Terms of Service</div>
-        <div>Privacy Policy</div>
-        <div> Accessibility</div>
-      </footer>
     </div>
   );
 }

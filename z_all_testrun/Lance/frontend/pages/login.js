@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import authredirect from "../components/authredirect";
 import withAuth from "../components/authcheck";
+import Layout from "../components/Layout";
 function login() {
   const { authstate } = useContext(AuthContext);
   const [userdata, setuserdata] = useState({ email: "", password: "" });
@@ -15,21 +16,23 @@ function login() {
   const router = useRouter();
 
   return (
-    <div className="">
-      {showcomponent ? (
-        <Login_Email
-          userdata={userdata}
-          setuserdata={setuserdata}
-          setshowcomponent={setshowcomponent}
-        />
-      ) : (
-        <LoginPass
-          userdata={userdata}
-          setuserdata={setuserdata}
-          handleChange={handleChange}
-        />
-      )}
-    </div>
+    <Layout>
+      <div className="">
+        {showcomponent ? (
+          <Login_Email
+            userdata={userdata}
+            setuserdata={setuserdata}
+            setshowcomponent={setshowcomponent}
+          />
+        ) : (
+          <LoginPass
+            userdata={userdata}
+            setuserdata={setuserdata}
+            handleChange={handleChange}
+          />
+        )}
+      </div>
+    </Layout>
   );
 }
 // export default login;

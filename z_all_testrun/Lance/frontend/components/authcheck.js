@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-
+import Empty from "./empty";
 import login from "../pages/login";
 const withAuth = (WrappedComponent) => {
   return (props) => {
@@ -30,7 +30,7 @@ const withAuth = (WrappedComponent) => {
           setVerified(true);
         } else {
           // If the token was fraud we first remove it from localStorage and then redirect to "/"
-          localStorage.removeItem("accessToken");
+          localStorage.removeItem("access_token");
           Router.replace("/login");
         }
       }

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import GoogleIcon from "../public/google-icon.png";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
@@ -20,10 +21,6 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
 
   return (
     <div>
-      <nav className="p-4 text-green-500 relative font-bold text-xl pl-36">
-        <p className=" ">upwork</p>
-      </nav>
-      <hr className="mt-2"></hr>
       <div className="flex justify-center pt-40  pb-20">
         <div className=" border rounded px-20  pt-10 pb-20 ">
           <div className="text-center font-semibold text-2xl mb-4">
@@ -74,18 +71,11 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
           <hr className="my-8"></hr>
           <div className="mt-8 text-center">
             <button className="rounded-full border  border-green-500 hover:bg-green-50  px-16 py-1">
-              Signup
+              <Link href="/signup">Signup</Link>
             </button>
           </div>
         </div>
       </div>
-
-      <footer className="bg-gray-800  text-white text-center ">
-        <div className=" pt-4 mb-2">© 2015 - 2021 Upwork® Global Inc.</div>
-        <div>Terms of Service</div>
-        <div>Privacy Policy</div>
-        <div> Accessibility</div>
-      </footer>
     </div>
   );
 }
