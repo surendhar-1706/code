@@ -12,7 +12,7 @@ function signup() {
           <div className="font-semibold text-3xl my-1">
             Get your free account
           </div>
-          <div className="my-4">
+          <div className="md:my-4">
             <button className="mt-2 flex items-center w-full  gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600">
               <Image
                 className="rounded-full overflow-hidden  "
@@ -21,7 +21,7 @@ function signup() {
                 width={30}
               />
 
-              <div className="pl-20">
+              <div className="md:px-20">
                 <div>Continue with Google</div>
               </div>
             </button>
@@ -50,7 +50,7 @@ function signup() {
           </div>
           <button
             type="submit"
-            className="mt-8 block text-white p-1 px-32 w-full bg-green-500 rounded-full hover:bg-green-600"
+            className="mt-8 block text-white p-1 md:px-32 w-full bg-green-500 rounded-full hover:bg-green-600"
           >
             Continue with Email
           </button>

@@ -8,6 +8,19 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
   const { authstate, dispatch } = useContext(AuthContext);
   const [formdata, setformdata] = useState({ email: "", password: "" });
   const [error, seterror] = useState(false);
+  const Continuewithgoogle = async (e) => {
+    try {
+      const fetched_data = await fetch(
+        "http://localhost:8000/auth/o/google-oauth2/?redirect_uri=http://localhost:8000/google"
+      );
+      const json_data = await fetched_data;
+
+      console.log(json_data.url);
+      window.location.replace(json_data.url);
+    } catch (err) {
+      console.log("from error in loginemail.js", err);
+    }
+  };
   const handlesubmit = (e) => {
     e.preventDefault();
     console.log("handle submit clicked");
@@ -52,20 +65,23 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
           <button
             type="submit"
             onClick={handlesubmit}
-            className="mt-8 block text-white px-16 py-1 bg-green-500 rounded-full hover:bg-green-600"
+            className="mt-8 block text-white md:px-16 p-1 w-full bg-green-500 rounded-full hover:bg-green-600"
           >
             Continue with Email
           </button>
           <p className="text-center p-2">or</p>
           <div>
-            <button className="mt-2 flex items-center  gap-3 w-full text-white bg-blue-500 rounded-full hover:bg-blue-600">
+            <button
+              onClick={Continuewithgoogle}
+              className="mt-2 flex items-center  gap-3 w-full text-white bg-blue-500 rounded-full hover:bg-blue-600"
+            >
               <Image
                 className="rounded-full overflow-hidden  "
                 src={GoogleIcon}
                 height={30}
                 width={30}
               />
-              <span className="pl-4">Continue with Google</span>
+              <span className="md:pl-4 p-1">Continue with Google</span>
             </button>
           </div>
           <hr className="my-8"></hr>

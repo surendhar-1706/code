@@ -23,7 +23,7 @@ function Layout({ children }) {
       </nav>
       <hr className="mt-2"></hr>
       {children}
-      <footer className="bg-gray-800  text-white text-center ">
+      <footer className="bg-gray-800 text-white text-center ">
         <div className=" pt-4 mb-2">© 2015 - 2021 Upwork® Global Inc.</div>
         <div>Terms of Service</div>
         <div>Privacy Policy</div>
