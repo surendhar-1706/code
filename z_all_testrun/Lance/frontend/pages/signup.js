@@ -5,6 +5,19 @@ import authredirect from "../components/authredirect";
 import Layout from "../components/Layout";
 
 function signup() {
+  const Continuewithgoogle = async (e) => {
+    try {
+      const fetched_data = await fetch(
+        "http://localhost:8000/auth/o/google-oauth2/?redirect_uri=http://localhost:3000/google"
+      );
+      const json_data = await fetched_data.json();
+
+      console.log(json_data.authorization_url);
+      window.location.replace(json_data.authorization_url);
+    } catch (err) {
+      console.log("from error in loginemail.js", err);
+    }
+  };
   return (
     <Layout>
       <div className="flex justify-center py-40 text-center">
@@ -13,7 +26,10 @@ function signup() {
             Get your free account
           </div>
           <div className="md:my-4">
-            <button className="mt-2 flex items-center w-full  gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600">
+            <button
+              onClick={Continuewithgoogle}
+              className="mt-2 flex items-center w-full  gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600"
+            >
               <Image
                 className="rounded-full overflow-hidden  "
                 src={GoogleIcon}

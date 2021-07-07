@@ -8,19 +8,7 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
   const { authstate, dispatch } = useContext(AuthContext);
   const [formdata, setformdata] = useState({ email: "", password: "" });
   const [error, seterror] = useState(false);
-  const Continuewithgoogle = async (e) => {
-    try {
-      const fetched_data = await fetch(
-        "http://localhost:8000/auth/o/google-oauth2/?redirect_uri=http://localhost:8000/google"
-      );
-      const json_data = await fetched_data;
 
-      console.log(json_data.url);
-      window.location.replace(json_data.url);
-    } catch (err) {
-      console.log("from error in loginemail.js", err);
-    }
-  };
   const handlesubmit = (e) => {
     e.preventDefault();
     console.log("handle submit clicked");
@@ -72,7 +60,7 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
           <p className="text-center p-2">or</p>
           <div>
             <button
-              onClick={Continuewithgoogle}
+              // onClick={Continuewithgoogle}
               className="mt-2 flex items-center  gap-3 w-full text-white bg-blue-500 rounded-full hover:bg-blue-600"
             >
               <Image
