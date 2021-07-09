@@ -7,13 +7,13 @@ export const AuthReducer = (state, action) => {
       };
     case "login_success":
       const { payload, type } = action;
-      localStorage.setItem("access_token", payload.json_data.access);
-      localStorage.setItem("refresh_token", payload.json_data.refresh);
+      localStorage.setItem("access_token", payload.json_data.access_token);
+      localStorage.setItem("refresh_token", payload.json_data.refresh_token);
       return {
         ...state,
         isAuthenticated: true,
-        access: payload.json_data.access,
-        refresh: payload.json_data.refresh,
+        access: payload.json_data.access_token,
+        refresh: payload.json_data.refresh_token,
       };
     case "login_fail":
       localStorage.removeItem("access_token");

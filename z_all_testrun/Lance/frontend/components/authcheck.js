@@ -13,7 +13,7 @@ const withAuth = (WrappedComponent) => {
         Router.replace("/login");
       } else {
         const fetched_data = await fetch(
-          "http://localhost:8000/auth/jwt/verify",
+          "http://localhost:8000/auth/token/verify/",
           {
             method: "post",
             headers: {

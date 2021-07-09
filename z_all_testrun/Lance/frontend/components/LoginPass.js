@@ -8,19 +8,16 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
     e.preventDefault();
     console.log(userdata);
     try {
-      const fetched_data = await fetch(
-        "http://localhost:8000/auth/jwt/create",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: userdata.email,
-            password: userdata.password,
-          }),
-        }
-      );
+      const fetched_data = await fetch("http://localhost:8000/auth/login/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userdata.email,
+          password: userdata.password,
+        }),
+      });
       const json_data = await fetched_data.json();
       console.log(json_data);
       dispatch({
@@ -36,7 +33,6 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
   };
   return (
     <div>
-      
       <div className="flex justify-center pt-40  pb-20">
         <div className=" border rounded px-20  pt-10 pb-20 ">
           <div className="font-semibold text-2xl text-center">Welcome</div>

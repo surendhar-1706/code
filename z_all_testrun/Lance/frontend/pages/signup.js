@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import GoogleIcon from "../public/google-icon.png";
 import Image from "next/image";
 import authredirect from "../components/authredirect";
 import Layout from "../components/Layout";
+import dynamic from "next/dynamic";
 
-function signup() {
+import { AuthContext } from "../context/AuthContext";
+import { useRouter } from "next/router";
+const GoogleLogin = dynamic(() => import("react-google-login"), { ssr: false });
+function Signup() {
+  const Router = useRouter();
+  const { dispatch } = useContext(AuthContext);
+  const responseGoogle = async (response) => {
+    const { accessToken } = response;
+    if (accessToken) {
+      try {
+        const fetched_data = await fetch("http://127.0.0.1:8000/auth/google/", {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            access_token: accessToken,
+          }),
+        });
+        const json_data = await fetched_data.json();
+        console.log(json_data);
+        dispatch({
+          type: "login_success",
+          payload: { json_data },
+        });
+        Router.replace("/");
+      } catch (err) {
+        console.log("login fail error from google", err);
+        dispatch({
+          type: "login_fail",
+        });
+      }
+    }
+  };
   const Continuewithgoogle = async (e) => {
     try {
       const fetched_data = await fetch(
@@ -25,22 +59,32 @@ function signup() {
           <div className="font-semibold text-3xl my-1">
             Get your free account
           </div>
-          <div className="md:my-4">
-            <button
-              onClick={Continuewithgoogle}
-              className="mt-2 flex items-center w-full  gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600"
-            >
-              <Image
-                className="rounded-full overflow-hidden  "
-                src={GoogleIcon}
-                height={30}
-                width={30}
-              />
+          <div className="mt-4  flex w-full items-center gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600 ">
+            <Image
+              className="rounded-full overflow-hidden"
+              src={GoogleIcon}
+              height={30}
+              width={30}
+            />
 
-              <div className="md:px-20">
-                <div>Continue with Google</div>
-              </div>
-            </button>
+            <div className="md:px-20">
+              <GoogleLogin
+                render={(renderProps) => (
+                  <button
+                    className=""
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    Continue with google
+                  </button>
+                )}
+                className=""
+                clientId="915969950645-1a5ual76bqknd89kgm6uvdtrr1vfs01e.apps.googleusercontent.com"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+            </div>
           </div>
           <div className="my-2 text-gray-500">or</div>
           <div className="flex border hover:border-green-500 focus:border-green-500">
@@ -76,4 +120,4 @@ function signup() {
   );
 }
 
-export default authredirect(signup);
+export default authredirect(Signup);

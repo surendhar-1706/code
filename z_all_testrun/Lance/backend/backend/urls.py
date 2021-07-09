@@ -23,8 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('dj_rest_auth.urls')),
+    path('auth/google/', GoogleLogin.as_view()),
+    # path('auth/', include('dj_rest_auth.urls')),
+    # path('auth/registration/', include('dj_rest_auth.registration.urls'))
+    # path('auth/', include('djoser.urls')),
+    # path('auth/', include('djoser.urls.jwt')),
     path('auth/', include('djoser.social.urls')),
     # path('google/', RedirectSocial.as_view())
 ]

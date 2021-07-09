@@ -5,9 +5,9 @@ import GoogleIcon from "../public/google-icon.png";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 function Login_Email({ setshowcomponent, setuserdata, userdata }) {
-  const { authstate, dispatch } = useContext(AuthContext);
+  // const { authstate, dispatch } = useContext(AuthContext);
   const [formdata, setformdata] = useState({ email: "", password: "" });
-  const [error, seterror] = useState(false);
+  // const [error, seterror] = useState(false);
 
   const handlesubmit = (e) => {
     e.preventDefault();

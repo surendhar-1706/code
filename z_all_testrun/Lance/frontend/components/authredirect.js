@@ -22,7 +22,7 @@ const withAuth = (WrappedComponent) => {
       // }
       else if (accessToken) {
         const fetched_data = await fetch(
-          "http://localhost:8000/auth/jwt/verify",
+          "http://localhost:8000/auth/token/verify/",
           {
             method: "post",
             headers: {

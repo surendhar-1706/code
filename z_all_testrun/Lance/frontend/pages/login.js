@@ -6,14 +6,13 @@ import { useRouter } from "next/router";
 import authredirect from "../components/authredirect";
 import withAuth from "../components/authcheck";
 import Layout from "../components/Layout";
-function login() {
+function Login() {
   const { authstate } = useContext(AuthContext);
   const [userdata, setuserdata] = useState({ email: "", password: "" });
   const [showcomponent, setshowcomponent] = useState(true);
   const handleChange = (e) => {
     setuserdata({ ...userdata, [e.target.name]: e.target.value });
   };
-  const router = useRouter();
 
   return (
     <Layout>
@@ -37,4 +36,4 @@ function login() {
 }
 // export default login;
 
-export default authredirect(login);
+export default authredirect(Login);
