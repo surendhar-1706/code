@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import GoogleIcon from "../public/google-icon.png";
 import Image from "next/image";
 import authredirect from "../components/authredirect";
@@ -7,11 +7,14 @@ import dynamic from "next/dynamic";
 
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
+
 const GoogleLogin = dynamic(() => import("react-google-login"), { ssr: false });
 function Signup() {
+  const [error, seterror] = useState({ iserror: false, data: "" });
   const Router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const responseGoogle = async (response) => {
+    console.log("from signup printing response", response);
     const { accessToken } = response;
     if (accessToken) {
       try {
@@ -26,17 +29,32 @@ function Signup() {
         });
         const json_data = await fetched_data.json();
         console.log(json_data);
-        dispatch({
-          type: "login_success",
-          payload: { json_data },
-        });
-        Router.replace("/");
+        console.log(json_data.non_field_errors[0]);
+        if (
+          json_data.non_field_errors ==
+          "User is already registered with this e-mail address."
+        ) {
+          seterror({
+            iserror: true,
+            data: json_data.non_field_errors[0],
+          });
+
+          Router.push("/signup");
+        } else {
+          dispatch({
+            type: "login_success",
+            payload: { json_data },
+          });
+          Router.replace("/");
+        }
       } catch (err) {
         console.log("login fail error from google", err);
         dispatch({
           type: "login_fail",
         });
       }
+    } else {
+      console.log("no access token found ");
     }
   };
   const Continuewithgoogle = async (e) => {
@@ -59,6 +77,7 @@ function Signup() {
           <div className="font-semibold text-3xl my-1">
             Get your free account
           </div>
+          {error.iserror ? error.data : ""}
           <div className="mt-4  flex w-full items-center gap-3  text-white bg-blue-500 rounded-full hover:bg-blue-600 ">
             <Image
               className="rounded-full overflow-hidden"

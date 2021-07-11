@@ -36,17 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'corsheaders',
-    # apps
-    'base',
-    'accounts',
+    'rest_framework_swagger',
+
     # rest_framework
     'rest_framework',
     'rest_framework.authtoken',
-    # jwt
-    'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
+
     # django rest auth
     'dj_rest_auth',
+    'dj_rest_auth.registration',
     # social
     'allauth',
     'allauth.account',
@@ -55,6 +53,14 @@ INSTALLED_APPS = [
     # djoser
     # 'djoser',
     # 'social_django',
+    # jwt
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    # apps
+    'base',
+    'accounts',
+    'tokenmanager',
+
 ]
 SITE_ID = 2
 
@@ -86,6 +92,9 @@ TEMPLATES = [
                 # 'social_django.context_processors.backends',
                 # 'social_django.context_processors.login_redirect',
             ],
+            'libraries': {
+                'staticfiles': 'django.templatetags.static',
+            }
         },
     },
 ]
@@ -128,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -144,6 +153,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -162,6 +172,7 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
@@ -169,11 +180,15 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+
+
 }
+
+
 REST_USE_JWT = True
 AUTHENTICATION_BACKENDS = (
-
+    'allauth.account.auth_backends.AuthenticationBackend',
     # 'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 
@@ -183,16 +198,17 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'resetpassworldsharity@gmail.com'
-EMAIL_HOST_PASSWORD = 'user@123'
+EMAIL_HOST_PASSWORD = 'xpkmiflukrzogxho'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=20),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
@@ -224,6 +240,9 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+LOGIN_URL = 'http://localhost:3000/'
 # white_list = ['http://localhost:8000', 'http://localhost:3000/google']
 # DJOSER = {
 #     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',

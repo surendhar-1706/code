@@ -17,20 +17,29 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic import TemplateView
+from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView
+from dj_rest_auth.registration.views import RegisterView, VerifyEmailView
 from .views import *
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
+from django.views.generic import TemplateView, RedirectView
+schema_view = get_swagger_view(title='Pastebin API')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    # restframework url
     path('api-auth/', include('rest_framework.urls')),
+    # dj rest auth
     path('auth/', include('dj_rest_auth.urls')),
+    path('auth/registration/', include('dj_rest_auth.registration.urls')),
+    # rest auth social
     path('auth/google/', GoogleLogin.as_view()),
-    # path('auth/', include('dj_rest_auth.urls')),
-    # path('auth/registration/', include('dj_rest_auth.registration.urls'))
-    # path('auth/', include('djoser.urls')),
-    # path('auth/', include('djoser.urls.jwt')),
-    path('auth/', include('djoser.social.urls')),
-    # path('google/', RedirectSocial.as_view())
+    path('accounts/', include('allauth.urls'), name='socialaccount_signup'),
+    # swagger
+    path('', schema_view),
+    url(r'^', include('django.contrib.auth.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
