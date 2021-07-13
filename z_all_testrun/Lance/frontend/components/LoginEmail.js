@@ -42,7 +42,7 @@ function Login_Email({ setshowcomponent, setuserdata, userdata }) {
             </svg>
 
             <input
-              className="ml-2 boder-none focus:outline-none w-full"
+              className="ml-2 border-none focus:outline-none w-full"
               placeholder="Username or Email"
               name="email"
               type="email"
