@@ -25,14 +25,17 @@ export const AuthReducer = (state, action) => {
         refresh: null,
       };
     case "logout":
+      console.log("logout action triggered");
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
       return {
         ...state,
         isAuthenticated: false,
+        access: null,
+        refresh: null,
       };
     case "authenticated":
-      console.log("is authenticated ran from reducer");
+      console.log("is authenticated ran from reducer from authreducer");
       return {
         ...state,
         isAuthenticated: true,

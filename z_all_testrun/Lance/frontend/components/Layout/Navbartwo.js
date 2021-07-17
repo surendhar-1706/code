@@ -4,12 +4,12 @@ import SendIcon from "@material-ui/icons/Send";
 import InsertEmoticonSharpIcon from "@material-ui/icons/InsertEmoticonSharp";
 function Navbartwo() {
   return (
-    <div className="flex  items-center bg-cyan-900 text-white py-4 ">
-      <div className="pl-40 pr-10">
+    <div className="flex flex-wrap items-center bg-cyan-900 text-white py-4 ">
+      <div className="pl-40 pr-10 font-bold text-lg">
         <Link href="/">Upwork</Link>
       </div>
 
-      <div className="flex  items-center border-none focus:outline-none p-2 px-3   rounded-full bg-cyan-800 ">
+      <div className="flex flex-wrap items-center border-none focus:outline-none p-2 px-3   rounded-full bg-cyan-800 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 p-1 text-white"
@@ -26,7 +26,7 @@ function Navbartwo() {
         </svg>
         <input
           placeholder="Search"
-          className="outline-none placeholder-white text-white bg-cyan-800  rounded-full px-3 pr-20 "
+          className="outline-none placeholder-white text-white bg-cyan-800  rounded-full md:px-3 md:pr-20 "
         />
       </div>
 
@@ -42,7 +42,7 @@ function Navbartwo() {
         <div className="hover:text-green-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 flex flex-wrap"
+            className="h-6 w-6 flex "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

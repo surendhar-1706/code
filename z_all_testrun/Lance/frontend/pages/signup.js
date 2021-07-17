@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import GoogleIcon from "../public/google-icon.png";
 import Image from "next/image";
-import authredirect from "../components/authredirect";
+
 import Layout from "../components/Layout";
 import dynamic from "next/dynamic";
 
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import Authredirect from "../components/authredirect";
 
 const GoogleLogin = dynamic(() => import("react-google-login"), { ssr: false });
 function Signup() {
@@ -139,4 +140,4 @@ function Signup() {
   );
 }
 
-export default authredirect(Signup);
+export default Authredirect(Signup);

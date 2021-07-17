@@ -1,21 +1,21 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import login from "../pages/login";
 import { AuthContext } from "../context/AuthContext";
-import Empty from "./empty";
-const withAuth = (WrappedComponent) => {
+const Authredirect = (WrappedComponent) => {
   return (props) => {
-    const { authstate, dispatch } = useContext(AuthContext);
     const Router = useRouter();
     const [access, setaccess] = useState("cool");
     const [verified, setVerified] = useState(false);
-
+    const { authstate, dispatch } = useContext(AuthContext);
+    const [auth, setauth] = useState(null);
     useEffect(async () => {
       const accessToken = localStorage.getItem("access_token");
       setaccess(accessToken);
-      if (authstate.isAuthenticated && accessToken) {
-        console.log("has authstate and token");
-        Router.push("/");
+      console.log(authstate, "printing authstate from auth redirect");
+      console.log("printng access token", accessToken);
+      if (accessToken && authstate.isAuthenticated) {
+        console.log("has authstate and token from auth redirect");
+        Router.push("/post");
       }
       // else if (!authstate.isAuthenticated && !accessToken) {
       //   Router.replace("/login");
@@ -39,7 +39,7 @@ const withAuth = (WrappedComponent) => {
           console.log("in a place verifying token");
           console.log("authstate.isauthenticated", authstate.isAuthenticated);
           setVerified(true);
-          Router.replace("/");
+          Router.replace("/post");
         } else if (authstate.isAuthenticated && !accessToken) {
           dispatch({
             type: "logout",
@@ -50,17 +50,12 @@ const withAuth = (WrappedComponent) => {
         }
       }
     }, []);
-
-    if (authstate.isAuthenticated) {
-      return null;
-    } else if (access && !verified) {
-      return null;
-    } else if (access && verified) {
-      return null;
-    } else if (!access && !verified) {
+    if (!access && !verified) {
       return <WrappedComponent {...props} />;
+    } else {
+      return null;
     }
   };
 };
 
-export default withAuth;
+export default Authredirect;

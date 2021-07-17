@@ -29,3 +29,5 @@ class SignupView(APIView):
 
         else:
             return Response({'error': 'password match agala'})
+
+

@@ -28,6 +28,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('api/', include('base.urls')),
     # restframework url
     path('api-auth/', include('rest_framework.urls')),
     # dj rest auth

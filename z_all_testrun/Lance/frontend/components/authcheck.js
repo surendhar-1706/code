@@ -2,14 +2,17 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import Empty from "./empty";
 import login from "../pages/login";
-const withAuth = (WrappedComponent) => {
+import { AuthContext } from "../context/AuthContext";
+const Authcheck = (WrappedComponent) => {
   return (props) => {
+    const { dispatch } = useContext(AuthContext);
     const Router = useRouter();
     const [verified, setVerified] = useState(false);
 
     useEffect(async () => {
       const accessToken = localStorage.getItem("access_token");
       if (!accessToken) {
+        console.log("no accessToken sergi from authcheck");
         Router.replace("/login");
       } else {
         const fetched_data = await fetch(
@@ -27,9 +30,17 @@ const withAuth = (WrappedComponent) => {
         const json_data = await fetched_data.json();
         // if token was verified we set the state.
         if (json_data.code !== "token_not_valid") {
+          console.log("access token verifed from authcheck");
           setVerified(true);
         } else {
+          console.log(
+            "we have access token but it is unverifed so we are removing it"
+          );
+          setVerified(false);
           // If the token was fraud we first remove it from localStorage and then redirect to "/"
+          dispatch({
+            case: "logout",
+          });
           localStorage.removeItem("access_token");
           Router.replace("/login");
         }
@@ -44,4 +55,4 @@ const withAuth = (WrappedComponent) => {
   };
 };
 
-export default withAuth;
+export default Authcheck;

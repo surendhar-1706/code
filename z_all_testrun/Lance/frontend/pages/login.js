@@ -3,9 +3,9 @@ import Login_Email from "../components/LoginEmail";
 import LoginPass from "../components/LoginPass";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import authredirect from "../components/authredirect";
-import withAuth from "../components/authcheck";
+
 import Layout from "../components/Layout";
+import Authredirect from "../components/authredirect";
 function Login() {
   const { authstate } = useContext(AuthContext);
   const [userdata, setuserdata] = useState({ email: "", password: "" });
@@ -36,4 +36,4 @@ function Login() {
 }
 // export default login;
 
-export default authredirect(Login);
+export default Authredirect(Login);
