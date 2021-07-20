@@ -24,7 +24,7 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
         type: "login_success",
         payload: { json_data },
       });
-      router.push("/");
+      router.push("/post");
     } catch (err) {
       dispatch({
         type: "login_fail",

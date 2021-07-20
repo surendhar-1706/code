@@ -1,5 +1,6 @@
 import React from "react";
 import withAuth from "../../components/authcheck";
+import PostDetail from "../../components/PostDetail";
 export const getStaticPaths = async () => {
   const fetched_data = await fetch("http://localhost:8000/api/post/data");
   const json_data = await fetched_data.json();
@@ -22,18 +23,13 @@ export const getStaticProps = async (context) => {
     props: { post: data },
   };
 };
-function PostDetail({ post }) {
+function PostId({ post }) {
   return (
     <div>
-      <p>{post.id}</p>
-      <p>{post.title}</p>
-      <div>{post.description}</div>
-      <div>{post.categroy}</div>
-      <div>{post.weekly_length}</div>
-      <div>{post.total_length}</div>
+      <PostDetail post={post} />
     </div>
   );
 }
 
 // export default PostDetail;
-export default withAuth(PostDetail);
+export default withAuth(PostId);

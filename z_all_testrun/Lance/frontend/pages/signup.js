@@ -30,14 +30,14 @@ function Signup() {
         });
         const json_data = await fetched_data.json();
         console.log(json_data);
-        console.log(json_data.non_field_errors[0]);
+        // console.log(json_data.non_field_errors[0]);
         if (
           json_data.non_field_errors ==
           "User is already registered with this e-mail address."
         ) {
           seterror({
             iserror: true,
-            data: json_data.non_field_errors[0],
+            data: "User is already registered with this e-mail address.",
           });
 
           Router.push("/signup");
@@ -46,13 +46,13 @@ function Signup() {
             type: "login_success",
             payload: { json_data },
           });
-          Router.replace("/");
+          Router.replace("/post");
         }
       } catch (err) {
         console.log("login fail error from google", err);
-        dispatch({
-          type: "login_fail",
-        });
+        // dispatch({
+        //   type: "login_fail",
+        // });
       }
     } else {
       console.log("no access token found ");
