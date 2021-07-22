@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PostDetail from "./PostDetail";
 
-function PostDetailFetch({ id }) {
+function PostDetailFetch({ id,setmodalstate }) {
   const [data, setdata] = useState();
 
   useEffect(async () => {
@@ -12,7 +12,7 @@ function PostDetailFetch({ id }) {
     const json_data = await fetched_data.json();
     setdata(json_data);
   }, []);
-  return <div>{data && <PostDetail post={data} />}</div>;
+  return <div>{data && <PostDetail post={data} setmodalstate={setmodalstate}/>}</div>;
 }
 
 export default PostDetailFetch;

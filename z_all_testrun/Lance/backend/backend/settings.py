@@ -174,13 +174,15 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
 
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2
 
 
 }
@@ -244,30 +246,3 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 LOGIN_URL = 'http://localhost:3000/'
-# white_list = ['http://localhost:8000', 'http://localhost:3000/google']
-# DJOSER = {
-#     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-#     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-#     'ACTIVATION_URL': '#/activate/{uid}/{token}',
-#     'SEND_ACTIVATION_EMAIL': False,
-#     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
-#     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:3000/google', 'http://localhost:8000/google', 'http://localhost:8000/facebook'],
-
-
-#     'SERIALIZERS': {
-#         'user_create': 'accounts.serializers.UserCreateSerializer',
-#         'user': 'accounts.serializers.UserCreateSerializer',
-#         'current_user': 'accounts.serializers.UserCreateSerializer',
-#         'user_delete': 'djoser.serializers.UserDeleteSerializer',
-#     }
-# }
-
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '915969950645-1a5ual76bqknd89kgm6uvdtrr1vfs01e.apps.googleusercontent.com'
-
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'BKrGpkRx841lQ_Wu7y_r4YWm'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['https://www.googleapis.com/auth/userinfo.email',
-#                                    'https://www.googleapis.com/auth/userinfo.profile', 'openid']
-# SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
-
-
-# https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http:localhost:3000/google&prompt=consent&response_type=code&client_id=915969950645-1a5ual76bqknd89kgm6uvdtrr1vfs01e.apps.googleusercontent.com&scope=email&access_type=offline

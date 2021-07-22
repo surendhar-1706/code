@@ -1,4 +1,4 @@
-import React from "react";
+
 import withAuth from "../../components/authcheck";
 import PostDetail from "../../components/PostDetail";
 export const getStaticPaths = async () => {
@@ -31,5 +31,5 @@ function PostId({ post }) {
   );
 }
 
-// export default PostDetail;
-export default withAuth(PostId);
+export default PostDetail;
+// export default withAuth(PostId);

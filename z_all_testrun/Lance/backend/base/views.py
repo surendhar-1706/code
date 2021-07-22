@@ -5,13 +5,14 @@ from rest_framework.views import APIView
 from .serializers import *
 from .models import *
 from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
+from django.conf import settings
 
 
-class PostListView(APIView):
-    def get(self, request, *args, **kwargs):
-        data_object = Post.objects.all()
-        serializer = PostSerializer(data_object, many=True)
-        return Response(serializer.data)
+class PostListView(generics.ListAPIView):
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class PostRetriveView(generics.RetrieveAPIView):

@@ -1,16 +1,18 @@
 import { useRouter } from "next/router";
-import React from "react";
 
-function PostDetail({ post }) {
+function PostDetail({ post, setmodalstate }) {
   const router = useRouter();
   const changemodalstate = () => {
-    console.log("button triggered");
-    router.query.id = null;
+    setmodalstate(false);
   };
   return (
     <div>
       <button
-        onClick={changemodalstate}
+        onClick={() => {
+          console.log("button triggered");
+          setmodalstate(false);
+          router.push("/post", undefined, { shallow: true });
+        }}
         className="bg-green-300 px-2 py-1 rounded-full"
       >
         back

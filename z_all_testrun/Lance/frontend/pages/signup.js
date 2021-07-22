@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import GoogleIcon from "../public/google-icon.png";
 import Image from "next/image";
 
@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import Authredirect from "../components/authredirect";
 
 const GoogleLogin = dynamic(() => import("react-google-login"), { ssr: false });
+
 function Signup() {
   const [error, seterror] = useState({ iserror: false, data: "" });
   const Router = useRouter();

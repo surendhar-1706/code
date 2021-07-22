@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import Empty from "./empty";
-import login from "../pages/login";
+
 import { AuthContext } from "../context/AuthContext";
 const Authcheck = (WrappedComponent) => {
   return (props) => {

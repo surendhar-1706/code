@@ -7,7 +7,7 @@ const Authredirect = (WrappedComponent) => {
     const [access, setaccess] = useState("cool");
     const [verified, setVerified] = useState(false);
     const { authstate, dispatch } = useContext(AuthContext);
-    const [auth, setauth] = useState(null);
+
     useEffect(async () => {
       const accessToken = localStorage.getItem("access_token");
       setaccess(accessToken);
