@@ -12,6 +12,7 @@
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "moment-timezone": "^0.5.33",
     "next": "^11.0.1",
     "next-auth": "^3.27.2",
     "react": "^17.0.2",
@@ -19,6 +20,7 @@
     "react-google-login": "^5.2.2",
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
+    "react-moment": "^1.1.1",
     "react-show-more-text": "^1.4.6",
     "react-text-truncate": "^0.17.0",
     "swr": "^0.5.6"

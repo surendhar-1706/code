@@ -10,8 +10,10 @@ function PostSearch() {
           <div className="flex items-center">
             <textarea
               // rows={1}
-              value={""}
-              className="w-full h-10 pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border boder-gray-300 "
+              onChange={() => {
+                console.log("search text area value changed");
+              }}
+              className="w-full h-10 pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border border-gray-300 "
               placeholder="Search for jobs"
             >
               {" "}

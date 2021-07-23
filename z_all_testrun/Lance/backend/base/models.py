@@ -11,6 +11,9 @@ class Skill(models.Model):
 
 
 class Post(models.Model):
+    Freelancer_type = (('Beginner', 'Beginner'),
+                       ('Intermediate', 'Intermediate'),
+                       ('Expert', 'Expert'))
     CATEGORY = (
         ('Backend', 'Backend'),
         ('Frontend', 'Frontend'),
@@ -18,22 +21,32 @@ class Post(models.Model):
     )
     WEEKLY_LENGTH = (
         ('Less than 30 hours', 'Less than 30 hours'),
-        ('More than 30 hours', 'Less than 30 hours')
+        ('More than 30 hours', 'More than 30 hours')
     )
     Expected_length = (
         ('Less than a month', 'Less than a month'),
         ('More than a month', 'More than a month'),
         ('Six months', 'Six months')
     )
-
+    Pay_type = (
+        ('Hourly', 'Hourly'),
+        ('Fixed-price', 'Fixed-price')
+    )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     category = models.CharField(choices=CATEGORY, null=True, max_length=255)
+    skill = models.ManyToManyField(Skill)
+    freelancer_type = models.CharField(
+        choices=Freelancer_type, max_length=255, blank=True)
+    pay_type = models.CharField(choices=Pay_type, max_length=255, blank=True)
+    from_price = models.FloatField(blank=True, null=True)
+    to_price = models.FloatField(blank=True, null=True)
+    fixed_price = models.FloatField(blank=True,null=True)
     weekly_length = models.CharField(
         choices=WEEKLY_LENGTH, null=True, max_length=255)
     total_length = models.CharField(
         choices=Expected_length, blank=True, max_length=255)
-    date_createad = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
