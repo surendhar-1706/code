@@ -25,6 +25,7 @@ function Navbartwo() {
           />
         </svg>
         <input
+          value=""
           placeholder="Search"
           className="outline-none placeholder-white text-white bg-cyan-800  rounded-full md:px-3 md:pr-20 "
         />

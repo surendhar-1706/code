@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 
 import Link from "next/link";
 import Layouttwo from "../components/Layout/Layouttwo";
-import Authcheck from "../components/authcheck";
+
 
 function Home({ post }) {
   return (
@@ -15,5 +15,5 @@ function Home({ post }) {
     </Layouttwo>
   );
 }
-export default Authcheck(Home);
+export default Home;
 // export default Home;

@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import login from "../pages/login";
-import withAuth from "../components/authcheck";
+ 
 function Layout({ children }) {
   const router = useRouter();
   const { dispatch, authstate } = useContext(AuthContext);

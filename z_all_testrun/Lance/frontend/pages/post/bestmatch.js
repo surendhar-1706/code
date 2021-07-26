@@ -7,7 +7,7 @@ import PostSearch from "../../components/PostSearch";
 import { useEffect, useState } from "react";
 import MostRecent from "../../components/PostComponents/MostRecent";
 const fetcher = (url) => fetch(url).then((r) => r.json());
-function PostListing(props) {
+function BestMatches(props) {
   const { data, error } = useSWR(
     "http://localhost:8000/api/post/data",
     fetcher,
@@ -36,5 +36,5 @@ function PostListing(props) {
     </Layouttwo>
   );
 }
-export default PostListing;
+export default BestMatches;
 // export default Authcheck(PostListing);

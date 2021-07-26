@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 
 import Layout from "../components/Layout";
-import Authredirect from "../components/authredirect";
+
 function Login() {
   const { authstate } = useContext(AuthContext);
   const [userdata, setuserdata] = useState({ email: "", password: "" });
@@ -36,4 +36,4 @@ function Login() {
 }
 // export default login;
 
-export default Authredirect(Login);
+export default Login;

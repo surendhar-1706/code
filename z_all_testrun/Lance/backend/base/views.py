@@ -18,3 +18,10 @@ class PostListView(generics.ListAPIView):
 class PostRetriveView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class PostNumberforstaticpagesView(generics.ListAPIView):
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializerStaticPage
+    pagination_class = None

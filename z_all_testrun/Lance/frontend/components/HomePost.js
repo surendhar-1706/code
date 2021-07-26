@@ -8,6 +8,9 @@ import PostDetailFetch from "./PostDetailFetch";
 import PostDate from "./PostComponents/PostDate";
 import { BiDislike } from "react-icons/bi";
 import { VscHeart } from "react-icons/vsc";
+import { RiHeartFill } from "react-icons/ri";
+import useSWR from "swr";
+const fetcher = (url) => fetch(url).then((r) => r.json());
 Modal.setAppElement("#__next");
 
 function HomePost({ post }) {
@@ -17,6 +20,7 @@ function HomePost({ post }) {
   const [postlist, setpostlist] = useState(post.results);
   const [modalstate, setmodalstate] = useState(false);
   const [pstid, setpstid] = useState();
+  const [liked, setliked] = useState(false);
   console.log("printing post fetched data", postlist);
 
   return (
@@ -50,7 +54,21 @@ function HomePost({ post }) {
               </div>
               <div className="flex items-center gap-x-2">
                 <BiDislike className="bg-white p-2 border border-gray-400 rounded-full h-9 w-9" />
-                <VscHeart className="bg-white p-2 border border-gray-400 rounded-full h-9 w-9" />
+                {liked ? (
+                  <RiHeartFill
+                    onClick={() => {
+                      setliked(false);
+                    }}
+                    className="text-gray-500 bg-white p-2 border border-gray-400 rounded-full h-9 w-9"
+                  />
+                ) : (
+                  <VscHeart
+                    onClick={() => {
+                      setliked(true);
+                    }}
+                    className="bg-white p-2 border border-gray-400 rounded-full h-9 w-9"
+                  />
+                )}
               </div>
             </div>
             <div className="pl-10 text-gray-500  flex flex-wrap items-center text-xs gap-1">
@@ -105,6 +123,8 @@ function HomePost({ post }) {
           onClick={async () => {
             setbuttonloading(false);
             if (nextpage) {
+              // const { data, error } = useSWR(nextpage, fetcher);
+              // console.log(nextpage, "daata", data);
               const fetched_data = await fetch(nextpage);
               const json_data = await fetched_data.json();
               setpostlist([...postlist, ...json_data.results]);

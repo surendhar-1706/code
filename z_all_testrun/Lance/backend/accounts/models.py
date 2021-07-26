@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.db.models.deletion import CASCADE
+from django.db.models.fields import CharField
 # Create your models here.
 
 
@@ -33,4 +35,55 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name', ]
 
     def __str__(self):
-        return self.first_name
+        return self.name
+
+
+class Languages(models.Model):
+    language = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.language
+
+
+class Freelancer_skills(models.Model):
+    skill_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.skill_name
+
+
+class Testimonials(models.Model):
+    text = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.text
+
+
+class EmploymentHistory(models.Model):
+    employment_history = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.employment_history
+
+
+class Profile(models.Model):
+    UserType = (
+        ('Client', 'Client'),
+        ('Freelancer', 'Freelancer')
+    )
+    user = models.ForeignKey(UserAccount, on_delete=CASCADE)
+    usertype = models.CharField(
+        max_length=25, blank=True, null=True, choices=UserType)
+    dp = models.ImageField(upload_to='profile_pic')
+    verified = models.BooleanField(default=False)
+    languages = models.ManyToManyField(Languages)
+    bio = models.TextField(blank=True, null=True)
+    total_earnings = models.FloatField(blank=True, null=True)
+    total_jobs = models.IntegerField(blank=True)
+    video_intro_link = models.CharField(max_length=255, blank=True, null=True)
+    education = models.CharField(max_length=255, blank=True, null=True)
+    employment_history = models.ManyToManyField(EmploymentHistory)
+    skills = models.ManyToManyField(Freelancer_skills)
+
+    def __str__(self):
+        return self.user

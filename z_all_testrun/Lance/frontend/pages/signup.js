@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import Authredirect from "../components/authredirect";
+
 
 const GoogleLogin = dynamic(() => import("react-google-login"), { ssr: false });
 
@@ -141,4 +141,4 @@ function Signup() {
   );
 }
 
-export default Authredirect(Signup);
+export default Signup;
