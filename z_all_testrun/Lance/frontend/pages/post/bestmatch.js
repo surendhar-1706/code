@@ -21,11 +21,11 @@ function BestMatches(props) {
   // }, []);
   return (
     <Layouttwo>
-      <div className="bg-gray-100 md:px-40 md:pt-7">
+      <div className="bg-gray-100 sm:px-20 md:px-40 md:pt-7">
         <PostSearch />
       </div>
-      <div className="bg-gray-100 md:grid gap-2 grid-cols-6 md:px-40 py-5 ">
-        <div>
+      <div className="bg-gray-100 md:grid gap-2 grid-cols-6 sm:px-20 md:px-40 py-5 ">
+        <div className="">
           <MostRecent />
         </div>
         <div className="col-span-4 border  border-gray-300 rounded-lg bg-white">

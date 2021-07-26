@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PostDetail from "./PostDetail";
 import useSWR from "swr";
 const fetcher = (url) => fetch(url).then((r) => r.json());
-function PostDetailFetch({ id, setmodalstate }) {
+function PostDetailFetch({ id, setmodalstate, modalstate }) {
   // const [data, setdata] = useState();
 
   // useEffect(async () => {
@@ -20,7 +20,13 @@ function PostDetailFetch({ id, setmodalstate }) {
   );
   return (
     <div>
-      {data && <PostDetail post={data} setmodalstate={setmodalstate} />}
+      {data && (
+        <PostDetail
+          post={data}
+          setmodalstate={setmodalstate}
+          modalstate={modalstate}
+        />
+      )}
     </div>
   );
 }
