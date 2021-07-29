@@ -1,28 +1,6 @@
-import { useRouter } from "next/router";
-
-function PostDetail({ post, setmodalstate, modalstate }) {
-  const router = useRouter();
-  const changemodalstate = () => {
-    setmodalstate(false);
-  };
+function PostDetail({ post }) {
   return (
     <div>
-      {modalstate ? (
-        <button
-          onClick={() => {
-            console.log("button triggered");
-            setmodalstate(false);
-            router.push("/post", undefined, { shallow: true });
-          }}
-          className="bg-green-300 px-2 py-1 rounded-full"
-        >
-          back
-        </button>
-      ) : (
-        <button className="px-2 py-1 bg-red-400 rounded-full">
-          Render back link here
-        </button>
-      )}
       <p>{post.id}</p>
       <p>{post.title}</p>
       <div>{post.description}</div>

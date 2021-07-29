@@ -13,12 +13,6 @@ function PostListing(props) {
     fetcher,
     { dedupingInterval: 300000 }
   );
-  // const [data, setdata] = useState();
-  // useEffect(async () => {
-  //   const fetched_data = await fetch("http://localhost:8000/api/post/data");
-  //   const json_data = await fetched_data.json();
-  //   setdata(json_data);
-  // }, []);
   return (
     <Layouttwo>
       <div className="bg-gray-100 sm:px-20 md:px-40 md:pt-7">

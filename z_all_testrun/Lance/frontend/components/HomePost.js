@@ -9,7 +9,10 @@ import PostDate from "./PostComponents/PostDate";
 import { BiDislike } from "react-icons/bi";
 import { VscHeart } from "react-icons/vsc";
 import { RiHeartFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 import useSWR from "swr";
+import ThirdModal from "./Modal/ThirdModal";
+
 const fetcher = (url) => fetch(url).then((r) => r.json());
 Modal.setAppElement("#__next");
 
@@ -24,11 +27,18 @@ function HomePost({ post }) {
   console.log("printing post fetched data", postlist);
 
   return (
-    <div className=" pt-10 ">
+    <div className=" pt-10  ">
+      {modalstate && !router.query.id && (
+        <ThirdModal setmodalstate={setmodalstate} modalstate={modalstate}>
+          <PostDetailFetch id={pstid} />
+        </ThirdModal>
+      )}
+
       <p className="font-bold px-10 text-xl">My Feed</p>
       <hr className="mt-7 px-10"></hr>
       <div className="py-3 px-10">My saved category</div>
       <hr></hr>
+
       {postlist.map((data) => {
         return (
           <div className="py-2 group hover:bg-gray-50" key={data.id}>
@@ -150,20 +160,23 @@ function HomePost({ post }) {
           )}
         </button>
       </div>
-      <Modal
-        className=""
-        isOpen={!router.query.id && modalstate}
-        onRequestClose={() => {
-          setmodalstate(false);
-          router.push("/post", undefined, { shallow: true });
-        }}
-      >
-        <PostDetailFetch
-          id={pstid}
-          setmodalstate={setmodalstate}
-          modalstate={modalstate}
-        />
-      </Modal>
+      {/* <motion.div animate={{ x: 0 }}>
+        {" "}
+        <Modal
+          className=""
+          isOpen={!router.query.id && modalstate}
+          onRequestClose={() => {
+            setmodalstate(false);
+            router.push("/post", undefined, { shallow: true });
+          }}
+        >
+          <PostDetailFetch
+            id={pstid}
+            setmodalstate={setmodalstate}
+            modalstate={modalstate}
+          />
+        </Modal>
+      </motion.div> */}
     </div>
   );
 }
