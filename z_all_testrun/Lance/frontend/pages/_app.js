@@ -12,12 +12,17 @@ function MyApp({ Component, pageProps, router }) {
     //   }}
     // >
 
-    <AuthContextProvider>
-      <AnimatePresence>
-        {" "}
+    <AnimatePresence
+      exitBeforeEnter
+      onExitComplete={() => {
+        console.log("onexit complete triggered -------------------------");
+        // setmodalstate(false);
+      }}
+    >
+      <AuthContextProvider>
         <Component {...pageProps} key={router.key} />
-      </AnimatePresence>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </AnimatePresence>
   );
 }
 

@@ -6,7 +6,13 @@ function dtwo() {
     <div className="">
       <button onClick={() => setmodal(true)}>Click true</button>
       <button onClick={() => setmodal(false)}>Click false</button>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          console.log("onexit complete triggered -------------------------");
+          // setmodalstate(false);
+        }}
+      >
         {modal && (
           <motion.div exit={{ opacity: 0 }}>
             <motion.div

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BiLoaderAlt } from "react-icons/bi";
 import ShowMoreText from "react-show-more-text";
@@ -12,9 +12,9 @@ import { RiHeartFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import ThirdModal from "./Modal/ThirdModal";
-
+import { AnimatePresence } from "framer-motion";
 const fetcher = (url) => fetch(url).then((r) => r.json());
-Modal.setAppElement("#__next");
+// Modal.setAppElement("#__next");
 
 function HomePost({ post }) {
   const router = useRouter();
@@ -24,16 +24,15 @@ function HomePost({ post }) {
   const [modalstate, setmodalstate] = useState(false);
   const [pstid, setpstid] = useState();
   const [liked, setliked] = useState(false);
-  console.log("printing post fetched data", postlist);
-
+  // console.log("printing post fetched data", postlist);
+  useEffect(() => {
+    console.log(
+      "printing modal state from homepost expected->false",
+      modalstate
+    );
+  }, [modalstate]);
   return (
     <div className=" pt-10  ">
-      {modalstate && !router.query.id && (
-        <ThirdModal setmodalstate={setmodalstate} modalstate={modalstate}>
-          <PostDetailFetch id={pstid} />
-        </ThirdModal>
-      )}
-
       <p className="font-bold px-10 text-xl">My Feed</p>
       <hr className="mt-7 px-10"></hr>
       <div className="py-3 px-10">My saved category</div>
@@ -50,12 +49,19 @@ function HomePost({ post }) {
                   as={`/post/${data.id}`}
                 >
                   <a
-                    onClick={() => {
-                      setmodalstate(true);
-                      console.log(data, "printing data");
+                    onClick={async () => {
                       setpstid(data.id);
-                      console.log(modalstate, "printing state");
-                      console.log(!router.query.id, "router query id");
+                      console.log(
+                        modalstate,
+                        "printing modalstate from title click button expected -> true"
+                      );
+                      let wow_three = await setmodalstate(true);
+                      // console.log(data, "printing data");
+
+                      console.log(
+                        !router.query.id,
+                        "router query id expected->true"
+                      );
                     }}
                   >
                     {data.title}
@@ -160,6 +166,19 @@ function HomePost({ post }) {
           )}
         </button>
       </div>
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          console.log("onexit complete triggered -------------------------");
+          // setmodalstate(false);
+        }}
+      >
+        {modalstate && !router.query.id && (
+          <ThirdModal setmodalstate={setmodalstate} modalstate={modalstate}>
+            <PostDetailFetch id={pstid} />
+          </ThirdModal>
+        )}
+      </AnimatePresence>
       {/* <motion.div animate={{ x: 0 }}>
         {" "}
         <Modal

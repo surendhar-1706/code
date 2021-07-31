@@ -2,10 +2,13 @@ import React from "react";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import AppleIcon from "@material-ui/icons/Apple";
 import AndroidOutlinedIcon from "@material-ui/icons/AndroidOutlined";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import InstagramIcon from "@material-ui/icons/Instagram";
+import { AiFillAndroid } from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
+import { GrInstagram } from "react-icons/gr";
+import { FaYoutube } from "react-icons/fa";
+import { AiFillLinkedin } from "react-icons/ai";
+import { AiFillApple } from "react-icons/ai";
+
 function Footertwo() {
   return (
     <div className="md:py-10">
@@ -30,26 +33,27 @@ function Footertwo() {
       <div className="md:flex justify-between items-center md:pl-40 md:pr-20 py-2 ">
         <div className="flex items-center space-x-2 pb-4">
           <div className="text-gray-700 text-sm font-thin"> Follow us</div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <FacebookIcon />
+          <div className=" p-1    text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            <FaFacebookF className="h-4 w-4" />
           </div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <LinkedInIcon />
+          <div className=" p-1 text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            <AiFillLinkedin className="h-4 w-4" />
           </div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <YouTubeIcon />
+          <div className=" p-1 text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            <FaYoutube className="h-4 w-4" />
           </div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <InstagramIcon />
+          <div className=" p-1   text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            <GrInstagram className="h-4 w-4" />
           </div>
         </div>
         <div className="flex items-center space-x-2 md:pr-40 pb-4">
           <div className="text-gray-700 text-sm font-thin">Mobile app</div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <AppleIcon />
+          <div className=" p-1   text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            <AiFillApple className="h-4 w-4" />
           </div>
-          <div className=" p-1  transform scale-75  text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
-            <AndroidOutlinedIcon />
+          <div className=" p-1   text-sm rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 ">
+            {/* <AndroidOutlinedIcon className="h-5 w-5" /> */}
+            <AiFillAndroid className="h-4 w-4" />
           </div>
         </div>
       </div>
