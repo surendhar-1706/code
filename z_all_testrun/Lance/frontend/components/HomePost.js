@@ -179,23 +179,6 @@ function HomePost({ post }) {
           </ThirdModal>
         )}
       </AnimatePresence>
-      {/* <motion.div animate={{ x: 0 }}>
-        {" "}
-        <Modal
-          className=""
-          isOpen={!router.query.id && modalstate}
-          onRequestClose={() => {
-            setmodalstate(false);
-            router.push("/post", undefined, { shallow: true });
-          }}
-        >
-          <PostDetailFetch
-            id={pstid}
-            setmodalstate={setmodalstate}
-            modalstate={modalstate}
-          />
-        </Modal>
-      </motion.div> */}
     </div>
   );
 }

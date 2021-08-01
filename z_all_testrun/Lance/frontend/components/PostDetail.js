@@ -1,6 +1,6 @@
 function PostDetail({ post }) {
   return (
-    <div className="pl-10">
+    <div className="">
       <p>{post.id}</p>
       <p>{post.title}</p>
       <div>{post.description}</div>

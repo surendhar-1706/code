@@ -16,12 +16,10 @@ function PostListing(props) {
   return (
     <AnimatePresence
       exitBeforeEnter
-      exitBeforeEnter
       onExitComplete={() => {
         console.log(
           "onexit complete triggered from post index page -------------------------"
         );
-        // setmodalstate(false);
       }}
     >
       <Layouttwo>

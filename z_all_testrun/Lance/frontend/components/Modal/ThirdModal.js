@@ -12,54 +12,61 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
     }
   }, [modal]);
   return (
-    <motion.div exit={{ opacity: 0 }}>
+    <div className="">
       {modalstate && (
-        // <AnimatePresence
-        //   exitBeforeEnter
-        //   onExitComplete={() => {
-        //     console.log(
-        //       "onexit complete triggered from third modal-------------------------"
-        //     );
-        //   }}
-        // >
-
         <motion.div
-          className=" fixed inset-0 overflow-y-scroll bg-yellow-100 overflow-hidden
+          className=" fixed inset-0 overflow-y-scroll  overflow-hidden
           "
           initial={{ x: "100vw", opacity: 0 }}
           animate={{
             x: 0,
             opacity: 1,
-            transition: { duration: 1 },
+            transition: { duration: 0.4, ease: "easeInOut" },
           }}
-          exit={{ opacity: 0, x: "100vw", transition: { duration: 1 } }}
+          exit={{
+            opacity: 0,
+            x: "100vw",
+            transition: { duration: 0.2 },
+            ease: "easeInOut",
+          }}
         >
-          {/* {children} */}
-          <div className=" bg-green-200">
-            <div className="bg-white pt-20">
-              <button
-                className="px-10 "
-                onClick={async () => {
-                  let wow_one = await setmodal(false);
-                  let wow_two = await setmodalstate(false);
-                  console.log(
-                    "printing from modal close button",
-                    modalstate,
-                    "-modalstate",
-                    modal,
-                    "-modal"
-                  );
-                  router.push("/post", undefined, { shallow: true });
-                }}
-              >
-                Click false
-              </button>
+          {" "}
+          <div className="md:grid grid-cols-6 ">
+            {" "}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 2 } }}
+              // exit={{ opacity: 0, transition: { duration: 10 } }}
+              className="col-span-1 bg-gray-200 bg-opacity-30"
+            >
+              {" "}
+            </motion.div>
+            <div className=" bg-white col-span-5 px-10">
+              <div className=" pt-20">
+                <button
+                  className=" "
+                  onClick={async () => {
+                    let wow_one = await setmodal(false);
+                    let wow_two = await setmodalstate(false);
+                    console.log(
+                      "printing from modal close button",
+                      modalstate,
+                      "-modalstate",
+                      modal,
+                      "-modal"
+                    );
+                    router.push("/post", undefined, { shallow: true });
+                  }}
+                >
+                  Click false
+                </button>
+              </div>
+              {children}
             </div>
-            {children}
           </div>
         </motion.div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
