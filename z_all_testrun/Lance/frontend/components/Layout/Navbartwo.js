@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import SendIcon from "@material-ui/icons/Send";
-import InsertEmoticonSharpIcon from "@material-ui/icons/InsertEmoticonSharp";
+
 function Navbartwo() {
   return (
     <div className="flex flex-wrap items-center bg-cyan-900 text-white py-4 ">
@@ -25,7 +25,6 @@ function Navbartwo() {
           />
         </svg>
         <input
-          value=""
           placeholder="Search"
           className="outline-none placeholder-white text-white bg-cyan-800  rounded-full md:px-3 md:pr-20 "
         />

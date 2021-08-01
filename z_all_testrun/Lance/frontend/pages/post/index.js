@@ -2,17 +2,32 @@ import HomePost from "../../components/HomePost";
 import Layouttwo from "../../components/Layout/Layouttwo";
 import useSWR from "swr";
 import { AnimatePresence } from "framer-motion";
-import PostDetail from "../../components/PostDetail";
 import PostSearch from "../../components/PostSearch";
-import { useEffect, useState } from "react";
 import MostRecent from "../../components/PostComponents/MostRecent";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function PostListing(props) {
+  const { authstate, dispatch } = useContext(AuthContext);
+
   const { data, error } = useSWR(
     "http://localhost:8000/api/post/data",
     fetcher,
     { dedupingInterval: 300000 }
   );
+  useEffect(async () => {
+    console.log(
+      authstate.isAuthenticated,
+      "printing authstate from post index"
+    );
+    const access_token = localStorage.getItem("access_token");
+    if (access_token) {
+      dispatch({
+        type: "authenticated",
+      });
+      console.log(authstate, "printing authstate from post index.js");
+    }
+  }, []);
   return (
     <AnimatePresence
       exitBeforeEnter
@@ -31,7 +46,7 @@ function PostListing(props) {
             <MostRecent />
           </div>
           <div className="col-span-4 border  border-gray-300 rounded-lg bg-white">
-            {data && <HomePost post={data} />}
+            {authstate.isAuthenticated && data && <HomePost post={data} />}
           </div>
           <div>wow</div>
         </div>
@@ -41,3 +56,4 @@ function PostListing(props) {
 }
 export default PostListing;
 // export default Authcheck(PostListing);
+// export default CheckAuth(PostListing);

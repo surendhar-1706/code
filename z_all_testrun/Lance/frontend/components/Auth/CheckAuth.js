@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-function CheckAuth() {
-  return (
-    <div>
-      <p>Auth Checker</p>
-    </div>
-  );
+function CheckAuth({ Component }) {
+  const [verified, setverified] = useState(true);
+  if (verified) {
+    return { Component };
+  }
+
+  return "null";
 }
 
 export default CheckAuth;
