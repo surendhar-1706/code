@@ -41,11 +41,11 @@ class Post(models.Model):
     pay_type = models.CharField(choices=Pay_type, max_length=255, blank=True)
     from_price = models.FloatField(blank=True, null=True)
     to_price = models.FloatField(blank=True, null=True)
-    fixed_price = models.FloatField(blank=True,null=True)
-    weekly_length = models.CharField(
-        choices=WEEKLY_LENGTH, null=True, max_length=255)
-    total_length = models.CharField(
-        choices=Expected_length, blank=True, max_length=255)
+    fixed_price = models.FloatField(blank=True, null=True)
+    weekly_length = models.CharField(blank=True,
+                                     choices=WEEKLY_LENGTH, null=True, max_length=255)
+    total_length = models.CharField(blank=True,
+                                    choices=Expected_length, null=True, max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

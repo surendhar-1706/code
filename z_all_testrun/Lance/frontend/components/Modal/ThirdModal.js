@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
+import { IoChevronBackSharp } from "react-icons/io5";
 function ThirdModal({ children, modalstate, setmodalstate }) {
   const [modal, setmodal] = useState(true);
   const router = useRouter();
@@ -12,7 +13,7 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
     }
   }, [modal]);
   return (
-    <div className="">
+    <div className="bg-gray-100">
       {modalstate && (
         <motion.div
           className=" fixed inset-0 overflow-y-scroll  overflow-hidden
@@ -41,13 +42,13 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
             >
               {" "}
             </motion.div>
-            <div className=" bg-white col-span-5 px-10">
-              <div className=" pt-20">
+            <div className=" col-span-5 bg-gray-100 border border-gray-200">
+              <div className="bg-white pl-8 py-7">
                 <button
-                  className=" "
+                  className="transform scale-125"
                   onClick={async () => {
-                    let wow_one = await setmodal(false);
-                    let wow_two = await setmodalstate(false);
+                    setmodal(false);
+                    setmodalstate(false);
                     console.log(
                       "printing from modal close button",
                       modalstate,
@@ -58,10 +59,13 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
                     router.push("/post", undefined, { shallow: true });
                   }}
                 >
-                  Click false
+                  <IoChevronBackSharp className="text-green-600 transform scale-150" />
                 </button>
               </div>
-              {children}
+              <hr className="mb-7"></hr>
+              <div className="bg-white ml-8 pl-5 pt-5 border border-gray-200 rounded-lg">
+                {children}
+              </div>
             </div>
           </div>
         </motion.div>

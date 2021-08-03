@@ -9,9 +9,9 @@ import { AuthContext } from "../../context/AuthContext";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function PostListing(props) {
   const { authstate, dispatch } = useContext(AuthContext);
-
+  const [shouldfetch, setshouldfetch] = useState(false);
   const { data, error } = useSWR(
-    "http://localhost:8000/api/post/data",
+    shouldfetch ? "http://localhost:8000/api/post/data" : null,
     fetcher,
     { dedupingInterval: 300000 }
   );
@@ -26,6 +26,7 @@ function PostListing(props) {
         type: "authenticated",
       });
       console.log(authstate, "printing authstate from post index.js");
+      setshouldfetch(true);
     }
   }, []);
   return (

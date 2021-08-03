@@ -12,8 +12,14 @@ function Layouttwo({ children }) {
 
   useEffect(async () => {
     const accessToken = localStorage.getItem("access_token");
+
     if (!accessToken) {
       Router.replace("/login");
+    } else if (accessToken && authstate.isAuthenticated !== false) {
+      console.log(
+        "user already verified--------------------------------------"
+      );
+      setVerified(true);
     } else {
       const fetched_data = await fetch(
         "http://localhost:8000/auth/token/verify/",
