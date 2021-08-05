@@ -17,6 +17,15 @@ module.exports = {
       teal: colors.teal,
       emerald: colors.emerald,
       cyan: colors.cyan,
+      upworkgreen: {
+        light: "#14a800",
+        dark: "#45793e",
+        verified: "#3c8224",
+        copylink: "#6cc85f",
+      },
+      upworkmodal: {
+        trans: "#788083",
+      },
     },
   },
   variants: {

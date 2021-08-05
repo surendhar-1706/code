@@ -4,7 +4,7 @@ import ModalPostPriceInfo from "./PostComponents/ModalPostPriceInfo";
 
 function PostDetail({ post }) {
   return (
-    <div>
+    <div className="px-5 bg-white border">
       <span>
         <div>
           <div className="text-xl font-semibold pt-2 pb-6">{post.title}</div>
@@ -54,11 +54,7 @@ function PostDetail({ post }) {
         </span>
         <hr />
 
-        <span className="flex ">
-          {/* <span className="pr-20">
-            <div className="font-semibold"> Preferred qualifications</div>
-          </span> */}
-          {/* <div className="text-xl font-semibold">Client's Recent History</div> */}
+        <div className="pl-5">
           <span className="">
             {" "}
             <div className="font-semibold pb-6 pt-3">Activity on this job</div>
@@ -71,7 +67,7 @@ function PostDetail({ post }) {
               <div>Unanswered invites:</div>
             </span>
           </span>
-        </span>
+        </div>
       </span>
     </div>
   );

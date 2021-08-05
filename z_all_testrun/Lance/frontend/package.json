@@ -21,7 +21,9 @@
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
     "react-moment": "^1.1.1",
+    "react-rating": "^2.0.5",
     "react-show-more-text": "^1.4.6",
+    "react-star-ratings": "^2.3.0",
     "react-text-truncate": "^0.17.0",
     "swr": "^0.5.6"
   },

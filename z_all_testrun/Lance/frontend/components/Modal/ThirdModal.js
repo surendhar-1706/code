@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { IoChevronBackSharp } from "react-icons/io5";
+import ModalClientDetail from "../PostComponents/ModalClientDetail";
+import ClientHistory from "../PostComponents/ClientHistory";
 function ThirdModal({ children, modalstate, setmodalstate }) {
   const [modal, setmodal] = useState(true);
   const router = useRouter();
@@ -63,8 +65,16 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
                 </button>
               </div>
               <hr className="mb-7"></hr>
-              <div className="bg-white ml-8 pl-5 pt-5 border border-gray-200 rounded-lg">
-                {children}
+              <div className="pb-8 ">
+                <div className="md:grid grid-cols-6   ml-8 md:mr-48 pt-3 rounded-lg auto-cols-min">
+                  <div className="col-span-4 "> {children}</div>
+                  <div className="border col-span-2 bg-white">
+                    <ModalClientDetail />
+                  </div>
+                </div>
+                <div className="mt-5 ml-8 bg-white ">
+                  <ClientHistory />
+                </div>
               </div>
             </div>
           </div>
