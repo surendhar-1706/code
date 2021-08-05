@@ -4,7 +4,7 @@ import ModalPostPriceInfo from "./PostComponents/ModalPostPriceInfo";
 
 function PostDetail({ post }) {
   return (
-    <div className="px-5 bg-white border">
+    <div className="px-5  ">
       <span>
         <div>
           <div className="text-xl font-semibold pt-2 pb-6">{post.title}</div>

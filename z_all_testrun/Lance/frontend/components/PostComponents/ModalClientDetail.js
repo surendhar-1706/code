@@ -83,7 +83,7 @@ function ModalClientDetail() {
         <div className=" overflow-hidden cursor-not-allowed select-none py-1 bg-gray-200 w-full pl-2 font-light text-gray-600">
           https://www.upwork.com/jobs
         </div>
-        <div className="font-semibold text-upworkgreen-copylink hover:underline py-1">
+        <div className="font-semibold text-upworkgreen-copylink hover:underline pt-1 pb-3">
           Copy link
         </div>
       </span>

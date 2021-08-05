@@ -6,6 +6,7 @@ import PostSearch from "../../components/PostSearch";
 import MostRecent from "../../components/PostComponents/MostRecent";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import PostProfile from "../../components/Profile/PostProfile";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function PostListing(props) {
   const { authstate, dispatch } = useContext(AuthContext);
@@ -49,7 +50,9 @@ function PostListing(props) {
           <div className="col-span-4 border  border-gray-300 rounded-lg bg-white">
             {authstate.isAuthenticated && data && <HomePost post={data} />}
           </div>
-          <div>wow</div>
+          <div>
+            <PostProfile />
+          </div>
         </div>
       </Layouttwo>
     </AnimatePresence>

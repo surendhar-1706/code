@@ -66,9 +66,9 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
               </div>
               <hr className="mb-7"></hr>
               <div className="pb-8 ">
-                <div className="md:grid grid-cols-6   ml-8 md:mr-48 pt-3 rounded-lg auto-cols-min">
-                  <div className="col-span-4 "> {children}</div>
-                  <div className="border col-span-2 bg-white">
+                <div className="md:grid row-span-full grid-cols-6   ml-8 md:mr-48 pt-3 rounded-lg">
+                  <div className="col-span-4 bg-white border"> {children}</div>
+                  <div className="border col-span-2 bg-white ">
                     <ModalClientDetail />
                   </div>
                 </div>
