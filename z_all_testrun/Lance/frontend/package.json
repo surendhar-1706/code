@@ -26,6 +26,7 @@
     "react-show-more-text": "^1.4.6",
     "react-star-ratings": "^2.3.0",
     "react-text-truncate": "^0.17.0",
+    "react-toastify": "^7.0.4",
     "swr": "^0.5.6"
   },
   "devDependencies": {

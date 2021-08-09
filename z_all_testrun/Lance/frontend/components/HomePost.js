@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { BiLoaderAlt } from "react-icons/bi";
 import ShowMoreText from "react-show-more-text";
@@ -13,10 +13,12 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import ThirdModal from "./Modal/ThirdModal";
 import { AnimatePresence } from "framer-motion";
+import { ModalContext_Create } from "../context/ModalContext";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 // Modal.setAppElement("#__next");
 
 function HomePost({ post }) {
+  const { GlobalModalState, dispatch } = useContext(ModalContext_Create);
   const router = useRouter();
   const [buttonloading, setbuttonloading] = useState(true);
   const [nextpage, setnextpage] = useState(post.next);
@@ -24,6 +26,7 @@ function HomePost({ post }) {
   const [modalstate, setmodalstate] = useState(false);
   const [pstid, setpstid] = useState();
   const [liked, setliked] = useState(false);
+
   // console.log("printing post fetched data", postlist);
   useEffect(() => {
     console.log(
@@ -55,9 +58,17 @@ function HomePost({ post }) {
                         modalstate,
                         "printing modalstate from title click button expected -> true"
                       );
-                      let wow_three = await setmodalstate(true);
-                      // console.log(data, "printing data");
-
+                      setmodalstate(true);
+                      console.log(
+                        "printing modalcontext_create",
+                        GlobalModalState
+                      );
+                      console.log(
+                        "going to trigger dispatch------------------------------"
+                      );
+                      dispatch({
+                        type: "setopen",
+                      });
                       console.log(
                         !router.query.id,
                         "router query id expected->true"

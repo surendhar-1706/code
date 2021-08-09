@@ -4,6 +4,8 @@ import Link from "next/link";
 import GoogleIcon from "../public/google-icon.png";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
+import { AnimatePresence } from "framer-motion";
+import CustomError from "./Notifications/CustomError";
 function Login_Email({ setshowcomponent, setuserdata, userdata }) {
   // const { authstate, dispatch } = useContext(AuthContext);
   const [formdata, setformdata] = useState({ email: "", password: "" });

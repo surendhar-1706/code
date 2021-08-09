@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { IoChevronBackSharp } from "react-icons/io5";
 import ModalClientDetail from "../PostComponents/ModalClientDetail";
 import ClientHistory from "../PostComponents/ClientHistory";
+import { ModalContext_Create } from "../../context/ModalContext";
 function ThirdModal({ children, modalstate, setmodalstate }) {
   const [modal, setmodal] = useState(true);
   const router = useRouter();
+  const { dispatch } = useContext(ModalContext_Create);
   useEffect(() => {
     if (modal) {
       document.body.style.overflow = "hidden";
@@ -58,6 +60,9 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
                       modal,
                       "-modal"
                     );
+                    dispatch({
+                      type: "setclose",
+                    });
                     router.push("/post", undefined, { shallow: true });
                   }}
                 >

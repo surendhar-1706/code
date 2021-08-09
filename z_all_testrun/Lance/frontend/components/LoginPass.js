@@ -1,7 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import Error from "./Notifications/Error";
+import CustomError from "./Notifications/CustomError";
+import { AnimatePresence, motion } from "framer-motion";
 function LoginPass({ userdata, setuserdata, handleChange }) {
+  const [err_state, seterr_state] = useState(false);
+  const set_err = () => {
+    seterr_state(false);
+  };
   const router = useRouter();
   const { authstate, dispatch } = useContext(AuthContext);
   const handleSubmit = async (e) => {
@@ -20,19 +27,36 @@ function LoginPass({ userdata, setuserdata, handleChange }) {
       });
       const json_data = await fetched_data.json();
       console.log(json_data);
+      if (json_data.non_field_errors) {
+        console.log(json_data.non_field_errors[0]);
+        seterr_state(true);
+        setTimeout(set_err, 3000);
+      } else {
+        router.push("/post");
+      }
+
       dispatch({
         type: "login_success",
         payload: { json_data },
       });
-      router.push("/post");
+
+      //set condition to push it only when authtoken is received
+      //
     } catch (err) {
+      console.log("error caught in Login Pass");
+      console.log(err);
       dispatch({
         type: "login_fail",
       });
     }
   };
   return (
-    <div>
+    <div className="relative">
+      <div className="absolute overflow-x-hidden top-0 right-0 mr-10">
+        <AnimatePresence>
+          <CustomError err_state={err_state} seterr_state={seterr_state} />
+        </AnimatePresence>
+      </div>
       <div className="flex justify-center pt-40  pb-20">
         <div className=" border rounded px-20  pt-10 pb-20 ">
           <div className="font-semibold text-2xl text-center">Welcome</div>

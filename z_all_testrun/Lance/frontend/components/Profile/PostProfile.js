@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoEyeSharp } from "react-icons/io5";
 import { TiContacts } from "react-icons/ti";
 import { MdModeEdit } from "react-icons/md";
@@ -6,20 +6,26 @@ import { BsClockHistory } from "react-icons/bs";
 import { Line } from "rc-progress";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
-import Isac from "../../styles/isaac.jpg";
+import Isac from "../../public/isaac.jpg";
 import Image from "next/image";
+import { ModalContext_Create } from "../../context/ModalContext";
+import { AnimatePresence, motion } from "framer-motion";
 function PostProfile() {
+  const { GlobalModalState } = useContext(ModalContext_Create);
+  console.log(GlobalModalState, "PostProfile.js");
   return (
-    <div>
+    <div className="px-2">
       <div className="flex items-start gap-x-1">
         <span className=" p-1 ">
-          <Image
-            className="rounded-full border"
-            src={Isac}
-            alt="Picture of the Profile Owner"
-            width={30}
-            height={30}
-          />
+          <AnimatePresence>
+            {GlobalModalState.isOpen ? (
+              ""
+            ) : (
+              <motion.div exit={{ opacity: 0 }}>
+                <Image src={Isac} height={30} width={30} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </span>
         <span className="font-semibold">My Profile</span>
       </div>
@@ -45,9 +51,9 @@ function PostProfile() {
       </div>
       <div>
         <span className="font-bold ">Hours</span>
-        <div className="flex items-center gap-x-1 pt-4 pb-4">
+        <div className="flex items-center gap-x-2 pt-4 pb-4">
           <BsClockHistory size={22} />
-          <div className="text-sm font-thin break-words">
+          <div className="text-sm font-thin break-words ">
             As Needed - Open to Offers
           </div>{" "}
           <div className="bg-white hover:bg-gray-50 hover:text-gray-600 rounded-full p-2">
