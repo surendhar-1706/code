@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import SendIcon from "@material-ui/icons/Send";
-
+import CreateJob from "../Modal/CreateJob";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import { ModalContext_Create } from "../../context/ModalContext";
 function Navbartwo() {
+  const { dispatch } = useContext(ModalContext_Create);
+  const [picdetail, setpicdetail] = useState(false);
+  useEffect(() => {
+    console.log("navbartwo.js useeffect ran");
+    if (picdetail) {
+      dispatch({
+        type: "setopen",
+      });
+    } else {
+      dispatch({
+        type: "setclose",
+      });
+    }
+  }, [picdetail]);
+
   return (
     <div className="flex flex-wrap items-center bg-cyan-900 text-white py-4 ">
       <div className="pl-40 pr-10 font-bold text-lg">
@@ -34,8 +52,13 @@ function Navbartwo() {
         {" "}
         <div className="hover:text-green-400">Find Work</div>
         <div className="hover:text-green-400">My Jobs</div>
-        <div className="hover:text-green-400">Reports</div>
-        <div className="hover:text-green-400">Messages</div>
+        <div className="hover:text-green-400">
+          <div className="">Reports</div>
+        </div>
+        <div className="hover:text-green-400">
+          <span>Messages</span>
+          <div className=""> {picdetail && <CreateJob />}</div>
+        </div>
         <div className="hover:text-green-400"></div>
       </div>
       <div className="flex flex-wrap items-center space-x-3">
@@ -75,7 +98,18 @@ function Navbartwo() {
           {" "}
           <SendIcon />
         </div>
-        <div className="hover:text-green-400 ">Pic</div>
+        <div className="">
+          <button
+            onClick={() => {
+              setpicdetail(!picdetail);
+
+              console.log("Client clicked");
+            }}
+            className="hover:text-green-400 "
+          >
+            Pic
+          </button>
+        </div>
       </div>
 
       <hr></hr>
