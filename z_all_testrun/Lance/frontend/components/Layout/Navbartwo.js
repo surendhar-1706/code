@@ -8,8 +8,14 @@ import { ModalContext_Create } from "../../context/ModalContext";
 function Navbartwo() {
   const { dispatch } = useContext(ModalContext_Create);
   const [picdetail, setpicdetail] = useState(false);
+
   useEffect(() => {
     console.log("navbartwo.js useeffect ran");
+    if (picdetail) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
     if (picdetail) {
       dispatch({
         type: "setopen",

@@ -1,30 +1,44 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
+import Isac from "../../public/static/isaac.jpg";
 function CreateJob() {
   return (
-    <div className="fixed bg-red-400 p-1 pb-40 pr-20">
-      <div className=" bg-white  text-gray-900   m-2  ">
-        <div className="flex  flex-between gap-x-5">
-          <button className="border  hover:bg-upworkgreen-light hover:text-white font-semibold">
+    <div className="fixed bg-transparent p-1 pt-2">
+      <div className=" bg-white   text-gray-900   border rounded-sm shadow-lg  m-2  ">
+        <div className="flex flex-wrap flex-between pt-4 px-5 w-full">
+          <button className="border px-12 py-1 rounded hover:bg-upworkgreen-light hover:text-white font-semibold">
             Online
           </button>
-          <button className="border  hover:bg-upworkgreen-light hover:text-white font-semibold">
+          <button className="border py-1 px-12 rounded hover:bg-upworkgreen-light hover:text-white font-semibold">
             Invisible
           </button>
         </div>
 
-        <div className="hover:bg-gray-200 ">
-          <span className="block ">Surendhar Palanisamy</span>
-          <span className="text-xs">Freelancer</span>
+        <div className="hover:bg-gray-200 flex items-center gap-x-2 mt-3 px-5 ">
+          <div className="">
+            <Image className="rounded-full" src={Isac} width={25} height={25} />
+          </div>
+          <div>
+            <span className="block ">Surendhar Palanisamy</span>
+            <span className="text-xs">Freelancer</span>
+          </div>
         </div>
-        <div className="hover:bg-gray-200 ">
-          <span className="block">Surendhar Palanisamy</span>
-          <span>
+        <div className="hover:bg-gray-200 flex items-center   gap-x-2 px-5 mb-4">
+          <div className="">
+            <Image className="rounded-full" src={Isac} width={25} height={25} />
+          </div>
+          <div>
+            {" "}
             <Link href="/post/create">
-              <a className="text-gray-900 text-xs">Client</a>
+              <a>
+                <span className="block">Surendhar Palanisamy</span>
+                <span>
+                  <div className="text-gray-900 text-xs">Client</div>
+                </span>
+              </a>
             </Link>
-          </span>
+          </div>
         </div>
       </div>
     </div>

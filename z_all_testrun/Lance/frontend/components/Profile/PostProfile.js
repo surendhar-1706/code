@@ -6,27 +6,28 @@ import { BsClockHistory } from "react-icons/bs";
 import { Line } from "rc-progress";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
-import Isac from "../../public/isaac.jpg";
+import Isac from "../../public/static/isaac.jpg";
 import Image from "next/image";
 import { ModalContext_Create } from "../../context/ModalContext";
 import { AnimatePresence, motion } from "framer-motion";
 function PostProfile() {
   const { GlobalModalState } = useContext(ModalContext_Create);
   console.log(GlobalModalState, "PostProfile.js");
+  const wow = require("../../public/static/isaac.jpg");
   return (
     <div className="px-2">
       <div className="flex items-start gap-x-1">
-        <span className=" p-1 ">
+        {/* <span className=" p-1 ">
           <AnimatePresence>
             {GlobalModalState.isOpen ? (
               ""
             ) : (
               <motion.div exit={{ opacity: 0 }}>
-                <Image src={Isac} height={30} width={30} />
+                <Image src={wow} height={30} width={30} />
               </motion.div>
             )}
           </AnimatePresence>
-        </span>
+        </span> */}
         <span className="font-semibold">My Profile</span>
       </div>
       <div className="flex items-center gap-x-1 pt-2">

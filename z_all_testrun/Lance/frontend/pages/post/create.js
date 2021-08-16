@@ -1,10 +1,14 @@
 import React from "react";
-
+import PostForm from "../../components/createpost/PostForm";
+import Layouttwo from "../../components/Layout/Layouttwo";
 function Create() {
   return (
-    <div>
-      <div>post create page</div>
-    </div>
+    <Layouttwo>
+      <div>
+        <div>post create page</div>
+        <PostForm />
+      </div>
+    </Layouttwo>
   );
 }
 
