@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import SendIcon from "@material-ui/icons/Send";
 import CreateJob from "../Modal/CreateJob";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import { ModalContext_Create } from "../../context/ModalContext";
 function Navbartwo() {
   const { dispatch } = useContext(ModalContext_Create);
