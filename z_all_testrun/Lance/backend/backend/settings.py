@@ -210,7 +210,7 @@ EMAIL_HOST_USER = 'resetpassworldsharity@gmail.com'
 EMAIL_HOST_PASSWORD = 'xpkmiflukrzogxho'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=24),
     'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

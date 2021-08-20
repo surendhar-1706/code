@@ -24,6 +24,8 @@ module.exports = {
         copylink: "#6cc85f",
         trail: "#95df00",
         stroke: "#dbf0a3",
+        form: "#1C4355",
+        bar: "#95DE01",
       },
     },
     fontSize: {
