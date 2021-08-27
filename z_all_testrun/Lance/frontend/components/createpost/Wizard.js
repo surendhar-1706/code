@@ -8,6 +8,9 @@ import {
   useFormik,
   useFormikContext,
 } from "formik";
+
+import { BiDollar } from "react-icons/bi";
+import { IoPricetagSharp } from "react-icons/io5";
 import * as Yup from "yup";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { MdAvTimer } from "react-icons/md";
@@ -16,6 +19,7 @@ import { BsSearch } from "react-icons/bs";
 import Link from "next/link";
 import Disclosurecomponent from "./Disclosurecomponent";
 import { AnimatePresence } from "framer-motion";
+
 const Wizard = ({ children, initialValues, onSubmit }) => {
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
@@ -100,7 +104,7 @@ const WizardApp = () => {
     <div className=" border">
       <Wizard
         initialValues={{
-          work_duration: "",
+          work_duration: "Longterm",
           //
           title: "",
           job_category: "",
@@ -109,7 +113,7 @@ const WizardApp = () => {
           //
           scope: "beginner",
           //
-          total_pay: "",
+          total_pay: "total",
           if_total_then_pay: "",
           if_hourly_then_pay_one: "",
           if_hourly_then_pay_two: "",
@@ -131,7 +135,7 @@ const WizardApp = () => {
           <div className="py-8 px-8 flex space-x-10">
             <span className="relative border rounded-md border-gray-300 hover:bg-gray-50 hover:border-green-500 cursor-pointer">
               <div className="absolute top-0 right-2">
-                <Field type="radio" name="work_duration" value="One" />
+                <Field type="radio" name="work_duration" value="Shortterm" />
               </div>
               <div className="mt-5  flex justify-center">
                 <MdAvTimer className="" size={25} />
@@ -154,7 +158,7 @@ const WizardApp = () => {
             </span>
             <span className="p-2 relative border rounded-md border-gray-300 hover:bg-gray-50 cursor-pointer hover:border-green-500">
               <div className="absolute top-0 right-2">
-                <Field type="radio" name="work_duration" value="Two" />
+                <Field type="radio" name="work_duration" value="Longterm" />
               </div>{" "}
               <div className="mt-5  flex justify-center">
                 <AiTwotoneCalendar size={25} />
@@ -184,7 +188,7 @@ const WizardApp = () => {
           })}
         >
           <span className="grid grid-cols-8">
-            <div className="col-span-4 bg-upworkgreen-form text-white rounded px-4 md:px-8">
+            <div className="col-span-4 bg-upworkgreen-form text-white rounded px-4 ">
               <span className="">
                 <Line
                   percent="25"
@@ -465,56 +469,122 @@ const WizardApp = () => {
               </div>
             </div>
             <div className="col-span-4 px-4 md:px-8 py-4 md:py-36">
-              <span>
-                <div>hourly</div>
-                <div className="bg-green">
-                  {" "}
-                  <Field
-                    onClick={() => {
-                      set_radio_value("hourly");
-                      console.log("horuly clicked");
-                    }}
-                    name="total_pay"
-                    type="radio"
-                    value="hourly"
-                  />
-                </div>{" "}
-                <ErrorMessage name="total_pay" />
-              </span>{" "}
-              <span>
-                <div>Total</div>
-                <Field
-                  onClick={() => {
-                    set_radio_value("total");
-                    console.log("total clicked");
-                  }}
-                  name="total_pay"
-                  type="radio"
-                  value="total"
-                />{" "}
-                <ErrorMessage name="total_pay" />
-              </span>
-              {radio_value === "hourly" ? (
-                <span>
-                  <div>Set hourly Rate</div>
-                  <Field
-                    className="border"
-                    name="if_hourly_then_pay_one"
-                  />{" "}
-                  <Field className="border" name="if_hourly_then_pay_two" />{" "}
-                  <div className="text-red-500">
-                    <ErrorMessage name="if_hourly_then_pay_one" />
+              <div className="flex justify-between items-center gap-x-4">
+                <span className="w-full">
+                  <div className="hover:bg-gray-50 rounded-lg p-4  border border-gray-200 hover:border-green-600 relative">
+                    {" "}
+                    <Field
+                      onClick={() => {
+                        set_radio_value("hourly");
+                        console.log("horuly clicked");
+                      }}
+                      className="absolute top-2 right-3"
+                      name="total_pay"
+                      type="radio"
+                      value="hourly"
+                    />
+                    <div className="flex justify-center py-2">
+                      {" "}
+                      <MdAvTimer size={25} />
+                    </div>
+                    <div className="font-semibold flex justify-center">
+                      Hourly rate
+                    </div>
+                  </div>{" "}
+                  <ErrorMessage name="total_pay" />
+                </span>{" "}
+                <span className="w-full">
+                  <div className="hover:bg-gray-50 rounded-lg p-4  border border-gray-200 hover:border-green-600 relative">
+                    <Field
+                      onClick={(values) => {
+                        set_radio_value("total");
+                        console.log("total clicked");
+                      }}
+                      className="absolute top-2 right-3"
+                      name="total_pay"
+                      type="radio"
+                      value="total"
+                    />{" "}
+                    <div className="flex justify-center py-2">
+                      <IoPricetagSharp size={25} />{" "}
+                    </div>
+                    <div className="font-semibold flex justify-center">
+                      Project Budget
+                    </div>
+                    <ErrorMessage name="total_pay" />
                   </div>
                 </span>
-              ) : (
-                <span>
-                  <div>Set total Rate</div>
-                  <Field className="border" name="if_total_then_pay" />{" "}
-                  <div className="text-red-500">
-                    <ErrorMessage name="if_total_then_pay" />
-                  </div>
-                </span>
-              )}
+              </div>
+              <div className="pt-8 overflow-hidden">
+                {radio_value === "hourly" ? (
+                  <span className="">
+                    <div className="py-2">Set hourly Rate</div>
+                    <div className="flex items-center gap-x-2 md:gap-x-10 flex-wrap">
+                      <div>
+                        <div>From</div>
+                        <div className="flex items-center gap-x-1">
+                          <span className="flex items-center border hover:border-green-500">
+                            {" "}
+                            <BiDollar />
+                            <Field
+                              rows={1}
+                              as="textarea"
+                              cols={10}
+                              type="text"
+                              className=" outline-none resize-none "
+                              name="if_hourly_then_pay_one"
+                            />
+                          </span>{" "}
+                          <div className="text-gray-600">/hour</div>
+                        </div>
+                      </div>{" "}
+                      <div className=" ">
+                        <div>To</div>
+                        <div className="flex items-center gap-x-1">
+                          <span className=" flex items-center border hover:border-green-500 ">
+                            <BiDollar />
+                            <Field
+                              rows={1}
+                              as="textarea"
+                              cols={10}
+                              type="text"
+                              className=" outline-none resize-none "
+                              name="if_hourly_then_pay_two"
+                            />
+                          </span>
+                          <div className="text-gray-600">/hour</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="py-2 text-red-500 text-sm tracking-tighter">
+                      <ErrorMessage name="if_hourly_then_pay_one" />
+                    </div>
+                  </span>
+                ) : (
+                  <span>
+                    <div className="font-sans tracking-tighter pb-2 ">
+                      Maximum project budget (USD)
+                    </div>
+
+                    <div className=" border hover:border-green-600 flex items-center md:w-52  h-10">
+                      {" "}
+                      <BiDollar className="md:p-1" size={25} />
+                      <Field
+                        className="border-none outline-none"
+                        name="if_total_then_pay"
+                      />
+                    </div>
+
+                    <div className="text-red-500 py-2 text-sm">
+                      <ErrorMessage name="if_total_then_pay" />
+                    </div>
+                    <div className="text-gray-400 text-sm py-2">
+                      You will have the option to create milestones which divide
+                      your project into manageable phases.
+                    </div>
+                  </span>
+                )}
+              </div>
             </div>
           </span>
         </WizardStep>

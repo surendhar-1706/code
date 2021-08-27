@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
 
-function buttonradio() {
-    return (
-        <div>
-            
-        </div>
-    )
+function ButtonRadio() {
+  return (
+    <div>
+      cool
+      <input type="radio" />
+    </div>
+  );
 }
 
-export default buttonradio
+export default ButtonRadio;
