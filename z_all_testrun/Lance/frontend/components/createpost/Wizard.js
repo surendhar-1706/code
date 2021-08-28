@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
-import {
-  ErrorMessage,
-  Field,
-  Form,
-  Formik,
-  useFormik,
-  useFormikContext,
-} from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import { BiDollar } from "react-icons/bi";
 import { IoPricetagSharp } from "react-icons/io5";
@@ -106,20 +99,41 @@ const WizardApp = () => {
         initialValues={{
           work_duration: "Longterm",
           //
-          title: "",
-          job_category: "",
+          title: "rest____framework",
+          job_category: "FrontEnd",
           //
           skill_required_for_job: "killing",
           //
           scope: "beginner",
           //
           total_pay: "total",
-          if_total_then_pay: "",
+          if_total_then_pay: "100",
           if_hourly_then_pay_one: "",
           if_hourly_then_pay_two: "",
+          job_description: "jahaha",
         }}
-        onSubmit={async (values) => {
-          console.log("Wizard submit hhhhhhhhhaaaaaaaaaa", values);
+        onSubmit={async (values, onSubmitProps) => {
+          console.log("Wizard submit hhhhhhhhhaaaaaaaaaa", values.total_pay);
+          // console.log("On submit props", onSubmitProps);
+          const data = await fetch("http://localhost:8000/api/post/data", {
+            method: "post",
+            body: JSON.stringify({
+              skill: values.skill_required_for_job,
+              title: values.title,
+              description: values.job_description,
+              category: values.job_category,
+              freelancer_type: values.scope,
+              pay_type: values.total_pay,
+              from_price: values.if_hourly_then_pay_one,
+              to_price: values.if_hourly_then_pay_two,
+              fixed_price: values.if_total_then_pay,
+              weekly_length: values.work_duration,
+              total_length: values.work_duration,
+            }),
+          });
+          const json_data = await data.json();
+          console.log(json_data);
+          onSubmitProps.setSubmitting(false);
         }}
       >
         <WizardStep
@@ -185,6 +199,9 @@ const WizardApp = () => {
           validationSchema={Yup.object({
             title: Yup.string().required("Please Fill the title"),
             job_category: Yup.string().required("Please Fill the job category"),
+            job_description: Yup.string().required(
+              "Please Fill the Job Description"
+            ),
           })}
         >
           <span className="grid grid-cols-8">
@@ -241,13 +258,14 @@ const WizardApp = () => {
                   </div>
                 </div>
               </span>
+
               <div>
                 <div className="font-semibold pt-3">Job category</div>
                 <div className="space-y-1">
                   <span className="flex items-center gap-x-2">
                     <Field
                       type="radio"
-                      className="border"
+                      className="border "
                       name="job_category"
                       value="FrontEnd"
                     />
@@ -275,6 +293,20 @@ const WizardApp = () => {
               </div>
               <ErrorMessage name="title" />
               <ErrorMessage name="job_category" />
+              <div className="md:py-2">
+                <div className="font-semibold "> Job Description</div>
+                <div className="py-2 w-full">
+                  <Field
+                    name="job_description"
+                    as="textarea"
+                    className="border w-full md:h-36 focus:outline-none focus:ring-1 focus:ring-green-500   text-right"
+                  />
+                </div>{" "}
+                <div className="text-red-500 tracking-tighter text-sm">
+                  {" "}
+                  <ErrorMessage name="job_description" />
+                </div>
+              </div>
             </div>
           </span>
         </WizardStep>
@@ -557,7 +589,9 @@ const WizardApp = () => {
                       </div>
                     </div>
                     <div className="py-2 text-red-500 text-sm tracking-tighter">
-                      <ErrorMessage name="if_hourly_then_pay_one" />
+                      {radio_value === "hourly" && (
+                        <ErrorMessage name="if_hourly_then_pay_one" />
+                      )}
                     </div>
                   </span>
                 ) : (
@@ -576,7 +610,9 @@ const WizardApp = () => {
                     </div>
 
                     <div className="text-red-500 py-2 text-sm">
-                      <ErrorMessage name="if_total_then_pay" />
+                      {radio_value === "total" && (
+                        <ErrorMessage name="if_total_then_pay" />
+                      )}
                     </div>
                     <div className="text-gray-400 text-sm py-2">
                       You will have the option to create milestones which divide
@@ -588,6 +624,27 @@ const WizardApp = () => {
             </div>
           </span>
         </WizardStep>
+        {/* <WizardStep
+          validationSchema={Yup.object({
+            job_description: Yup.string().required(
+              "Please Fill the Job Description"
+            ),
+          })}
+        >
+          <div className="md:px-20 md:py-10 p-5">
+            <div>Job Description</div>
+            <div className="border border-gray-400 focus-within:outline-green-700">
+              {" "}
+              <Field
+                rows="10"
+                className="w-full resize-none outline-none "
+                as="textarea"
+                name="job_description"
+              />
+            </div>{" "}
+            <ErrorMessage name="job_description" />
+          </div>
+        </WizardStep> */}
       </Wizard>
     </div>
   );

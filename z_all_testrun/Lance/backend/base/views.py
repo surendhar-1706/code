@@ -9,7 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.conf import settings
 
 
-class PostListView(generics.ListAPIView):
+class PostListView(generics.ListCreateAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
