@@ -97,19 +97,19 @@ const WizardApp = () => {
     <div className=" border">
       <Wizard
         initialValues={{
-          work_duration: "Longterm",
+          work_duration: "Less than 30 hours",
           //
           title: "rest____framework",
-          job_category: "FrontEnd",
+          job_category: "Web design",
           //
           skill_required_for_job: "killing",
           //
-          scope: "beginner",
+          scope: "Expert",
           //
-          total_pay: "total",
-          if_total_then_pay: "100",
-          if_hourly_then_pay_one: "",
-          if_hourly_then_pay_two: "",
+          total_pay: "Fixed-price",
+          if_total_then_pay: 0,
+          if_hourly_then_pay_one: 0,
+          if_hourly_then_pay_two: 0,
           job_description: "jahaha",
         }}
         onSubmit={async (values, onSubmitProps) => {
@@ -117,8 +117,11 @@ const WizardApp = () => {
           // console.log("On submit props", onSubmitProps);
           const data = await fetch("http://localhost:8000/api/post/data", {
             method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
-              skill: values.skill_required_for_job,
+              skill: [{ name: values.skill_required_for_job }],
               title: values.title,
               description: values.job_description,
               category: values.job_category,
@@ -128,12 +131,12 @@ const WizardApp = () => {
               to_price: values.if_hourly_then_pay_two,
               fixed_price: values.if_total_then_pay,
               weekly_length: values.work_duration,
-              total_length: values.work_duration,
+              // total_length: values.work_duration,
             }),
           });
           const json_data = await data.json();
           console.log(json_data);
-          onSubmitProps.setSubmitting(false);
+          // onSubmitProps.setSubmitting(false);
         }}
       >
         <WizardStep
@@ -149,7 +152,11 @@ const WizardApp = () => {
           <div className="py-8 px-8 flex space-x-10">
             <span className="relative border rounded-md border-gray-300 hover:bg-gray-50 hover:border-green-500 cursor-pointer">
               <div className="absolute top-0 right-2">
-                <Field type="radio" name="work_duration" value="Shortterm" />
+                <Field
+                  type="radio"
+                  name="work_duration"
+                  value="Less than 30 hours"
+                />
               </div>
               <div className="mt-5  flex justify-center">
                 <MdAvTimer className="" size={25} />
@@ -267,9 +274,9 @@ const WizardApp = () => {
                       type="radio"
                       className="border "
                       name="job_category"
-                      value="FrontEnd"
+                      value="Web design"
                     />
-                    <div>FrontEnd</div>
+                    <div>Web design</div>
                   </span>
                   <span className="flex items-center gap-x-2">
                     <Field
@@ -434,7 +441,7 @@ const WizardApp = () => {
               <div className="flex hover:bg-gray-100 items-start gap-x-2 py-2">
                 <Field
                   type="radio"
-                  value="expert"
+                  value="Expert"
                   className="border mt-1.5"
                   name="scope"
                 />
@@ -535,7 +542,7 @@ const WizardApp = () => {
                       className="absolute top-2 right-3"
                       name="total_pay"
                       type="radio"
-                      value="total"
+                      value="Fixed-price"
                     />{" "}
                     <div className="flex justify-center py-2">
                       <IoPricetagSharp size={25} />{" "}
