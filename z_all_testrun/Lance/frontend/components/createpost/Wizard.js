@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, FieldArray } from "formik";
 
 import { BiDollar } from "react-icons/bi";
 import { IoPricetagSharp } from "react-icons/io5";
@@ -102,18 +102,19 @@ const WizardApp = () => {
           title: "rest____framework",
           job_category: "Web design",
           //
-          skill_required_for_job: "killing",
+          skill_required_for_job: [""],
           //
           scope: "Expert",
           //
-          total_pay: "Fixed-price",
-          if_total_then_pay: 0,
-          if_hourly_then_pay_one: 0,
-          if_hourly_then_pay_two: 0,
-          job_description: "jahaha",
+          total_pay: "",
+          if_total_then_pay: 50,
+          if_hourly_then_pay_one: 5,
+          if_hourly_then_pay_two: 10,
+          job_description:
+            "As opposed to previously discussed references to another entity, the referred entity can instead also be embedded or nested in the representation of the object that refers to it. Such nested relationships can be expressed by using serializers as fields.",
         }}
         onSubmit={async (values, onSubmitProps) => {
-          console.log("Wizard submit hhhhhhhhhaaaaaaaaaa", values.total_pay);
+          console.log("Wizard submit hhhhhhhhhaaaaaaaaaa", values);
           // console.log("On submit props", onSubmitProps);
           const data = await fetch("http://localhost:8000/api/post/data", {
             method: "post",
@@ -121,7 +122,7 @@ const WizardApp = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              skill: [{ name: values.skill_required_for_job }],
+              skill: values.skill_required_for_job,
               title: values.title,
               description: values.job_description,
               category: values.job_category,
@@ -136,7 +137,7 @@ const WizardApp = () => {
           });
           const json_data = await data.json();
           console.log(json_data);
-          // onSubmitProps.setSubmitting(false);
+          onSubmitProps.setSubmitting(false);
         }}
       >
         <WizardStep
@@ -318,9 +319,8 @@ const WizardApp = () => {
           </span>
         </WizardStep>
         <WizardStep
-          validationSchema={Yup.object({
-            skill_required_for_job: Yup.string().required("Please Fill skills"),
-          })}
+          validationSchema={Yup.object({})}
+          //  skill_required_for_job: Yup.string().required("Please Fill skills"),
         >
           <span className="grid grid-cols-8">
             <div className="pb-40 col-span-4 bg-upworkgreen-form text-white rounded px-4 md:px-8">
@@ -344,10 +344,6 @@ const WizardApp = () => {
               <span className="text-4xl font-semibold  ">
                 What skills does your work require
               </span>
-              {/* <div className="py-4 text-md">
-              This helps your job post stand out to the right candidates. It’s
-              the first thing they’ll see, so make it count!
-            </div> */}
             </div>
             <div className="px-4 md:px-8 col-span-4 pt-4 md:pt-36">
               <div className="font-semibold text-lg">
@@ -355,11 +351,50 @@ const WizardApp = () => {
               </div>
               <div className="mt-2 flex border items-center space-x-2 hover:border-green-600">
                 <BsSearch size={30} className="py-1 px-2" />
-                <Field
+                <FieldArray
                   className="outline-none w-full h-9"
+                  id="skill_required"
                   name="skill_required_for_job"
-                  placeholder="Search skills or add your own"
-                />
+                >
+                  {(fieldArrayProps) => {
+                    console.log("Field Array Props", fieldArrayProps);
+                    const { push, remove, form } = fieldArrayProps;
+                    const { values } = form;
+                    const { skill_required_for_job } = values;
+                    return (
+                      <div>
+                        {skill_required_for_job.map((skill, index) => {
+                          return (
+                            <div key={index}>
+                              <Field
+                                name={`skill_required_for_job[${index}]`}
+                              />
+                              {index > 0 && (
+                                <button
+                                  type="button"
+                                  className="border-double"
+                                  onClick={() => {
+                                    remove(index);
+                                  }}
+                                >
+                                  Remove
+                                </button>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  push("");
+                                }}
+                              >
+                                Add
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  }}
+                </FieldArray>
               </div>
               <ErrorMessage name="skill_required_for_job" />
               <AnimatePresence>
@@ -474,7 +509,7 @@ const WizardApp = () => {
               ),
             }),
             if_total_then_pay: Yup.string().when("total_pay", {
-              is: "total",
+              is: "Fixed-price",
               then: Yup.string().required(
                 "You selected total mode so input total"
               ),
@@ -631,27 +666,6 @@ const WizardApp = () => {
             </div>
           </span>
         </WizardStep>
-        {/* <WizardStep
-          validationSchema={Yup.object({
-            job_description: Yup.string().required(
-              "Please Fill the Job Description"
-            ),
-          })}
-        >
-          <div className="md:px-20 md:py-10 p-5">
-            <div>Job Description</div>
-            <div className="border border-gray-400 focus-within:outline-green-700">
-              {" "}
-              <Field
-                rows="10"
-                className="w-full resize-none outline-none "
-                as="textarea"
-                name="job_description"
-              />
-            </div>{" "}
-            <ErrorMessage name="job_description" />
-          </div>
-        </WizardStep> */}
       </Wizard>
     </div>
   );
