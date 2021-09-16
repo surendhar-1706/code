@@ -11,6 +11,7 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    print('Running post serializer')
     skill = SkillSerializer(many=True)
 
     class Meta:
@@ -21,10 +22,9 @@ class PostSerializer(serializers.ModelSerializer):
         skill_data = validated_data.pop('skill')
         post = Post.objects.create(**validated_data)
         for skill in skill_data:
+            print(skill, 'printing skill from serializer')
             Skill.objects.create(post=post, **skill)
         return post
-        # def get_skill_data(self, obj):
-        #     return SkillSerialzer(instance=obj.id).data
 
 
 class PostSerializerStaticPage(serializers.ModelSerializer):

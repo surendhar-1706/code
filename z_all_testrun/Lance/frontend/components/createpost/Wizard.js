@@ -319,8 +319,11 @@ const WizardApp = () => {
           </span>
         </WizardStep>
         <WizardStep
-          validationSchema={Yup.object({})}
-          //  skill_required_for_job: Yup.string().required("Please Fill skills"),
+          validationSchema={Yup.object({
+            skill_required_for_job: Yup.array().required(
+              "This field is requireds"
+            ),
+          })}
         >
           <span className="grid grid-cols-8">
             <div className="pb-40 col-span-4 bg-upworkgreen-form text-white rounded px-4 md:px-8">
