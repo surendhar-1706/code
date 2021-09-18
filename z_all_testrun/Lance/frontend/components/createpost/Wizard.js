@@ -102,7 +102,7 @@ const WizardApp = () => {
           title: "rest____framework",
           job_category: "Web design",
           //
-          skill_required_for_job: [""],
+          skill_required_for_job: [{ name: "" }],
           //
           scope: "Expert",
           //
@@ -114,7 +114,10 @@ const WizardApp = () => {
             "As opposed to previously discussed references to another entity, the referred entity can instead also be embedded or nested in the representation of the object that refers to it. Such nested relationships can be expressed by using serializers as fields.",
         }}
         onSubmit={async (values, onSubmitProps) => {
-          console.log("Wizard submit hhhhhhhhhaaaaaaaaaa", values);
+          console.log(
+            "Wizard submit hhhhhhhhhaaaaaaaaaa",
+            values.skill_required_for_job
+          );
           // console.log("On submit props", onSubmitProps);
           const data = await fetch("http://localhost:8000/api/post/data", {
             method: "post",
@@ -356,7 +359,6 @@ const WizardApp = () => {
                 <BsSearch size={30} className="py-1 px-2" />
                 <FieldArray
                   className="outline-none w-full h-9"
-                  id="skill_required"
                   name="skill_required_for_job"
                 >
                   {(fieldArrayProps) => {
@@ -366,11 +368,11 @@ const WizardApp = () => {
                     const { skill_required_for_job } = values;
                     return (
                       <div>
-                        {skill_required_for_job.map((skill, index) => {
+                        {skill_required_for_job.map((name, index) => {
                           return (
                             <div key={index}>
                               <Field
-                                name={`skill_required_for_job[${index}]`}
+                                name={`skill_required_for_job[${index}].name`}
                               />
                               {index > 0 && (
                                 <button
