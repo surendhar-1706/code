@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
+import { AiOutlineMinus } from "react-icons/ai";
 import { ErrorMessage, Field, Form, Formik, FieldArray } from "formik";
-
+import { IoIosAdd } from "react-icons/io";
 import { BiDollar } from "react-icons/bi";
 import { IoPricetagSharp } from "react-icons/io5";
 import * as Yup from "yup";
@@ -355,8 +356,8 @@ const WizardApp = () => {
               <div className="font-semibold text-lg">
                 Search skills or add your own
               </div>
-              <div className="mt-2 flex border items-center space-x-2 hover:border-green-600">
-                <BsSearch size={30} className="py-1 px-2" />
+              <div className="mt-2 flex  items-center space-x-2 ">
+                {/* <BsSearch size={30} className="py-1 px-2" /> */}
                 <FieldArray
                   className="outline-none w-full h-9"
                   name="skill_required_for_job"
@@ -370,29 +371,43 @@ const WizardApp = () => {
                       <div>
                         {skill_required_for_job.map((name, index) => {
                           return (
-                            <div key={index}>
-                              <Field
-                                name={`skill_required_for_job[${index}].name`}
-                              />
-                              {index > 0 && (
-                                <button
-                                  type="button"
-                                  className="border-double"
-                                  onClick={() => {
-                                    remove(index);
-                                  }}
-                                >
-                                  Remove
-                                </button>
-                              )}
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  push("");
-                                }}
-                              >
-                                Add
-                              </button>
+                            <div
+                              className="flex  items-center space-x-1 border-b-2 border-green-300"
+                              key={index}
+                            >
+                              {/* border border-green-600 focus:outline-none focus:ring-1 focus:ring-green-500 */}
+                              <div className="flex md:w-72">
+                                {" "}
+                                <Field
+                                  className="m-1 focus:outline-none my-2 w-full"
+                                  name={`skill_required_for_job[${index}].name`}
+                                />
+                              </div>
+                              <div className="space-x-3">
+                                {" "}
+                                {index === 0 && (
+                                  <button
+                                    type="button"
+                                    className=" mx:2 px-0.5 md:px-2 "
+                                    onClick={() => {
+                                      push("");
+                                    }}
+                                  >
+                                    <IoIosAdd className="rounded-full bg-gray-500 text-white" />
+                                  </button>
+                                )}{" "}
+                                {index > 0 && (
+                                  <button
+                                    type="button"
+                                    className=" mx:2 px-1 md:px-2"
+                                    onClick={() => {
+                                      remove(index);
+                                    }}
+                                  >
+                                    <AiOutlineMinus className="rounded-full text-white bg-gray-500" />
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           );
                         })}
