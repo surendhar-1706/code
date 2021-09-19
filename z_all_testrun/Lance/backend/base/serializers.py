@@ -23,7 +23,8 @@ class PostSerializer(serializers.ModelSerializer):
         post = Post.objects.create(**validated_data)
         for skill in skill_data:
             print(skill, 'printing skill from serializer')
-            Skill.objects.create(post=post, **skill)
+            skill, created = Skill.objects.get_or_create(name=skill['name'])
+            post.skill.add(skill)
         return post
 
 
