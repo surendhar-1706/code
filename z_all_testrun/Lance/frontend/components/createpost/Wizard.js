@@ -572,12 +572,12 @@ const WizardApp = () => {
                         set_radio_value("hourly");
                         console.log("horuly clicked");
                       }}
-                      className="absolute top-2 right-3"
+                      className="md:absolute top-2 right-3"
                       name="total_pay"
                       type="radio"
                       value="hourly"
                     />
-                    <div className="flex justify-center py-2">
+                    <div className="flex justify-center md:py-2">
                       {" "}
                       <MdAvTimer size={25} />
                     </div>
@@ -587,19 +587,19 @@ const WizardApp = () => {
                   </div>{" "}
                   <ErrorMessage name="total_pay" />
                 </span>{" "}
-                <span className="w-full">
-                  <div className="hover:bg-gray-50 rounded-lg p-4  border border-gray-200 hover:border-green-600 relative">
+                <span className="w-full flex ">
+                  <div className="hover:bg-gray-50 rounded-lg md:p-4  border border-gray-200 hover:border-green-600 relative">
                     <Field
                       onClick={(values) => {
                         set_radio_value("total");
                         console.log("total clicked");
                       }}
-                      className="absolute top-2 right-3"
+                      className="md:absolute top-2 right-3"
                       name="total_pay"
                       type="radio"
                       value="Fixed-price"
                     />{" "}
-                    <div className="flex justify-center py-2">
+                    <div className="flex justify-center md:py-2">
                       <IoPricetagSharp size={25} />{" "}
                     </div>
                     <div className="font-semibold flex justify-center">
