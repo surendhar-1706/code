@@ -7,7 +7,10 @@ from .models import *
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from django.conf import settings
+from .filters import *
 from rest_framework import filters
+# django_filters
+from django_filters import rest_framework as filters
 
 
 class PostListView(generics.ListCreateAPIView):
@@ -31,5 +34,7 @@ class PostNumberforstaticpagesView(generics.ListAPIView):
 class PostSearch(generics.ListAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['skill__name', 'title']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = PostFilter
+    # filterset_fields = ('title', 'skill__name')
+    # search_fields = ['skill__name', 'title']

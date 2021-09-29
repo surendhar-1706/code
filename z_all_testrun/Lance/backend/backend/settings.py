@@ -50,12 +50,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    # djoser
-    # 'djoser',
-    # 'social_django',
+
     # jwt
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    # filter
+    'django_filters',
     # apps
     'base',
     'accounts',
