@@ -50,7 +50,7 @@ function HomePost({ post }) {
                   scroll={false}
                   href={`?postid=${data.id}`}
                   as={`/post/${data.id}`}
-                >
+                > 
                   <a
                     onClick={async () => {
                       setpstid(data.id);

@@ -236,7 +236,7 @@ const WizardApp = () => {
                 </div>
               </span>
               <span className="text-4xl font-semibold ">
-                Let's start with a strong title.
+                Let us start with a strong title.
               </span>
               <div className="py-4 text-md">
                 This helps your job post stand out to the right candidates. It’s
@@ -460,8 +460,8 @@ const WizardApp = () => {
                 What level of experience will it need?
               </div>
               <div className="font-thin text-gray-700 py-2">
-                This won't restrict any proposals, but helps match expertise to
-                your budget.
+                This will not restrict any proposals, but helps match expertise
+                to your budget.
               </div>
               <div className="flex hover:bg-gray-100 items-start gap-x-2 py-2">
                 <Field
