@@ -63,7 +63,8 @@ function ThirdModal({ children, modalstate, setmodalstate }) {
                     dispatch({
                       type: "setclose",
                     });
-                    router.push("/post", undefined, { shallow: true });
+                    // router.push("/post", undefined, { shallow: true });
+                    router.back();
                   }}
                 >
                   <IoChevronBackSharp className="text-green-600 transform scale-150" />

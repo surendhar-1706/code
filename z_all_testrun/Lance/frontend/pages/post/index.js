@@ -1,6 +1,7 @@
 import HomePost from "../../components/HomePost";
 import Layouttwo from "../../components/Layout/Layouttwo";
 import useSWR from "swr";
+import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 import PostSearch from "../../components/PostSearch";
 import MostRecent from "../../components/PostComponents/MostRecent";
@@ -40,6 +41,9 @@ function PostListing(props) {
       }}
     >
       <Layouttwo>
+        <Head>
+          <title>Post</title>
+        </Head>
         <div className="bg-gray-100 sm:px-20 md:px-40 md:pt-7">
           <PostSearch />
         </div>

@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { BiDislike } from "react-icons/bi";
 import { VscHeart } from "react-icons/vsc";
 import { RiHeartFill } from "react-icons/ri";
 import ShowMoreText from "react-show-more-text";
 import PostDate from "../PostComponents/PostDate";
+import { BiLoaderAlt } from "react-icons/bi";
+import { ModalContext_Create } from "../../context/ModalContext";
+import { useRouter } from "next/router";
+import { AnimatePresence } from "framer-motion";
+import ThirdModal from "../Modal/ThirdModal";
+import PostDetailFetch from "../PostDetailFetch";
 function SearchResult({ data }) {
+  const router = useRouter();
+  const { GlobalModalState, dispatch } = useContext(ModalContext_Create);
+  const [modalstate, setmodalstate] = useState(false);
+  const [pstid, setpstid] = useState();
   const [liked, setliked] = useState(false);
+  const [buttonloading, setbuttonloading] = useState(true);
+  const [nextpage, setnextpage] = useState(data.next);
+  const [postlist, setpostlist] = useState(data.results);
   return (
     <div>
       {data &&
-        data.results.map((data) => {
+        postlist.map((data) => {
           return (
             <div className="py-2 group hover:bg-gray-50" key={data.id}>
               <div className="px-10 mt-2 mb-6 flex justify-between  flex-wrap items-center">
@@ -116,6 +129,51 @@ function SearchResult({ data }) {
             </div>
           );
         })}
+      <div className="px-10 py-2">
+        <button
+          onClick={async () => {
+            setbuttonloading(false);
+            if (nextpage) {
+              // const { data, error } = useSWR(nextpage, fetcher);
+              // console.log(nextpage, "daata", data);
+              const fetched_data = await fetch(nextpage);
+              const json_data = await fetched_data.json();
+              setpostlist([...postlist, ...json_data.results]);
+              setnextpage(json_data.next);
+            } else {
+              console.log("no next page found pring next page", nextpage);
+            }
+            setbuttonloading(true);
+          }}
+          className=" rounded-full pl-4 pr-4 py-1  text-sm  font-bold border text-green-500 border-gray-500 hover:bg-gray-50"
+        >
+          {buttonloading ? (
+            <span className="">Load more Jobs</span>
+          ) : (
+            <div className="flex items-center ">
+              <div className="pr-3">
+                {" "}
+                <BiLoaderAlt className="animate-spin" />
+              </div>
+
+              <span>Load more Jobs</span>
+            </div>
+          )}
+        </button>
+      </div>
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          console.log("onexit complete triggered -------------------------");
+          // setmodalstate(false);
+        }}
+      >
+        {modalstate && !router.query.id && (
+          <ThirdModal setmodalstate={setmodalstate} modalstate={modalstate}>
+            <PostDetailFetch id={pstid} />
+          </ThirdModal>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
