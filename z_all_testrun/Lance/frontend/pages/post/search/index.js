@@ -10,7 +10,7 @@ import MostRecent from "../../../components/PostComponents/MostRecent";
 import { AnimatePresence } from "framer-motion";
 import PostProfile from "../../../components/Profile/PostProfile";
 const fetcher = (url) => fetch(url).then((r) => r.json());
-function search() {
+function Search() {
   const { authstate, dispatch } = useContext(AuthContext);
   const router = useRouter();
   const [shouldfetch, setshouldfetch] = useState(false);
@@ -23,16 +23,16 @@ function search() {
     { dedupingInterval: 300000 }
   );
   useEffect(async () => {
-    console.log(
-      authstate.isAuthenticated,
-      "printing authstate from post index"
-    );
+    // console.log(
+    //   authstate.isAuthenticated,
+    //   "printing authstate from post index"
+    // );
     const access_token = localStorage.getItem("access_token");
     if (access_token) {
       dispatch({
         type: "authenticated",
       });
-      console.log(authstate, "printing authstate from post index.js");
+      // console.log(authstate, "printing authstate from post index.js");
       setshouldfetch(true);
     }
   }, []);
@@ -53,11 +53,9 @@ function search() {
           <PostSearch />
         </div>
         <div className="bg-gray-100 md:grid gap-2 grid-cols-6 sm:px-20 md:px-40 py-5 ">
-          <div className="">
-            <MostRecent />
-          </div>
+          <div className="">{/* <MostRecent /> */}</div>
           <div className="col-span-4 border  border-gray-300 rounded-lg bg-white">
-            {console.log(data)}
+            {/* {console.log(data, "printing data from index search page")} */}
             {authstate.isAuthenticated && data && <SearchResult data={data} />}
           </div>
           <div>
@@ -69,4 +67,4 @@ function search() {
   );
 }
 
-export default search;
+export default Search;

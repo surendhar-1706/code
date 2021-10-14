@@ -23,8 +23,8 @@ function HomePost({ post }) {
   const [buttonloading, setbuttonloading] = useState(true);
   const [nextpage, setnextpage] = useState(post.next);
   const [postlist, setpostlist] = useState(post.results);
-  const [modalstate, setmodalstate] = useState(false);
   const [pstid, setpstid] = useState();
+  const [modalstate, setmodalstate] = useState(false);
   const [liked, setliked] = useState(false);
 
   // console.log("printing post fetched data", postlist);
@@ -50,7 +50,7 @@ function HomePost({ post }) {
                   scroll={false}
                   href={`?postid=${data.id}`}
                   as={`/post/${data.id}`}
-                > 
+                >
                   <a
                     onClick={async () => {
                       setpstid(data.id);

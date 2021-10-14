@@ -35,7 +35,7 @@ export const AuthReducer = (state, action) => {
         refresh: null,
       };
     case "authenticated":
-      console.log("is authenticated ran from reducer from authreducer");
+      // console.log("is authenticated ran from reducer from authreducer");
       return {
         ...state,
         isAuthenticated: true,

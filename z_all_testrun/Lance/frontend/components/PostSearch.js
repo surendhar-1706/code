@@ -13,8 +13,8 @@ function PostSearch() {
           <Formik
             initialValues={{ search_field_value: "" }}
             onSubmit={(values, actions) => {
-              console.log("submit triggered in postsearch.js");
-              console.log(values.search_field_value);
+              // console.log("submit triggered in postsearch.js");
+              // console.log(values.search_field_value);
               router.push(`/post/search/?title=${values.search_field_value}`);
             }}
           >

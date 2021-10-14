@@ -12,7 +12,7 @@ import { ModalContext_Create } from "../../context/ModalContext";
 import { AnimatePresence, motion } from "framer-motion";
 function PostProfile() {
   const { GlobalModalState } = useContext(ModalContext_Create);
-  console.log(GlobalModalState, "PostProfile.js");
+  // console.log(GlobalModalState, "PostProfile.js");
   const wow = require("../../public/static/isaac.jpg");
   return (
     <div className="px-2">
