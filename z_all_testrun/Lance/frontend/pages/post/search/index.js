@@ -9,6 +9,7 @@ import PostSearch from "../../../components/PostSearch";
 import MostRecent from "../../../components/PostComponents/MostRecent";
 import { AnimatePresence } from "framer-motion";
 import PostProfile from "../../../components/Profile/PostProfile";
+import SearchSort from "../../../components/Search/SearchSort";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function Search() {
   const { authstate, dispatch } = useContext(AuthContext);
@@ -53,7 +54,9 @@ function Search() {
           <PostSearch />
         </div>
         <div className="bg-gray-100 md:grid gap-2 grid-cols-6 sm:px-20 md:px-40 py-5 ">
-          <div className="">{/* <MostRecent /> */}</div>
+          <div className="">
+            <SearchSort />
+          </div>
           <div className="col-span-4 border  border-gray-300 rounded-lg bg-white">
             {/* {console.log(data, "printing data from index search page")} */}
             {authstate.isAuthenticated && data && <SearchResult data={data} />}

@@ -25,7 +25,7 @@ function SearchResult({ data }) {
   useEffect(() => {
     console.log("printing data from useEffect", data.next);
     setnextpage(data.next);
-  }, []);
+  }, [searchedquery]);
   return (
     <div>
       {router.query !== searchedquery && setpostlist(data.results)}

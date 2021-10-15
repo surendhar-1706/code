@@ -7,14 +7,17 @@ function PostSearch() {
   return (
     <div className="">
       <div className="md:grid grid-cols-6">
-        <div className="font-semibold text-2xl">Find Work</div>
+        {router.pathname === "/post/search" ? (
+          <div className="font-semibold text-2xl">Filter by</div>
+        ) : (
+          <div className="font-semibold text-2xl">Find Work</div>
+        )}
+
         <div className="col-span-4 ">
           {" "}
           <Formik
             initialValues={{ search_field_value: "" }}
             onSubmit={(values, actions) => {
-              // console.log("submit triggered in postsearch.js");
-              // console.log(values.search_field_value);
               router.push(`/post/search/?title=${values.search_field_value}`);
             }}
           >
