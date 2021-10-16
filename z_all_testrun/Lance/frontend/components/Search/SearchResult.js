@@ -23,7 +23,7 @@ function SearchResult({ data }) {
   // console.log(data.next, " variable declaration part printing next");
   const [searchedquery, setsearchedquery] = useState(router.query);
   useEffect(() => {
-    console.log("printing data from useEffect", data.next);
+    // console.log("printing data from useEffect", data.next);
     setnextpage(data.next);
   }, [searchedquery]);
   return (

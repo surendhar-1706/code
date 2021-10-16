@@ -15,28 +15,24 @@ function Search() {
   const { authstate, dispatch } = useContext(AuthContext);
   const router = useRouter();
   const [shouldfetch, setshouldfetch] = useState(false);
-
+  const [date, setdate] = useState("date_created");
   const { data, error } = useSWR(
     shouldfetch
-      ? `http://localhost:8000/api/search?title=${router.query.title}`
+      ? `http://localhost:8000/api/search?title=${router.query.title}&ordering=-date_created`
       : null,
-    fetcher,
-    { dedupingInterval: 300000 }
+    fetcher
   );
   useEffect(async () => {
-    // console.log(
-    //   authstate.isAuthenticated,
-    //   "printing authstate from post index"
-    // );
+    console.log("running inside ");
+
     const access_token = localStorage.getItem("access_token");
     if (access_token) {
       dispatch({
         type: "authenticated",
       });
-      // console.log(authstate, "printing authstate from post index.js");
       setshouldfetch(true);
     }
-  }, []);
+  }, [date]);
   return (
     <AnimatePresence
       exitBeforeEnter

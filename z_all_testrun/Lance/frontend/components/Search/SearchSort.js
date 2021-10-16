@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import { BiSearch } from "react-icons/bi";
 import { useRouter } from "next/router";
 function SearchSort() {
+  const sortoptions = [
+    {
+      key: "date_created",
+      value: "date_created",
+    },
+    {
+      key: "-date_created",
+      value: "-date_created",
+    },
+  ];
   const router = useRouter();
+
   return (
     <div className="space-y-3 font-semibold">
       <Formik
-        initialValues={{ search_field_value: "" }}
+        initialValues={{ ordering: false }}
         onSubmit={(values, actions) => {
-          router.push(`/post/search/?title=${values.search_field_value}`);
+          console.log("searchsort submitted");
         }}
       >
         {(props) => (
@@ -18,13 +29,19 @@ function SearchSort() {
               <input
                 type="checkbox"
                 className="w-full h-10 pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border border-gray-300 "
-                onChange={(e) => {
-                  props.handleChange(e);
-                  console.log("values changed from searchsort checkbox");
+                onChange={async (e) => {
+                  const wow = await props.handleChange(e);
+                  console.log(
+                    "values changed from searchsort checkbox",
+                    props.values.ordering
+                  );
+                  const wow2 = await router.push(
+                    `/post/search/?title=${router.query.title}&ordering=${props.values.ordering}`
+                  );
                 }}
                 onBlur={props.handleBlur}
-                value={props.values.search_field_value}
-                name="search_field_value"
+                value={props.values.ordering}
+                name="ordering"
                 placeholder="Search for jobs"
               />
               <button type="submit">

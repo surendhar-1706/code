@@ -1,3 +1,4 @@
+from django.db.models import fields
 import django_filters
 from django_filters.filters import CharFilter
 from .models import Post
