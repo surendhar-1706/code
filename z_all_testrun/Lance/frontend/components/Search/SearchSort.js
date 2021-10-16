@@ -18,7 +18,7 @@ function SearchSort() {
   return (
     <div className="space-y-3 font-semibold">
       <Formik
-        initialValues={{ ordering: false }}
+        initialValues={{ ordering: "-date.created" }}
         onSubmit={(values, actions) => {
           console.log("searchsort submitted");
         }}
@@ -26,28 +26,48 @@ function SearchSort() {
         {(props) => (
           <form onSubmit={props.handleSubmit}>
             <div className="flex items-center">
-              <input
-                type="checkbox"
-                className="w-full h-10 pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border border-gray-300 "
-                onChange={async (e) => {
-                  const wow = await props.handleChange(e);
-                  console.log(
-                    "values changed from searchsort checkbox",
-                    props.values.ordering
-                  );
-                  const wow2 = await router.push(
-                    `/post/search/?title=${router.query.title}&ordering=${props.values.ordering}`
-                  );
-                }}
-                onBlur={props.handleBlur}
-                value={props.values.ordering}
-                name="ordering"
-                placeholder="Search for jobs"
-              />
-              <button type="submit">
-                {" "}
-                <BiSearch className="bg-green-600 text-white h-10 w-9 px-1.5" />
-              </button>
+              <div>
+                <label>Asce</label>
+                <input
+                  type="radio"
+                  className="w-full  pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border border-gray-300 "
+                  onChange={async (e) => {
+                    const wow = await props.handleChange(e);
+                    console.log(
+                      "values changed from searchsort checkbox",
+                      props.values.ordering
+                    );
+                    const wow2 = await router.push(
+                      `/post/search/?title=${router.query.title}&ordering=${props.values.ordering}`,
+                      { shallow: true }
+                    );
+                  }}
+                  onBlur={props.handleBlur}
+                  value="-date_created"
+                  name="ordering"
+                  placeholder="Search for jobs"
+                />
+                <label>Desc</label>
+                <input
+                  type="radio"
+                  className="w-full  pl-5 resize-none  rounded-sm p-1 outline-none focus:border-green-600 border border-gray-300 "
+                  onChange={async (e) => {
+                    const wow = await props.handleChange(e);
+                    console.log(
+                      "values changed from searchsort checkbox",
+                      props.values.ordering
+                    );
+                    const wow2 = await router.push(
+                      `/post/search/?title=${router.query.title}&ordering=${props.values.ordering}`,
+                      { shallow: true }
+                    );
+                  }}
+                  onBlur={props.handleBlur}
+                  value="date_created"
+                  name="ordering"
+                  placeholder="Search for jobs"
+                />
+              </div>
             </div>
 
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}

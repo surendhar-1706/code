@@ -18,9 +18,10 @@ function Search() {
   const [date, setdate] = useState("date_created");
   const { data, error } = useSWR(
     shouldfetch
-      ? `http://localhost:8000/api/search?title=${router.query.title}&ordering=-date_created`
+      ? `http://localhost:8000/api/search?title=${router.query.title}&ordering=${router.query.ordering}`
       : null,
-    fetcher
+    fetcher,
+    { dedupingInterval: 300000 }
   );
   useEffect(async () => {
     console.log("running inside ");

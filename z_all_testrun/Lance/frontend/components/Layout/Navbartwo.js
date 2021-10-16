@@ -28,7 +28,7 @@ function Navbartwo() {
   return (
     <div className="flex flex-wrap items-center bg-cyan-900 text-white py-4 ">
       <div className="pl-40 pr-10 font-bold text-lg">
-        <Link href="/">Upwork</Link>
+        <Link href="/post">Upwork</Link>
       </div>
 
       <div className="flex flex-wrap items-center border-none focus:outline-none p-2 px-3   rounded-full bg-cyan-800 ">

@@ -18,7 +18,9 @@ function PostSearch() {
           <Formik
             initialValues={{ search_field_value: "" }}
             onSubmit={(values, actions) => {
-              router.push(`/post/search/?title=${values.search_field_value}`);
+              router.push(
+                `/post/search/?title=${values.search_field_value}&ordering=date_created`
+              );
             }}
           >
             {(props) => (
