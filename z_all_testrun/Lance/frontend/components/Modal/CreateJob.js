@@ -19,10 +19,14 @@ function CreateJob() {
           <div className="">
             <Image className="rounded-full" src={Isac} width={25} height={25} />
           </div>
-          <div>
-            <span className="block ">Surendhar Palanisamy</span>
-            <span className="text-xs">Freelancer</span>
-          </div>
+          <Link href="/profile">
+            <a>
+              <div>
+                <span className="block ">Surendhar Palanisamy</span>
+                <span className="text-xs">Freelancer</span>
+              </div>
+            </a>
+          </Link>
         </div>
         <div className="hover:bg-gray-200 flex items-center   gap-x-2 px-5 mb-4">
           <div className="">

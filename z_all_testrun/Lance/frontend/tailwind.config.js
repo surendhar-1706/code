@@ -26,6 +26,7 @@ module.exports = {
         stroke: "#dbf0a3",
         form: "#1C4355",
         bar: "#95DE01",
+        button: "#14A901",
       },
     },
     fontSize: {

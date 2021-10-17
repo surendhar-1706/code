@@ -8,6 +8,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import Isac from "../../public/static/isaac.jpg";
 import Image from "next/image";
+import Link from "next/link";
 import { ModalContext_Create } from "../../context/ModalContext";
 import { AnimatePresence, motion } from "framer-motion";
 function PostProfile() {
@@ -30,12 +31,16 @@ function PostProfile() {
         </span> */}
         <span className="font-semibold">My Profile</span>
       </div>
-      <div className="flex items-center gap-x-1 pt-2">
-        <IoEyeSharp className="text-upworkgreen-light" />
-        <span className="text-upworkgreen-light hover:underline hover:text-upworkgreen-dark">
-          View Profile
-        </span>
-      </div>
+      <Link href="/profile">
+        <a>
+          <div className="flex items-center gap-x-1 pt-2">
+            <IoEyeSharp className="text-upworkgreen-light" />
+            <span className="text-upworkgreen-light hover:underline hover:text-upworkgreen-dark">
+              View Profile
+            </span>
+          </div>
+        </a>
+      </Link>
       <div className="pt-2 pb-4">
         <span className="font-semibold ">Visibiltiy</span>
         <span className="flex items-center pt-4 gap-x-1">
