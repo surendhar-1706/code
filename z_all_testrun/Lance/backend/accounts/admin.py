@@ -14,3 +14,6 @@ class CustomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserAccount, CustomAdmin)
+admin.site.register(Profile)
+admin.site.register(Languages)
+admin.site.register(EmploymentHistory)

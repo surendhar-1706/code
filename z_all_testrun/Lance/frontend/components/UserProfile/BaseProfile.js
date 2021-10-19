@@ -2,6 +2,7 @@ import React from "react";
 import AboutProfile from "./AboutProfile";
 import EarningProfile from "./EarningProfile";
 import GeneralInfo from "./GeneralInfo";
+import WorkHistory from "./WorkHistory";
 
 function BaseProfile() {
   return (
