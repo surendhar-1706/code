@@ -32,6 +32,7 @@ class Post(models.Model):
         ('Hourly', 'Hourly'),
         ('Fixed-price', 'Fixed-price')
     )
+
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     category = models.CharField(choices=CATEGORY, null=True, max_length=255)
