@@ -15,7 +15,7 @@ from rest_framework import filters
 from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
-
+ 
 class PostListView(generics.ListCreateAPIView):
 
     queryset = Post.objects.all()

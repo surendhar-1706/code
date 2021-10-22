@@ -72,6 +72,7 @@ class Profile(models.Model):
         ('Client', 'Client'),
         ('Freelancer', 'Freelancer')
     )
+
     user = models.ForeignKey(UserAccount, on_delete=CASCADE)
     usertype = models.CharField(
         max_length=25, blank=True, null=True, choices=UserType)

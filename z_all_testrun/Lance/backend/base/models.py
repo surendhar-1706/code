@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE, SET_NULL
 
 # Create your models here.
 
@@ -32,7 +33,8 @@ class Post(models.Model):
         ('Hourly', 'Hourly'),
         ('Fixed-price', 'Fixed-price')
     )
-
+    profile = models.ForeignKey(
+        'accounts.Profile', on_delete=CASCADE, default=1)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     category = models.CharField(choices=CATEGORY, null=True, max_length=255)
