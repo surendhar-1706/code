@@ -88,4 +88,4 @@ class Profile(models.Model):
     skill = models.ManyToManyField(Skill)
 
     def __str__(self):
-        return self.user.name
+        return self.user.email

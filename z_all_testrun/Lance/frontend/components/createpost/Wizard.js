@@ -115,15 +115,18 @@ const WizardApp = () => {
             "As opposed to previously discussed references to another entity, the referred entity can instead also be embedded or nested in the representation of the object that refers to it. Such nested relationships can be expressed by using serializers as fields.",
         }}
         onSubmit={async (values, onSubmitProps) => {
-          console.log(
-            "Wizard submit hhhhhhhhhaaaaaaaaaa",
-            values.skill_required_for_job
-          );
+          // console.log(
+          //   "Wizard submit hhhhhhhhhaaaaaaaaaa",
+          //   values.skill_required_for_job
+          // );
           // console.log("On submit props", onSubmitProps);
+          const token = localStorage.getItem("access_token");
           const data = await fetch("http://localhost:8000/api/post/data", {
             method: "post",
             headers: {
+              Authorization: "JWT " + token,
               "Content-Type": "application/json",
+              accept: "application/json",
             },
             body: JSON.stringify({
               skill: values.skill_required_for_job,
@@ -139,6 +142,7 @@ const WizardApp = () => {
               // total_length: values.work_duration,
             }),
           });
+          // console.log("access token-----------------", token);
           const json_data = await data.json();
           console.log(json_data);
           onSubmitProps.setSubmitting(false);

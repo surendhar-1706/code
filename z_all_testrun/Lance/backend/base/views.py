@@ -1,25 +1,39 @@
-from django.shortcuts import render
-
-from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 # Create your views here.
 from .serializers import *
 from .models import *
-from rest_framework import generics
-from rest_framework.pagination import PageNumberPagination
-from django.conf import settings
+from .pagination import *
 from .filters import *
-from rest_framework import filters
-# django_filters
-# from django_filters import rest_framework as filters
-from rest_framework.filters import OrderingFilter
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
- 
-class PostListView(generics.ListCreateAPIView):
 
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+# class PostListView(generics.ListCreateAPIView):
+#     print('wow from postlistview---------------------------')
+
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+
+
+class PostListView(APIView):
+
+    def get(self, request):
+        queryset = Post.objects.all()
+        paginator = CustomPaginator()
+        response = paginator.generate_response(
+            queryset, PostSerializer, request)
+        return response
+
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        serializer.set_the_user(request)
+        serializer.set_the_user(request)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PostRetriveView(generics.RetrieveAPIView):
@@ -40,5 +54,7 @@ class PostSearch(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_class = PostFilter
     ordering_fields = ['date_created', 'title']
+
     # filterset_fields = ('title', 'skill__name')
+
     # search_fields = ['skill__name', 'title']
