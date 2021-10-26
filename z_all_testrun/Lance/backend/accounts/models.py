@@ -36,7 +36,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name', ]
 
     def __str__(self):
-        return self.name
+        return self.email
 
 
 class Languages(models.Model):
@@ -76,16 +76,16 @@ class Profile(models.Model):
     user = models.ForeignKey(UserAccount, on_delete=CASCADE)
     usertype = models.CharField(
         max_length=25, blank=True, null=True, choices=UserType)
-    dp = models.ImageField(upload_to='profile_pic')
+    dp = models.ImageField(upload_to='profile_pic', blank=True)
     verified = models.BooleanField(default=False)
-    languages = models.ManyToManyField(Languages)
+    languages = models.ManyToManyField(Languages, blank=True)
     bio = models.TextField(blank=True, null=True)
     total_earnings = models.FloatField(blank=True, null=True)
-    total_jobs = models.IntegerField(blank=True)
+    total_jobs = models.IntegerField(blank=True, default=0)
     video_intro_link = models.CharField(max_length=255, blank=True, null=True)
     education = models.CharField(max_length=255, blank=True, null=True)
     employment_history = models.TextField(blank=True, null=True)
-    skill = models.ManyToManyField(Skill)
+    skill = models.ManyToManyField(Skill, blank=True)
 
     def __str__(self):
         return self.user.email

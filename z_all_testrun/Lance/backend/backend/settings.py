@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     # filter
     'django_filters',
     # apps
-    'base',
+    'base.apps.BaseConfig',
     'accounts',
     'tokenmanager',
 

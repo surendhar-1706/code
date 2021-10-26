@@ -1,9 +1,13 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save, pre_save
+from django.contrib.auth import get_user_model
+from django.dispatch import receiver
+from accounts.models import Profile
+User = get_user_model()
 
 
-def default_subject(sender, instance, using):
-    if not instance.subject_init:
-        instance.subject_init = instance.subject_initials()
-
-
-pre_save.connect(default_subject, sender=Subject)
+@receiver(post_save, sender=User)
+def profile_creation(sender, instance, created, **kwargs):
+    print('wow----------------------------------------')
+    if created:
+        Profile.objects.create(user=instance)
+        print(instance)
