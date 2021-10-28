@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'accounts',
     'tokenmanager',
+    'chat',
 
 ]
 SITE_ID = 2

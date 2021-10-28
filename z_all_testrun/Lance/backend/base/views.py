@@ -10,13 +10,6 @@ from .pagination import *
 from .filters import *
 
 
-# class PostListView(generics.ListCreateAPIView):
-#     print('wow from postlistview---------------------------')
-
-#     queryset = Post.objects.all()
-#     serializer_class = PostSerializer
-
-
 class PostListView(APIView):
 
     def get(self, request):
@@ -28,7 +21,6 @@ class PostListView(APIView):
 
     def post(self, request):
         serializer = PostSerializer(data=request.data)
-        serializer.set_the_user(request)
         serializer.set_the_user(request)
         if serializer.is_valid():
             serializer.save()

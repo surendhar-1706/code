@@ -28,14 +28,17 @@ class PostSerializer(serializers.ModelSerializer):
                 algorithm='HS256').decode(token, verify=False)
             user = valid_data['user_id']
             profile = Profile.objects.get(user=user)
+            # print('printing profile name from serillizer')
+            # print(profile)
             request.user = profile
-            # self.user = request.user
+            self.user = request.user
 
         except ValidationError as v:
             print("validation error", v)
             print('current user ------------', request)
 
     def create(self, validated_data):
+        validated_data["profile"] = self.user
         skill_data = validated_data.pop('skill')
         post = Post.objects.create(**validated_data)
         for skill in skill_data:
