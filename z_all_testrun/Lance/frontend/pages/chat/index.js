@@ -28,10 +28,21 @@ function ChatHome() {
         messages.map((message) => {
           return <div key={message.id}>{message}</div>;
         })}
-      {/* <Formik
-        initialValues={{ name: "jared" }}
-        onSubmit={(values, actions) => {
+      <Formik
+        initialValues={{ message: "" }}
+        onSubmit={async (values, actions) => {
           console.log(values);
+          const wow = await client.send(
+            JSON.stringify({
+              type: "chat_message",
+              message: values.message,
+            })
+          );
+          actions.resetForm({
+            values: {
+              message: "",
+            },
+          });
         }}
       >
         {(props) => (
@@ -40,14 +51,16 @@ function ChatHome() {
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
-              value={props.values.name}
-              name="name"
+              value={props.values.message}
+              name="message"
             />
-            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+            {props.errors.message && (
+              <div id="feedback">{props.errors.message}</div>
+            )}
             <button type="submit">Submit</button>
           </form>
         )}
-      </Formik> */}
+      </Formik>
     </div>
   );
 }
