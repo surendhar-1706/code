@@ -36,6 +36,7 @@ function ChatHome() {
             JSON.stringify({
               type: "chat_message",
               message: values.message,
+              command: "fetch_messages",
             })
           );
           actions.resetForm({

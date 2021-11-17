@@ -9,3 +9,6 @@ class ChatMessage(models.Model):
 
     def last_ten(self):
         return ChatMessage.objects.order_by('-timestamp').all()[:10]
+
+    def __str__(self):
+        return self.content
