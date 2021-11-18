@@ -1,3 +1,4 @@
+# obj = ChatMessage.objects.create(content=message_extract)
 import json
 from channels.generic.websocket import WebsocketConsumer
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -25,7 +26,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print('save_message_ran')
         print(message['message'])
 
-        # obj = ChatMessage.objects.create(content=message_extract)
     commands = {
         'fetch_messages': fetch_messages,
         'new_message': new_message,
@@ -55,16 +55,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-
         message = text_data_json['message']
-        # print(text_data_json)
         # self.commands[text_data_json['save_message']](self, text_data_json)
-        # Send message to room group
-        # self.commands['save_message'](self, text_data_json)
-        # message_extract = message['message']
-        obj = ChatMessage(
-            content=message)
-        await database_sync_to_async(obj.save)()
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -72,7 +64,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': message
             }
         )
-        # save = save_messages()
+        obj = ChatMessage(
+            content=message)
+        await database_sync_to_async(obj.save)()
 
     # Receive message from room group
     async def chat_message(self, event):

@@ -65,8 +65,8 @@ function AboutProfile() {
           </div>
         </div>
         <div className="text-sm font-sans md:pr-16 text-gray-600 ">
-          "It was great working with Surendhar .Very cooperative, understanding
-          and clear in communication. I would love to work with him in future"
+          It was great working with Surendhar .Very cooperative, understanding
+          and clear in communication. I would love to work with him in future
         </div>
         <div className="flex items-center gap-x-24">
           <div className="font-semibold">$10.00</div>

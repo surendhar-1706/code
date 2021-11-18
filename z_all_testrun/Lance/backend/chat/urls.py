@@ -1,8 +1,10 @@
 from django.urls import path
 
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<str:room_name>/', views.room, name='room'),
+    path('', index, name='index'),
+    path('<str:room_name>/', room, name='room'),
+    # from here its for api
+    path('api/last_ten/', ChatListview.as_view()),
 ]
