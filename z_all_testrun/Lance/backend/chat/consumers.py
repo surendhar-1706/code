@@ -5,32 +5,28 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import async_to_sync
 from channels.db import database_sync_to_async
 from .models import ChatMessage
+from rest_framework_simplejwt.backends import TokenBackend
+from accounts.models import Profile
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
-    def fetch_messages(self, data):
-        print('running fetch messages')
-        return
-
-    def new_message(self, data):
-        return
-
-    def messages_to_json(self, messages):
-        return
-
-    def message_to_json(self, message):
-        return
-
-    async def save_message(self, message):
+    def save_message(self, message):
         print('save_message_ran')
         print(message['message'])
 
-    commands = {
-        'fetch_messages': fetch_messages,
-        'new_message': new_message,
-        'save_message': save_message
-    }
+    def get_user(self, text_data_json):
+        token = text_data_json['token']
+        print(token)
+        valid_data = TokenBackend(
+            algorithm='HS256').decode(token, verify=False)
+        print(valid_data)
+        user = valid_data['user_id']
+        profile = Profile.objects.get(user=user)
+        return profile
+
+    def set_name(self, profile):
+        return profile.user.name
 
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -64,8 +60,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': message
             }
         )
+
+        profile = await database_sync_to_async(self.get_user)(text_data_json)
+        name = await database_sync_to_async(self.set_name)(profile)
         obj = ChatMessage(
-            content=message)
+            content=message, profile=profile, name=name)
         await database_sync_to_async(obj.save)()
 
     # Receive message from room group
