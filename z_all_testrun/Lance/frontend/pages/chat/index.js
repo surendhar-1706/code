@@ -5,7 +5,8 @@ import useSWR from "swr";
 import Layouttwo from "../../components/Layout/Layouttwo";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 function ChatHome() {
-  const room_name = "cool";
+  // const room_name = "cool";
+  const user = "32";
   const [messages, setmessages] = useState([]);
   // const { data, error } = useSWR(
   //   "http://localhost:8000/chat/api/last_ten/",
@@ -13,11 +14,13 @@ function ChatHome() {
   //   { dedupingInterval: 10 }
   // );
   const [data, setdata] = useState();
-  // const token = localStorage.getItem("access_token");
-  const client = new w3cwebsocket(
-    "ws://127.0.0.1:8000/ws/chat/" + room_name + "/"
-  );
+
+  // const client = new w3cwebsocket(
+  //   "ws://127.0.0.1:8000/ws/chat/" + room_name + "/"
+  // );
+
   useEffect(async () => {
+    const token = localStorage.getItem("access_token");
     console.log("useEffect ran from chat page");
     const fetched_data = await fetch(
       "http://localhost:8000/chat/api/last_ten/",
@@ -34,6 +37,10 @@ function ChatHome() {
     console.log("priniting json_data", json_data);
     const results = json_data.results.reverse();
     setdata(json_data);
+    const auth_token = token;
+    const client = new w3cwebsocket(
+      "ws://127.0.0.1:8000/ws/chat/" + user + "/" + auth_token + "/"
+    );
     client.onopen = () => {
       console.log("WebSocket Client Connected");
     };
@@ -49,12 +56,12 @@ function ChatHome() {
   return (
     <Layouttwo>
       <div>
-        <h6>Room Name : {room_name}</h6>
+        {/* <h6>Room Name : {}</h6> */}
         {data &&
           data.results.map((message) => {
             return (
               <div className="flex items-center " key={message.id}>
-                <div>{message.name}</div>
+                <div>[{message.name}]</div>
                 <div>{message.content}</div>
               </div>
             );

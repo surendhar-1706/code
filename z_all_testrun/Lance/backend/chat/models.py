@@ -15,3 +15,14 @@ class ChatMessage(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class ChatRoom(models.Model):
+    user1 = models.ForeignKey(
+        Profile, on_delete=CASCADE, default=1, related_name='user1')
+    user2 = models.ForeignKey(
+        Profile, on_delete=CASCADE, default=2, related_name='user2')
+    name = models.CharField(blank=True, max_length=100)
+
+    def __str__(self):
+        return self.name
