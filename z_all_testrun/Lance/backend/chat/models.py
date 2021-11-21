@@ -5,7 +5,7 @@ from accounts.models import Profile
 
 
 class ChatMessage(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=CASCADE, default=1)
+    user_id = models.CharField(blank=True, default='1', max_length=100)
     name = models.CharField(blank=True, null=True, max_length=100)
     content = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -18,11 +18,10 @@ class ChatMessage(models.Model):
 
 
 class ChatRoom(models.Model):
-    user1 = models.ForeignKey(
-        Profile, on_delete=CASCADE, default=1, related_name='user1')
-    user2 = models.ForeignKey(
-        Profile, on_delete=CASCADE, default=2, related_name='user2')
+    user_id_1 = models.CharField(max_length=100, default='1')
+    user_id_2 = models.CharField(max_length=100, default='2')
     name = models.CharField(blank=True, max_length=100)
+    messages = models.ManyToManyField(ChatMessage, blank=True)
 
     def __str__(self):
         return self.name
