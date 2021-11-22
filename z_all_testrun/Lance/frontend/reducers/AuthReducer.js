@@ -35,10 +35,12 @@ export const AuthReducer = (state, action) => {
         refresh: null,
       };
     case "authenticated":
-      // console.log("is authenticated ran from reducer from authreducer");
+      console.log("is authenticated ran from reducer from authreducer");
       return {
         ...state,
         isAuthenticated: true,
+        access: localStorage.getItem("access_token"),
+        refresh: localStorage.getItem("refresh_token"),
       };
   }
 };

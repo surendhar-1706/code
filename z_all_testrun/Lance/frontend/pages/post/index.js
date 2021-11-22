@@ -12,7 +12,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 function PostListing(props) {
   const { authstate, dispatch } = useContext(AuthContext);
   const [shouldfetch, setshouldfetch] = useState(false);
-  const { data, error } = useSWR(
+  const { data, error } = useSWR(  
     shouldfetch ? "http://localhost:8000/api/post/data" : null,
     fetcher,
     { dedupingInterval: 300000 }

@@ -1,3 +1,4 @@
+from django.core.checks import messages
 from django.db import models
 from django.db.models.deletion import CASCADE
 from accounts.models import Profile
@@ -5,7 +6,7 @@ from accounts.models import Profile
 
 
 class ChatMessage(models.Model):
-    user_id = models.CharField(blank=True, default='1', max_length=100)
+    profile = models.ForeignKey(Profile, on_delete=CASCADE, default=1)
     name = models.CharField(blank=True, null=True, max_length=100)
     content = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -18,10 +19,9 @@ class ChatMessage(models.Model):
 
 
 class ChatRoom(models.Model):
-    user_id_1 = models.CharField(max_length=100, default='1')
-    user_id_2 = models.CharField(max_length=100, default='2')
-    name = models.CharField(blank=True, max_length=100)
-    messages = models.ManyToManyField(ChatMessage, blank=True)
+    user_id_1 = models.CharField(blank=True, default='1', max_length=100)
+    user_id_2 = models.CharField(blank=True, default='2', max_length=100)
+    room_name = models.CharField(blank=True, default='cool', max_length=100)
 
     def __str__(self):
-        return self.name
+        return self.room_name

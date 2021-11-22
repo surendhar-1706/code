@@ -1,27 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { w3cwebsocket } from "websocket";
 import { Formik } from "formik";
-import useSWR from "swr";
-import Layouttwo from "../../components/Layout/Layouttwo";
-const fetcher = (url) => fetch(url).then((r) => r.json());
-function ChatHome() {
-  // const room_name = "cool";
-  const user = "32";
-  const [messages, setmessages] = useState([]);
-  // const { data, error } = useSWR(
-  //   "http://localhost:8000/chat/api/last_ten/",
-  //   fetcher,
-  //   { dedupingInterval: 10 }
-  // );
-  const [data, setdata] = useState();
+import jwt_decode from "jwt-decode";
 
-  // const client = new w3cwebsocket(
-  //   "ws://127.0.0.1:8000/ws/chat/" + room_name + "/"
-  // );
+import Layouttwo from "../../components/Layout/Layouttwo";
+import { AuthContext } from "../../context/AuthContext";
+
+function ChatHome() {
+  const { authstate, dispatch } = useContext(AuthContext);
+
+  // console.log("authstate", authstate.access);
+  const other_user_id = "31";
+  const [messages, setmessages] = useState([]);
+  const [data, setdata] = useState();
+  const [start_client, set_start_client] = useState(false);
+  const [room_name, set_room_name] = useState();
+  const client = start_client
+    ? new w3cwebsocket("ws://127.0.0.1:8000/ws/chat/" + room_name + "/")
+    : null;
 
   useEffect(async () => {
-    const token = localStorage.getItem("access_token");
     console.log("useEffect ran from chat page");
+    const token = localStorage.getItem("access_token");
+    var decoded = jwt_decode(token);
+    console.log(decoded);
+    if (decoded) {
+      const my_id = decoded["user_id"];
+      const room_name_var = my_id + "_" + other_user_id;
+      set_room_name(room_name_var);
+      set_start_client(true);
+    }
     const fetched_data = await fetch(
       "http://localhost:8000/chat/api/last_ten/",
       {
@@ -34,34 +42,32 @@ function ChatHome() {
     );
 
     const json_data = await fetched_data.json();
-    console.log("priniting json_data", json_data);
     const results = json_data.results.reverse();
     setdata(json_data);
-    const auth_token = token;
-    const client = new w3cwebsocket(
-      "ws://127.0.0.1:8000/ws/chat/" + user + "/" + auth_token + "/"
-    );
-    client.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
-    client.onmessage = async (chat_message) => {
-      const dataFromServer = JSON.parse(chat_message.data);
-      console.log("got reply! ", dataFromServer);
 
-      if (dataFromServer) {
-        setmessages((messages) => [...messages, dataFromServer.message]);
-      }
-    };
-  }, []);
+    if (start_client) {
+      console.log("printing clinet", client.onopen);
+      client.onopen = () => {
+        console.log("WebSocket Client Connected");
+      };
+      client.onmessage = async (chat_message) => {
+        const dataFromServer = JSON.parse(chat_message.data);
+        console.log("got reply! ", dataFromServer);
+
+        if (dataFromServer) {
+          setmessages((messages) => [...messages, dataFromServer.message]);
+        }
+      };
+    }
+  }, [start_client]);
   return (
     <Layouttwo>
       <div>
-        {/* <h6>Room Name : {}</h6> */}
         {data &&
           data.results.map((message) => {
             return (
               <div className="flex items-center " key={message.id}>
-                <div>[{message.name}]</div>
+                <div>{message.name}</div>
                 <div>{message.content}</div>
               </div>
             );

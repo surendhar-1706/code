@@ -1,7 +1,14 @@
+from rest_framework import generics
+from rest_framework.exceptions import ValidationError
+from rest_framework_simplejwt.backends import TokenBackend
+
+from .pagination import CustomPaginator
+from .serializers import *
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import permissions
+from rest_framework import pagination, permissions
+from rest_framework.generics import ListAPIView
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your views here.
@@ -29,3 +36,24 @@ class SignupView(APIView):
 
         else:
             return Response({'error': 'password match agala'})
+
+
+class ProfileData(generics.RetrieveAPIView):
+    model = Profile
+    queryset = Profile.objects.all()
+    serializer_class = Profileserialzier
+
+    def get(self, request, *args, **kwargs):
+        token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+        try:
+            valid_data = TokenBackend(
+                algorithm='HS256').decode(token, verify=False)
+            user = valid_data['user_id']
+            self.user_id = user
+        except ValidationError as v:
+            print("validation error", v)
+            print('current user ------------', request)
+        print('self.user------', self.user_id)
+        profile = Profile.objects.get(user=self.user_id)
+        serializer = self.get_serializer(profile)
+        return Response(serializer.data)

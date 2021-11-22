@@ -4,7 +4,7 @@ import Footertwo from "./Footertwo";
 import { AuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-const fetcher = (url) => fetch(url).then((r) => r.json());
+
 function Layouttwo({ children }) {
   const { dispatch, authstate } = useContext(AuthContext);
   const Router = useRouter();
@@ -37,6 +37,9 @@ function Layouttwo({ children }) {
       // if token was verified we set the state.
       if (json_data.code !== "token_not_valid") {
         setVerified(true);
+        dispatch({
+          type: "authenticated",
+        });
       } else {
         // If the token was fraud we first remove it from localStorage and then redirect to "/"
         localStorage.removeItem("access_token");
