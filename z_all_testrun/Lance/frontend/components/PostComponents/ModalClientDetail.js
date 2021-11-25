@@ -1,18 +1,44 @@
 import React from "react";
+import useSWR from "swr";
 import { BiHeart } from "react-icons/bi";
 import { RiFlag2Fill } from "react-icons/ri";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { GoVerified } from "react-icons/go";
 import StarRatings from "react-star-ratings";
+import { useRouter } from "next/router";
+import Link from "next/link";
+const fetcher = (url) => fetch(url).then((r) => r.json());
 function ModalClientDetail() {
+  const router = useRouter();
+
+  const { data, error } = useSWR(
+    "http://localhost:8000/api/post/data/" + router.query.postid,
+    fetcher,
+    { dedupingInterval: 300000 }
+  );
+  {
+    data && console.log(data);
+  }
+
   return (
     <div className="px-6">
-      <button
-        className="mt-10 bg-upworkgreen-light py-1.5 w-full
+      {data ? (
+        <Link href={`/chat/${data.profile}`}>
+          <button
+            className="mt-10 bg-upworkgreen-light py-1.5 w-full
       transition duration-500  ease-in-out hover:bg-upworkgreen-dark  text-white block   rounded-full"
-      >
-        Submit a Propsal
-      </button>
+          >
+            Submit a Propsal
+          </button>
+        </Link>
+      ) : (
+        <button
+          className="mt-10 bg-upworkgreen-light py-1.5 w-full
+      transition duration-500  ease-in-out hover:bg-upworkgreen-dark  text-white block   rounded-full"
+        >
+          Submit a Propsal
+        </button>
+      )}
       <button
         className="mt-5 flex  justify-center font-semibold
         border border-gray-200

@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework.exceptions import ValidationError
 from accounts.models import Profile
- 
+
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,6 +32,7 @@ class PostSerializer(serializers.ModelSerializer):
             # print(profile)
             request.user = profile
             self.user = request.user
+            print('printing profile name from serillizer', profile.user)
 
         except ValidationError as v:
             print("validation error", v)

@@ -2,7 +2,7 @@ import PostDetail from "../../components/PostDetail";
 export const getStaticPaths = async () => {
   const fetched_data = await fetch("http://localhost:8000/api/post/all");
   const json_data = await fetched_data.json();
-
+  
   const paths = json_data.map((post) => ({
     params: { postid: post.id.toString() },
   }));
