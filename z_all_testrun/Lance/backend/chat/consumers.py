@@ -31,35 +31,41 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return profile.user.name
 
     def check_user_and_room(self, room_name, my_id, other_user_id):
-        print('chek_user_and_romm------------')
-        print(my_id)
-        print(other_user_id)
+        temp_my_id = other_user_id
+        temp_other_user_id = my_id
+        temp_room_name = 'chat_'+other_user_id+'_'+my_id
         if not ChatRoom.objects.filter(room_name=room_name).exists():
-            # create the room with the users information forwarded with your request
             ChatRoom.objects.create(
                 user_id_1=my_id, user_id_2=other_user_id, room_name=room_name)
-            print('new chat romm created-----------')
-        else:
-            print(' chat romm exists----------')
         room = ChatRoom.objects.get(room_name=room_name)
         if my_id != room.user_id_1 and other_user_id != room.user_id_2:
             print('Relevant users dont exists------------------------')
 
+    def add_messages_to_room(self, room_name, message, name, my_id, other_id, profile):
+        room = ChatRoom.objects.get(room_name=room_name)
+        msg_obj = ChatMessage.objects.create(
+            profile=profile, content=message, name=name)
+        room.messages.add(msg_obj)
+
     async def connect(self):
-        # other_user_id = self.scope['url_route']['kwargs']['other_user_id']
-        # my_id = self.scope['url_route']['kwargs']['my_id']
-        # self.my_id = my_id
-        # self.room_group_name = 'chat_'+str(self.my_id)+'_'+other_user_id
+      
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
         temp_array = self.room_name.split('_')
         self.my_id = temp_array[0]
         other_user_id = temp_array[1]
+        small_id = ''
+        big_id = ''
+        if(int(self.my_id) > int(other_user_id)):
+            self.small_id = other_user_id
+            self.big_id = self.my_id
+        else:
+            self.small_id = self.my_id
+            self.big_id = other_user_id
+        self.room_name = str(self.small_id)+'_'+str(self.big_id)
+        self.room_group_name = 'chat_%s' % self.room_name
         await database_sync_to_async(self.check_user_and_room)(self.room_group_name, self.my_id, other_user_id)
-        # Join room group
-        # test_var = 'chat_1_2'
-        # one = test_var.split('_')
-        # print('the_one---------------------', one[1])
+        
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -78,7 +84,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
 
     async def receive(self, text_data):
-        print('running receive---------------------------')
+     
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         # self.commands[text_data_json['save_message']](self, text_data_json)
@@ -89,13 +95,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': message
             }
         )
+        temp_array = self.room_group_name.split('_')
+        one = temp_array[1]
+        two = temp_array[2]
 
         profile = await database_sync_to_async(self.get_user)(text_data_json['token'])
         name = await database_sync_to_async(self.set_name)(profile)
-        obj = ChatMessage(
-            content=message, profile=profile, name=name)
-        print('nahiiiiiiiiiii-')
-        await database_sync_to_async(obj.save)()
+        # obj = ChatMessage(
+        #     content=message, profile=profile, name=name)
+        # message_object = await database_sync_to_async(obj.save)()
+        if(one == self.my_id):
+            self.other_user_id = two
+        else:
+            self.other_user_id = one
+        await database_sync_to_async(self.add_messages_to_room)(self.room_group_name, message, name, self.my_id, self.other_user_id, profile)
 
     # Receive message from room group
     async def chat_message(self, event):

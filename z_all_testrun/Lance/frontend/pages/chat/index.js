@@ -10,11 +10,13 @@ function ChatHome() {
   const { authstate, dispatch } = useContext(AuthContext);
 
   // console.log("authstate", authstate.access);
-  const other_user_id = "31";
+  const other_user_id = "34";
+  // const [other_user_id, set_other_user_id] = useState();
   const [messages, setmessages] = useState([]);
   const [data, setdata] = useState();
   const [start_client, set_start_client] = useState(false);
   const [room_name, set_room_name] = useState();
+
   const client = start_client
     ? new w3cwebsocket("ws://127.0.0.1:8000/ws/chat/" + room_name + "/")
     : null;
@@ -30,8 +32,13 @@ function ChatHome() {
       set_room_name(room_name_var);
       set_start_client(true);
     }
+    var my_id = decoded["user_id"];
+    var msg_fetch_room_name =
+      my_id > other_user_id
+        ? "chat_" + other_user_id + "_" + my_id
+        : "chat_" + my_id + "_" + other_user_id;
     const fetched_data = await fetch(
-      "http://localhost:8000/chat/api/last_ten/",
+      "http://localhost:8000/chat/api/last_ten/" + msg_fetch_room_name + "/",
       {
         headers: {
           Authorization: "JWT " + localStorage.getItem("access_token"),

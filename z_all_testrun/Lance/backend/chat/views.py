@@ -25,10 +25,18 @@ def room(request, room_name):
 #     pagination_class = ChatPaginator
 
 class ChatListview(APIView):
-    def get(self, request):
-        queryset = ChatMessage.objects.order_by('-id').all()
+    print('ran_ChatListview------------------------')
+
+    def get(self, request, *args, **kwargs):
+
+        room_name = self.kwargs.get('msg_fetch_room_name', None)
+        # print(room_name, 'room_name')
+
+        queryset = ChatRoom.objects.get(room_name=room_name)
+        queryset = queryset.messages.order_by('-id').all()
+        print(queryset, 'queryset-------------------W')
         paginator = ChatPaginator()
         response = paginator.generate_response(
             queryset, ChatSerializer, request)
-        print(request)
+
         return response

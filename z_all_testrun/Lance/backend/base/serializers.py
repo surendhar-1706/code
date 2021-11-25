@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework.exceptions import ValidationError
 from accounts.models import Profile
-
+ 
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
