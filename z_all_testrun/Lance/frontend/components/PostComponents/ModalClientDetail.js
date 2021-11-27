@@ -23,7 +23,7 @@ function ModalClientDetail() {
   return (
     <div className="px-6">
       {data ? (
-        <Link href={`/chat/${data.profile}`}>
+        <Link href={`/chat/${data.user}`}>
           <button
             className="mt-10 bg-upworkgreen-light py-1.5 w-full
       transition duration-500  ease-in-out hover:bg-upworkgreen-dark  text-white block   rounded-full"

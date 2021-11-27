@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField
-from base.models import Skill
+
 # Create your models here.
 
 
@@ -85,7 +85,7 @@ class Profile(models.Model):
     video_intro_link = models.CharField(max_length=255, blank=True, null=True)
     education = models.CharField(max_length=255, blank=True, null=True)
     employment_history = models.TextField(blank=True, null=True)
-    skill = models.ManyToManyField(Skill, blank=True)
+    skill = models.ManyToManyField('base.Skill', blank=True)
 
     def __str__(self):
         return self.user.email

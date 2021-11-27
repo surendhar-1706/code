@@ -31,9 +31,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         return profile.user.name
 
     def check_user_and_room(self, room_name, my_id, other_user_id):
-        temp_my_id = other_user_id
-        temp_other_user_id = my_id
-        temp_room_name = 'chat_'+other_user_id+'_'+my_id
         if not ChatRoom.objects.filter(room_name=room_name).exists():
             ChatRoom.objects.create(
                 user_id_1=my_id, user_id_2=other_user_id, room_name=room_name)
@@ -48,24 +45,26 @@ class ChatConsumer(AsyncWebsocketConsumer):
         room.messages.add(msg_obj)
 
     async def connect(self):
-      
+
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
         temp_array = self.room_name.split('_')
-        self.my_id = temp_array[0]
-        other_user_id = temp_array[1]
-        small_id = ''
-        big_id = ''
-        if(int(self.my_id) > int(other_user_id)):
+        print('prininging temp array-----------------------------------', temp_array)
+        self.my_id = temp_array[1]
+        other_user_id = temp_array[2]
+        if(self.my_id > other_user_id):
             self.small_id = other_user_id
             self.big_id = self.my_id
+            print(self.small_id, 'small')
+            print(self.big_id, 'big')
         else:
             self.small_id = self.my_id
             self.big_id = other_user_id
+            print(self.small_id, 'small')
+            print(self.big_id, 'big')
         self.room_name = str(self.small_id)+'_'+str(self.big_id)
         self.room_group_name = 'chat_%s' % self.room_name
         await database_sync_to_async(self.check_user_and_room)(self.room_group_name, self.my_id, other_user_id)
-        
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -84,7 +83,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
 
     async def receive(self, text_data):
-     
+
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         # self.commands[text_data_json['save_message']](self, text_data_json)

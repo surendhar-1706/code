@@ -5,6 +5,8 @@ from rest_framework import serializers
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework.exceptions import ValidationError
 from accounts.models import Profile
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -27,19 +29,20 @@ class PostSerializer(serializers.ModelSerializer):
             valid_data = TokenBackend(
                 algorithm='HS256').decode(token, verify=False)
             user = valid_data['user_id']
+
             profile = Profile.objects.get(user=user)
-            # print('printing profile name from serillizer')
-            # print(profile)
-            request.user = profile
-            self.user = request.user
-            print('printing profile name from serillizer', profile.user)
+
+            new_test = User.objects.get(id=int(user))
+            self.user = new_test
+            print('new_test00000000000000', new_test)
 
         except ValidationError as v:
             print("validation error", v)
             print('current user ------------', request)
 
     def create(self, validated_data):
-        validated_data["profile"] = self.user
+        print('from create', self.user)
+        validated_data["user"] = self.user
         skill_data = validated_data.pop('skill')
         post = Post.objects.create(**validated_data)
         for skill in skill_data:
