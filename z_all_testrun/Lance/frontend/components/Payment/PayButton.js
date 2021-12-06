@@ -3,17 +3,18 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import toast, { Toaster } from "react-hot-toast";
 import React, { useEffect } from "react";
 
-function PayButton() {
+function PayButton({ quantity }) {
   console.log("printing payment variable");
   console.log(process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID);
   const notify = () => toast("Here is your toast.");
+  var temp_amount = Number(quantity) * 0.2;
+  var real_amount = String(temp_amount);
   return (
     <PayPalScriptProvider
       options={{
         "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
       }}
     >
-      {/* <button onClick={notify}>Click me </button> */}
       <Toaster />
       <PayPalButtons
         style={{ layout: "horizontal" }}
@@ -22,7 +23,7 @@ function PayButton() {
             purchase_units: [
               {
                 amount: {
-                  value: "2.00",
+                  value: real_amount,
                 },
               },
             ],
