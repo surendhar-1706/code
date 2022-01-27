@@ -19,7 +19,7 @@ from rest_framework_swagger.views import get_swagger_view
 # from django.conf.urls import url
 from django.conf import settings
 from django.views.static import serve
-schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_swagger_view(title='Poss Assignment Api creation')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('crud.urls')),
