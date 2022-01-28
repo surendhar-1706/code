@@ -1,10 +1,11 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 
-function Contact() {
+function LoginIndex() {
     return <div>
-        <Layout childcomponent='hi from contact' />
+
+        <Layout childcomponent='login page' />
     </div>;
 }
 
-export default Contact;
+export default LoginIndex;

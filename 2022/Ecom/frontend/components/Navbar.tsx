@@ -8,6 +8,7 @@ import { Stack, HStack, VStack } from '@chakra-ui/react'
 import NextLink from "next/link"
 import { LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
+import DrawerRes from './home/DrawerRes';
 function Navbar() {
     const router = useRouter()
     return <div>
@@ -61,7 +62,7 @@ function Navbar() {
 
             <HStack display={['flex', 'flex', 'flex', 'none']}>
 
-                <Box>hi</Box>
+                <DrawerRes />
             </HStack>
         </HStack >
 

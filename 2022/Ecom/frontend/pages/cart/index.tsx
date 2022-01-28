@@ -1,10 +1,10 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 
-function Contact() {
+function CartIndex() {
     return <div>
-        <Layout childcomponent='hi from contact' />
+        <Layout childcomponent={'cart index'} />
     </div>;
 }
 
-export default Contact;
+export default CartIndex;

@@ -7,11 +7,12 @@ import { Box } from '@chakra-ui/react'
 import Nav from '../components/Nav'
 import Layout from '../components/Layout'
 import Hi from '../components/hi'
+import HomeBackground from '../components/home/HomeBackground'
 const Home: NextPage = () => {
   return (
     <div>
       {/* <Navbar /> */}
-      <Layout childcomponent={<Hi />} />
+      <Layout childcomponent={<HomeBackground />} />
 
 
     </div>
