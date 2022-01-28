@@ -6,7 +6,7 @@ type ParentComponent = {
 }
 function ProductIndex(props: ParentComponent) {
     return <div>
-        <Layout childcomponent='hi is passed as a string' />
+        {/* <Layout childcomponent='hi is passed as a string' /> */}
     </div>
 
         ;

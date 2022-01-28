@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 
 function About() {
     return <div>
-        <Layout childcomponent='about' />
+        {/* <Layout childcomponent='about' /> */}
     </div>;
 }
 

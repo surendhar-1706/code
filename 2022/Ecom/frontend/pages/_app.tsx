@@ -9,12 +9,13 @@ import {
   QueryClientProvider,
 } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import Layout from '../components/Layout'
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-
+        <Layout childcomponent={<Component {...pageProps} />} />
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />
     </QueryClientProvider>

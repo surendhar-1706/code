@@ -44,11 +44,15 @@ function Navbar() {
 
             <HStack display={['none', 'none', 'none', 'flex']} gap={3}>
 
-                <Button leftIcon={<BiLogIn />} variant='outline'>
+                <Button leftIcon={<BiLogIn />} variant='outline' onClick={() => {
+                    router.push('/login')
+                }}>
                     Login
 
                 </Button>
-                <Button leftIcon={<BiUserPlus />} variant='outline'>
+                <Button leftIcon={<BiUserPlus />} variant='outline' onClick={() => {
+                    router.push('/register')
+                }}>
                     Register
 
                 </Button>

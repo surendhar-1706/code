@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 
 function Contact() {
     return <div>
-        <Layout childcomponent='hi from contact' />
+        {/* <Layout childcomponent='hi from contact' /> */}
     </div>;
 }
 

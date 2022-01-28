@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   return (
     <div>
       {/* <Navbar /> */}
-      <Layout childcomponent={<HomeBackground />} />
+      <HomeBackground />
 
 
     </div>

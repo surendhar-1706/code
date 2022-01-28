@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 function LoginIndex() {
     return <div>
 
-        <Layout childcomponent='login page' />
+        hi from login page
     </div>;
 }
 

@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 
 function CartIndex() {
     return <div>
-        <Layout childcomponent={'cart index'} />
+        {/* <Layout childcomponent={'cart index'} /> */}
     </div>;
 }
 

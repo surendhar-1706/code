@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, GridItem, HStack, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import DisplayGrid from './DisplayGrid';
@@ -49,20 +49,22 @@ function ShowProducts() {
     const { data: electronics, } = useQuery('electronics', getElectronics, { refetchOnWindowFocus: false })
     return <div>
 
-        <VStack px={'36'} pt='3' gap={4}>
+        <VStack px={['5', '', '', '36']} pt='3' gap={4}>
             <Text fontSize={'3xl'} fontWeight='semibold' textAlign={'center'}>Latest Products</Text>
             <Divider border={'2px'} />
             <Tabs align='center' variant='' colorScheme=''>
-                <TabList gap={'2'}>
-                    <Tab borderWidth={'1px'} px='6' rounded={'md'} >All</Tab>
-                    <Tab borderWidth={'1px'} px='6' rounded={'md'} >Mens's Clothing</Tab>
-                    <Tab borderWidth={'1px'} px='6' rounded={'md'} >Women's Clothing</Tab>
-                    <Tab borderWidth={'1px'} px='6' rounded={'md'} >Jewellery</Tab>
-                    <Tab borderWidth={'1px'} px='6' rounded={'md'} >Electronic</Tab>
+                <TabList >
+                    <Box display={['none', 'none', 'none', 'flex']} gap={'2'}>
+                        <Tab borderWidth={'1px'} px='6' rounded={'md'} >All</Tab>
+                        <Tab borderWidth={'1px'} px='6' rounded={'md'} >Mens's Clothing</Tab>
+                        <Tab borderWidth={'1px'} px='6' rounded={'md'} >Women's Clothing</Tab>
+                        <Tab borderWidth={'1px'} px='6' rounded={'md'} >Jewellery</Tab>
+                        <Tab borderWidth={'1px'} px='6' rounded={'md'} >Electronic</Tab>
+                    </Box>
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <Grid templateColumns='repeat(4, 1fr)' gap={6}>
+                        <Grid templateColumns={['', 'repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)']} gap={6}>
                             {data ? data.map((one: Product_type) => {
                                 return <GridItem
                                     pt={'2'}
