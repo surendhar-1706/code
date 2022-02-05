@@ -33,8 +33,9 @@ function RegsiterHome() {
             validationSchema={Yup.object().shape({
                 firstName: Yup.string().min(5).max(10).required('first Name is required'),
                 lastName: Yup.string().min(5).max(10).required('last Name is required'),
+                checked: Yup.array().min(1, 'Select atleast one'),
                 radio: Yup.string().required('Dei!! select panra'),
-                checked: Yup.array().min(1, 'Se;ect atleast one')
+
             })}
 
         >

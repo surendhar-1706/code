@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Grid, GridItem, HStack, Image, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import DisplayGrid from './DisplayGrid';
@@ -47,6 +47,7 @@ function ShowProducts() {
     const { data: women, } = useQuery('women', getWomens, { refetchOnWindowFocus: false })
     const { data: jewelery, } = useQuery('jewlery', getJewellery, { refetchOnWindowFocus: false })
     const { data: electronics, } = useQuery('electronics', getElectronics, { refetchOnWindowFocus: false })
+    const toggle_border_color = useColorModeValue('gray.50', 'gray.500')
     return <div>
 
         <VStack px={['5', '', '', '36']} pt='3' gap={4}>
@@ -72,7 +73,7 @@ function ShowProducts() {
                                     boxShadow={'md'}
                                     borderWidth='1px'
                                     borderRadius='lg'
-                                    borderColor={'gray.50'}
+                                    borderColor={toggle_border_color}
                                     align={'center'}
                                     overflow='hidden'
                                     key={one.id}  >
