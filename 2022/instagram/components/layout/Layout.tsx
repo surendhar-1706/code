@@ -8,7 +8,7 @@ type Layouttype = {
 function Layout(props: Layouttype) {
     return <Box >
         <Header />
-        <Box as={'main'} height={'100vh'}>{props.childcomponent}</Box>
+        <Box >{props.childcomponent}</Box>
         <Footer />
     </Box>;
 }

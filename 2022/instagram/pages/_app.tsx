@@ -5,27 +5,17 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
+import useSWR, { SWRConfig } from 'swr'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import Layout from '../components/layout/Layout';
 function MyApp({ Component, pageProps }: AppProps) {
-  const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        retry: false,
-        staleTime: twentyFourHoursInMs,
-      },
-    },
-  });
-  return <ChakraProvider>
-    <QueryClientProvider client={queryClient}>
-      <Layout childcomponent={<Component {...pageProps} />} />
 
-      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
-    </QueryClientProvider>
+  return <ChakraProvider>
+
+    <Layout childcomponent={<Component {...pageProps} />} />
+
+    {/* <ReactQueryDevtools initialIsOpen={false} position='bottom-right' /> */}
+
 
   </ChakraProvider>
 }

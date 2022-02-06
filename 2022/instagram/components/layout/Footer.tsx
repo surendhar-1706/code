@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react';
 import React from 'react';
 
 function Footer() {
-    return <Box height={'100vh'}>
+    return <Box >
         this is footer
     </Box>;
 }

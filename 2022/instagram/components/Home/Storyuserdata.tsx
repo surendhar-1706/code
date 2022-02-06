@@ -2,9 +2,11 @@ import { Box, Image, Text, VStack } from '@chakra-ui/react';
 // import Image from 'next/image';
 import React from 'react';
 import { useQueries, useQuery } from 'react-query';
+import useSWR from 'swr';
 type storyusertype = {
     id: number
 }
+
 function Storyuserdata(props: storyusertype) {
     const fetchuser = async () => {
         const data = await fetch('https://randomuser.me/api/')
@@ -13,7 +15,12 @@ function Storyuserdata(props: storyusertype) {
         return json_data
     }
     let name = 'random_data' + props.id
-    const { data } = useQuery(name, fetchuser)
+    // const { data } = useQuery(name, fetchuser)
+    const { data } = useSWR(name, fetchuser, {
+        revalidateOnFocus: true,
+        dedupingInterval: 600000,
+        revalidateOnMount: true
+    })
     return <Box >
 
         {data &&
