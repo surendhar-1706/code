@@ -20,8 +20,9 @@ import {
 } from '@chakra-ui/react'
 import { Fade, ScaleFade, Slide, SlideFade } from '@chakra-ui/react'
 import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+import { Router, useRouter } from 'next/router';
 function Header() {
-
+    const router = useRouter()
     return <HStack
         position={'sticky'}
         top='0'
@@ -32,6 +33,7 @@ function Header() {
         borderBottom={'1px'}
         borderBottomColor={'gray.200'}
         bgColor={'white'}
+        zIndex={50}
 
     >
 
@@ -42,20 +44,25 @@ function Header() {
         <Box w={'150'} display={['none', 'none', 'none', 'flex']}>
             <InputGroup textColor={'gray.500'} bgColor={'gray.50'} rounded={'sm'}>
                 <InputLeftElement
-                    pointerEvents='none'
-                    children={<AiOutlineSearch />}
-                />
+
+                >
+                    < AiOutlineSearch />
+                </InputLeftElement>
                 <Input type='text' placeholder='Search' />
             </InputGroup>
         </Box>
         <HStack gap={2} >
-            <Icon w={7} h={7} as={AiFillHome} />
+            <Icon w={7} h={7} as={AiFillHome} onClick={() => {
+                router.push('/')
+            }} />
             <Box pt={2} position={'relative'} >
                 <Icon w={7} h={7} as={BiMessageRoundedCheck} />
                 <Badge position={'absolute'} fontSize='0.6em' top='1' left='4' bgColor={'red.500'} rounded='full' variant={'solid'}>1</Badge></Box>
             <Icon w={7} h={7} as={CgAddR} />
             <Icon w={7} h={7} as={MdOutlineExplore} />
-            <Icon w={7} h={7} as={AiOutlineHeart} />
+            <Icon w={7} h={7} as={AiOutlineHeart} onClick={() => {
+                router.push('/test')
+            }} />
             <Popover isLazy colorScheme={'whiteAlpha'} >
                 <PopoverTrigger>
                     <Box as='button'>

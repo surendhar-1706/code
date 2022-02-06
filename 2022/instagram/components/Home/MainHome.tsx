@@ -10,11 +10,11 @@ function MainHome() {
         mt={8}>
 
         <Grid
-            templateColumns={['', '', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+            templateColumns={['repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
             gap={4}
         >
-            <GridItem colSpan={2} bg='papayawhip' >
-                <Box>
+            <GridItem colSpan={2}  >
+                <Box >
                     <Stories />
                     <Feed />
                 </Box>

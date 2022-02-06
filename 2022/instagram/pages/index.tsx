@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Instagram</title>
       </Head>
-      <Layout childcomponent={<MainHome />} />
+      <MainHome />
     </div>
   )
 }
