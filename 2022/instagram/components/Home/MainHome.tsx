@@ -20,7 +20,7 @@ function MainHome() {
                 </Box>
             </GridItem>
             <GridItem colSpan={1}  >
-                <Box bg='papayawhip' display={['none', 'none', 'none', 'flex']}>
+                <Box display={['none', 'none', 'none', 'flex']} >
                     <Suggestions />
                 </Box>
             </GridItem>

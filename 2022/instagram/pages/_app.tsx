@@ -6,14 +6,24 @@ import {
   QueryClientProvider,
 } from 'react-query';
 import useSWR, { SWRConfig } from 'swr'
+import { SessionProvider } from 'next-auth/react'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import Layout from '../components/layout/Layout';
-function MyApp({ Component, pageProps }: AppProps) {
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
   return <ChakraProvider>
-
-    <Layout childcomponent={<Component {...pageProps} />} />
-
+    <RecoilRoot>
+      <SessionProvider session={session}>
+        <Layout childcomponent={<Component {...pageProps} />} />
+      </SessionProvider>
+    </RecoilRoot>
     {/* <ReactQueryDevtools initialIsOpen={false} position='bottom-right' /> */}
 
 
