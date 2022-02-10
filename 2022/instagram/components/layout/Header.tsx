@@ -112,9 +112,10 @@ function Header() {
                                     // console.log(values)
                                     setSubmitting(true)
                                     const docref = await addDoc(collection(db, 'posts'), {
-                                        username: session?.user?.email,
+                                        username: session?.user?.name,
                                         caption: values.caption,
                                         profileimg: session?.user?.image,
+                                        email: session?.user?.email,
                                         timestamp: serverTimestamp()
                                     })
                                     console.log('new doc added')

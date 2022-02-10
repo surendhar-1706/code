@@ -1,7 +1,7 @@
 
 import { Avatar, Box, Button, HStack, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsBookmark, BsChat, BsThreeDots } from "react-icons/bs";
 import { useQuery } from 'react-query';
 import useSWR from 'swr';
@@ -20,11 +20,15 @@ type storyusertype = {
     id: number
 }
 import { AiOutlineHeart } from "react-icons/ai";
+;
+
 function FeedPost(props: storyusertype) {
+
     let name = 'random_data' + props.id
     const { data } = useSWR(name, fetchuser, {
         revalidateOnFocus: true, dedupingInterval: 600000, revalidateOnMount: true
     })
+
     return <div>
         <Stack borderWidth='1px'>
             <HStack p={3} justify={'space-between'}>
