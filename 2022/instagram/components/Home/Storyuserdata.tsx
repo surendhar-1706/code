@@ -11,7 +11,7 @@ function Storyuserdata(props: storyusertype) {
     const fetchuser = async () => {
         const data = await fetch('https://randomuser.me/api/')
         const json_data = await data.json()
-        console.log(json_data, 'story user data')
+        // console.log(json_data, 'story user data')
         return json_data
     }
     let name = 'random_data' + props.id

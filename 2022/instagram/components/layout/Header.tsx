@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { Badge, Box, Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, HStack, Icon, IconButton, Input, InputGroup, InputLeftAddon, InputLeftElement, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import Image from 'next/image';
 import Instagram from '../../public/instagram.png'
@@ -7,6 +7,7 @@ import { BiMessageRoundedCheck } from "react-icons/bi";
 import { RiWechatPayLine } from "react-icons/ri";
 import { CgAddR } from "react-icons/cg";
 import { MdOutlineExplore } from "react-icons/md";
+import * as Yup from 'yup';
 import {
     Popover,
     PopoverTrigger,
@@ -32,11 +33,26 @@ import {
 } from '@chakra-ui/react'
 import { Field, FieldProps, Form, Formik, FormikProps, FormikState, FormikValues } from 'formik';
 import Preview from '../Preview';
+import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { db, storage } from '../../firebase';
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import { imagestate } from '../../atoms/Imageatom';
+
 function Header() {
+    const [imgerr, setimgerr] = useState('Please select an image')
+    const [empty, setisempty] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { data: session } = useSession()
     const filepicker = useRef(null)
-    // const [open, setopen] = useRecoilState(modalstate)
+    const [value, setvalue] = useRecoilState(imagestate)
+    const UploadSchema = Yup.object().shape({
+        caption: Yup.string()
+            .required('Required'),
+        photo1: Yup.mixed()
+            .nullable()
+            .required('Required'),
+
+    });
     const router = useRouter()
     return <HStack
         position={'sticky'}
@@ -70,6 +86,11 @@ function Header() {
                         {/* <Button rounded={'full'} w='6' h='6' bgColor={'red.100'} onClick={() => { filepicker.current.click() }}>
                             <AiOutlineCamera colorScheme={'red'} />
                         </Button> */}
+                        <Box >
+                            <Text
+                                fontWeight={'bold'}
+                                fontFamily='body'>Click to choose </Text>
+                        </Box>
                         <Box as={'button'}
                         >
                             <Icon
@@ -81,16 +102,33 @@ function Header() {
                                 p={1}
                                 textColor='red.300'
                                 as={AiOutlineCamera} /> </Box>
-                        <Box >
-                            <Text
-                                fontWeight={'bold'}
-                                fontFamily='body'>Click to choose</Text>
-                        </Box>
 
-                        <Formik initialValues={{ photo1: '', caption: '' }}
+
+                        <Formik
+                            validationSchema={UploadSchema}
+                            initialValues={{ photo1: '', caption: '' }}
                             onSubmit={
-                                (values) => {
-                                    console.log(values)
+                                async (values, { setSubmitting }) => {
+                                    // console.log(values)
+                                    setSubmitting(true)
+                                    const docref = await addDoc(collection(db, 'posts'), {
+                                        username: session?.user?.email,
+                                        caption: values.caption,
+                                        profileimg: session?.user?.image,
+                                        timestamp: serverTimestamp()
+                                    })
+                                    console.log('new doc added')
+                                    const imageref = ref(storage, `posts/${docref.id}/image`)
+                                    await uploadString(imageref, value, 'data_url').then(
+                                        async snapshot => {
+                                            const downloadurl = await getDownloadURL(imageref)
+                                            await updateDoc(doc(db, 'posts', docref.id), {
+                                                image: downloadurl
+                                            })
+                                        }
+                                    )
+                                    setSubmitting(false)
+                                    onClose()
                                 }
                             }
                         >
@@ -99,32 +137,61 @@ function Header() {
                                     <Form>
                                         <VStack gap={6}>
 
+
                                             <input
                                                 hidden
                                                 type='file'
                                                 name='photo1'
                                                 ref={filepicker}
 
+
                                                 onChange={(event: any) => formikProps.setFieldValue('photo1', event.target.files[0])} />
+                                            {formikProps.errors.photo1}
+                                            {/* {({ field, form }: FieldProps) => (
+                                                <FormControl>
+                                                    <FormErrorMessage textColor={'green.500'}>{</FormErrorMessage>
+                                                </FormControl>
+                                            )} */}
+
+
                                             {/* {formikProps.values.photo1 && console.log(formikProps.values.photo1)} */}
                                             {/* < Image src={formikProps.values.photo1} /> */}
 
-
                                             {formikProps.values.photo1 && <Preview file={formikProps.values.photo1} />}
-
                                             <Field name='caption' >
                                                 {({ field, form }: FieldProps) => (
                                                     <FormControl isInvalid={(form.errors.caption && form.touched.caption) ? true : false}>
-                                                        <FormLabel htmlFor='caption'>Last name</FormLabel>
+                                                        {/* <FormLabel htmlFor='caption'>Last name</FormLabel> */}
                                                         <Input {...field} id='caption' placeholder='Enter a caption' />
                                                         <FormErrorMessage textColor={'green.500'}>{form.errors.caption}</FormErrorMessage>
                                                     </FormControl>
                                                 )}
                                             </Field>
 
-                                            <Button colorScheme={'red'} type='submit'>
-                                                Upload Photo
-                                            </Button>
+
+
+
+                                            {formikProps.isSubmitting ? ( // isSubmitting IS A FORMIK PROPS
+                                                <Button
+                                                    isLoading
+                                                    loadingText='Uploading'
+                                                    colorScheme='red'
+                                                    spinnerPlacement='end'
+                                                >
+                                                    Continue
+                                                </Button>
+                                            ) :
+
+
+                                                <Button
+                                                    onClick={() => { }}
+                                                    colorScheme={'red'}
+                                                    type='submit'
+
+                                                >
+                                                    Upload Photo
+                                                </Button>}
+
                                         </VStack>
                                     </Form>
                                 )
