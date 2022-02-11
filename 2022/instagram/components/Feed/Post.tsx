@@ -9,24 +9,77 @@ import { FiSend } from "react-icons/fi";
 import { RiChat1Line } from "react-icons/ri";
 import { FaRegSmile } from "react-icons/fa";
 import { } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useSession } from 'next-auth/react';
 import { Field, FieldProps, Form, Formik } from 'formik';
+
 ;
 import * as Yup from "yup";
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import Moment from 'react-moment';
 function Post({ postdata }: any) {
     const { data: session } = useSession()
-    const [comments, setcomments] = useState<any[]>()
+    const [comments, setcomments] = useState<any[]>([])
+    const [likes, setlikes] = useState<any[]>([])
+    const [hasliked, sethasliked] = useState<any>(false)
+
     useEffect(() => {
         onSnapshot(query(collection(db, 'posts', postdata.id, 'comment'), orderBy('timestamp', 'desc')), snapshot => {
             setcomments(snapshot.docs)
         })
-        console.log(comments, 'comments')
+        // console.log(comments, 'comments')
 
-    }, [db])
+    }, [db, postdata.id])
+    useEffect(() => {
+        onSnapshot(query(collection(db, 'posts', postdata.id, 'likes')), snapshot => {
+            setlikes(snapshot.docs)
+
+        })
+
+
+    }, [db, postdata.id])
+    console.log(likes, 'printing likes')
+    const likepost = async () => {
+        const email: any = session?.user?.email
+        if (hasliked) {
+            console.log('inside unlike  post')
+
+            sethasliked(false)
+            await deleteDoc(doc(db, 'posts', postdata.id, 'likes', email)).then(() => { })
+
+        }
+        else {
+            console.log('inside like post', hasliked)
+
+            await setDoc(doc(db, 'posts', postdata.id, 'likes', email), {
+                username: session?.user?.name
+            })
+        }
+    }
+    useEffect(() => {
+        // console.log('like effect')
+        // sethasliked(
+        //     likes?.findIndex(like => {
+        //         console.log(like.id, 'liked id')
+        //         like.id === session?.user?.email
+        //     }) !== -1)
+
+        likes?.map(like => {
+            console.log(like.id, 'like id')
+            if (like.id === session?.user?.email) {
+                sethasliked(true)
+            }
+            else {
+                sethasliked(false)
+            }
+        })
+    }
+
+
+
+        , [db, likes]
+    )
     return (
         <div>
             {/* {postdata.data().username} */}
@@ -42,7 +95,18 @@ function Post({ postdata }: any) {
                 {session ? <Stack px={'2'} py='2' >
                     <HStack justify={'space-between'}>
                         <HStack>
-                            <Box as={'button'}> <AiOutlineHeart size={'23'} /></Box>
+                            {hasliked ? <Box
+
+                                as={'button'}>
+
+                                <AiFillHeart
+                                    style={{ fill: 'red' }}
+                                    onClick={likepost}
+                                    size={'23'}
+                                />
+
+
+                            </Box> : <Box as={'button'}> <AiOutlineHeart onClick={likepost} size={'23'} /></Box>}
                             <Box transform={''} as={'button'} >
                                 {/* <BsChat />  */} <RiChat1Line size={'23'} />
                             </Box>
@@ -54,6 +118,7 @@ function Post({ postdata }: any) {
                             <BsBookmark size={'18'} />
                         </Box>
                     </HStack>
+                    <HStack>  {likes?.length > 0 ? <Text fontSize={'xs'} fontWeight='bold'> {likes?.length} likes</Text> : <Text fontSize={'xs'} fontWeight='bold'> 0 likes</Text>}</HStack>
                     <HStack fontSize={'sm'}>
                         {<Text noOfLines={1} fontWeight={'semibold'}>{postdata.data().username}</Text>}
                         <Text noOfLines={1}>{postdata.data().caption}</Text>

@@ -43,7 +43,7 @@ function Header() {
     const [empty, setisempty] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { data: session } = useSession()
-    const filepicker = useRef(null)
+    const filepicker = useRef<any>(null)
     const [value, setvalue] = useRecoilState(imagestate)
     const UploadSchema = Yup.object().shape({
         caption: Yup.string()
@@ -251,7 +251,7 @@ function Header() {
                     <PopoverArrow />
                     <PopoverBody px={'5'} >
                         <VStack>
-                            {session ? <Box as={'button'} onClick={signOut}>Log Out</Box> : <Box as={'button'} onClick={signIn}>Log in</Box>}
+                            {session ? <Box as={'button'} onClick={() => signOut()}>Log Out</Box> : <Box as={'button'} onClick={() => signIn()}>Log in</Box>}
                         </VStack>
                     </PopoverBody>
                 </PopoverContent>

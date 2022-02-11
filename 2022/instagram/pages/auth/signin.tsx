@@ -4,6 +4,7 @@ import Layout from '../../components/layout/Layout';
 import { Box, Button, Stack, Text, VStack } from '@chakra-ui/react';
 import Instagram from '../../public/instagram.png'
 import Image from 'next/image';
+import Head from 'next/head';
 type provider_type = {
     providers: singular_type[]
 }
@@ -13,6 +14,11 @@ type singular_type = {
 }
 function signin({ providers }: provider_type) {
     return <VStack pt={10} gap='5'>
+        <Head>
+            <title>Login</title>
+            {/* <link rel="shortcut icon" href="/static/logo.png" /> */}
+            <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        </Head>
         <Image src={Instagram} />
         <Text>Please Signin to have a better experience</Text>
         <Box p={'16'}>

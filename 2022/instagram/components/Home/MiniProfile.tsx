@@ -21,11 +21,11 @@ function MiniProfile() {
                 </Box>
             </HStack>
 
-            <Text as='button' onClick={signOut} fontSize={'sm'} fontWeight='semibold' textColor={'#55B6F6'}>SignOut</Text>
+            <Text as='button' onClick={() => signOut()} fontSize={'sm'} fontWeight='semibold' textColor={'#55B6F6'}>SignOut</Text>
 
         </HStack> :
             <HStack justify={'space-between'} pl='3' pr='2' py='2' gap={'12'} position='fixed'>
-                <Text as='button' onClick={signIn} fontSize={'sm'} fontWeight='semibold' textColor={'#55B6F6'}>signIn</Text>
+                <Text as='button' onClick={() => signIn()} fontSize={'sm'} fontWeight='semibold' textColor={'#55B6F6'}>signIn</Text>
             </HStack>
         }
     </div >;

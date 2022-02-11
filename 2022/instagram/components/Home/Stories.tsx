@@ -19,9 +19,6 @@ function Stories() {
         py='2'
         rounded={'md'}
         overflowX='auto'
-
-
-
     >
         {session &&
 
