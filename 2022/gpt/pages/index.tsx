@@ -8,14 +8,9 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <Box
-      bgGradient='linear(to-r, #01254A, #021932, #040D19)'
 
-    >
-      <MainIndex />
-
-
+    ><MainIndex />
     </Box>
   )
 }
-
 export default Home
