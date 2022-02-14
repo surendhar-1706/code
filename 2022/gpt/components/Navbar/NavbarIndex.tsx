@@ -38,12 +38,12 @@ function NavbarIndex() {
             <Box display={['flex', 'flex', 'none', 'none']}>
                 <RiMenu3Fill size={'20'} onClick={() => onOpen()} />
             </Box>
-            <Drawer onClose={onClose} isOpen={isOpen} size={size}>
+            <Drawer onClose={onClose} isOpen={isOpen} size={'xs'}>
                 <DrawerOverlay />
-                <DrawerContent p={0} mt={['8', '8', '8', '8']} bgGradient='linear(to-r, #01254A, #021932, #040D19)' textColor={'white'}>
+                <DrawerContent mt={['8', '8', '8', '8']} bgGradient='linear(to-r, #01254A, #021932, #040D19)' textColor={'white'}>
                     <DrawerCloseButton />
 
-                    <DrawerBody >
+                    <DrawerBody  >
                         <VStack >
                             <Stack mt={'6'} >
                                 <Text>Home</Text>

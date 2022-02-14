@@ -38,6 +38,7 @@ function IndexHeader() {
                 </GridItem>
 
             </Grid>
+
         </Box>
     )
 }
