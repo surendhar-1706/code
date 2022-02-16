@@ -13,31 +13,34 @@ import {
     DrawerCloseButton,
 } from '@chakra-ui/react'
 function NavbarIndex() {
-    const [size, setSize] = React.useState('xs')
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <HStack
+        <Box>
+            <HStack
+                textColor={'white'}
+                fontWeight={'semibold'}
+                justify={'space-between'}
+            >
 
-            textColor={'white'}
-            fontWeight={'semibold'}
-            justify={'space-between'}
-        >
-            <Image src={Logo} height='15' />
-            <HStack gap={'10'} display={['none', 'none', 'flex', 'flex']}>
+                <Image src={Logo} height='15' />
+                <HStack gap={'10'} display={['none', 'none', 'flex', 'flex']}>
 
-                <Text>Home</Text>
-                <Text>What is GPT?</Text>
-                <Text>Open AI</Text>
-                <Text>Case Studies</Text>
-                <Text>Library</Text>
-            </HStack>
-            <HStack gap={'10'} display={['none', 'none', 'none', 'flex']}>
-                <Text as={'button'}>Sign in</Text>
-                <Button _hover={{ bgColor: '' }} bgColor='brand.button'>Sign up</Button>
-            </HStack>
-            <Box display={['flex', 'flex', 'none', 'none']}>
-                <RiMenu3Fill size={'20'} onClick={() => onOpen()} />
-            </Box>
+                    <Text>Home</Text>
+                    <Text>What is GPT?</Text>
+                    <Text>Open AI</Text>
+                    <Text>Case Studies</Text>
+                    <Text>Library</Text>
+                </HStack>
+                <HStack gap={'10'} display={['none', 'none', 'none', 'flex']}>
+                    <Text as={'button'}>Sign in</Text>
+                    <Button _hover={{ bgColor: '' }} bgColor='brand.button'>Sign up</Button>
+                </HStack>
+                <Box display={['flex', 'flex', 'none', 'none']}>
+                    <RiMenu3Fill size={'20'} onClick={() => onOpen()} />
+                </Box>
+
+            </HStack >
             <Drawer onClose={onClose} isOpen={isOpen} size={'xs'}>
                 <DrawerOverlay />
                 <DrawerContent mt={['8', '8', '8', '8']} bgGradient='linear(to-r, #01254A, #021932, #040D19)' textColor={'white'}>
@@ -58,7 +61,7 @@ function NavbarIndex() {
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
-        </HStack >
+        </Box>
     )
 }
 
