@@ -9,7 +9,14 @@ const Home: NextPage = () => {
   return (
     <Box
 
-    ><MainIndex />
+    >
+      <Head>
+        <title>GPT</title>
+        {/* <link rel="shortcut icon" href="/static/logo.png" /> */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/Header Illustration.png" />
+      </Head>
+
+      <MainIndex />
     </Box>
   )
 }

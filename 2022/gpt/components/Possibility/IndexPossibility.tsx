@@ -4,7 +4,6 @@ import React from 'react'
 import Possibility from '../../public/Feature Image.png'
 function IndexPossibility() {
     return (
-
         <Box textColor={'white'}  >
             <Box display={['', '', 'flex', 'flex']} alignItems='flex-end' gap={12}>
                 <Box gap={''} >

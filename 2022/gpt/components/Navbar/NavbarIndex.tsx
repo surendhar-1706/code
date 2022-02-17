@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react'
+import { Box, Button, HStack, Link, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 import Logo from '../../public/GPT-3.svg'
@@ -23,13 +23,15 @@ function NavbarIndex() {
                 justify={'space-between'}
             >
 
-                <Image src={Logo} height='15' />
+                <Link href='#home' >   <Image src={Logo} height='15' /></Link>
                 <HStack gap={'10'} display={['none', 'none', 'flex', 'flex']}>
 
-                    <Text>Home</Text>
-                    <Text>What is GPT?</Text>
-                    <Text>Open AI</Text>
-                    <Text>Case Studies</Text>
+
+                    <Link href='#home' >   <Text >Home</Text></Link>
+
+                    <Link href='#what' >       <Text>What is GPT?</Text></Link>
+                    <Link href='#poss' >        <Text>Open AI</Text></Link>
+                    <Link href='#case' >       <Text>Case Studies</Text></Link>
                     <Text>Library</Text>
                 </HStack>
                 <HStack gap={'10'} display={['none', 'none', 'none', 'flex']}>
@@ -49,10 +51,10 @@ function NavbarIndex() {
                     <DrawerBody  >
                         <VStack >
                             <Stack mt={'6'} >
-                                <Text>Home</Text>
-                                <Text>What is GPT?</Text>
-                                <Text>Open AI</Text>
-                                <Text>Case Studies</Text>
+                                <Link href='#home' >   <Text >Home</Text></Link>
+                                <Link href='#what' >       <Text>What is GPT?</Text></Link>
+                                <Link href='#poss' >        <Text>Open AI</Text></Link>
+                                <Link href='#case' >       <Text>Case Studies</Text></Link>
                                 <Text>Library</Text>
                                 <Text >Sign in</Text>
                                 <Text >Sign Up</Text>
@@ -61,7 +63,7 @@ function NavbarIndex() {
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
-        </Box>
+        </Box >
     )
 }
 
