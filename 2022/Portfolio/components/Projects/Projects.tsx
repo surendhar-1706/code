@@ -10,7 +10,7 @@ function Projects() {
             <Dividers />
             <Text fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Projects</Text>
             <Instagram />
-            <GPT />
+
         </Box >
     )
 }

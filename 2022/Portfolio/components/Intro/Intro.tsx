@@ -7,7 +7,7 @@ function Intro() {
         <HStack
             alignItems={'center'}
             justify={'space-between'}>
-            <Stack fontSize={'xl'} fontFamily={'mono'}>
+            <Stack fontSize={['xs', 'sm', 'xl', 'xl']} fontFamily={'mono'}>
                 <Text>Hello There 👋, I am</Text>
                 <Text fontWeight={'bold'} textColor={'#0001FE'}>Surendhar Palanisamy</Text>
                 <Text >I am fullStack Web developer.</Text>

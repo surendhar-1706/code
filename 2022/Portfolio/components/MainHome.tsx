@@ -6,7 +6,7 @@ import Projects from './Projects/Projects'
 
 function MainHome() {
     return (
-        <Box px={'36'} py={'4'}>
+        <Box px={['3', '3', '36', '36']} py={'4'}>
             <Navbar />
             <Intro />
             <Projects />
