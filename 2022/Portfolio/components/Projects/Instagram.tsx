@@ -17,7 +17,7 @@ function Instagram() {
     return (
 
         <VStack>
-            <Grid templateColumns={['repeat(1  , 1fr)', 'repeat(1  , 1fr)', 'repeat(1  , 1fr)', 'repeat(1  , 1fr)']} gap={12}>
+            <Grid templateColumns={['repeat(1  , 1fr)', 'repeat(1  , 1fr)', 'repeat(1  , 1fr)', 'repeat(2  , 1fr)']} gap={4}>
                 <GridItem py={2} shadow='xl' rounded={'lg'} borderWidth={'thin'}  >
                     <Box alignItems={'flex-end'} gap={4} display={['', '', 'flex', 'flex']} px={'4'} py={2}  >
                         <VStack   >
@@ -85,7 +85,7 @@ function Instagram() {
 
                 <GridItem py={2} shadow='xl' rounded={'lg'} borderWidth={'thin'}  >
                     <Box alignItems={'flex-end'} gap={4} display={['', '', 'flex', 'flex']} px={'4'} py={2}  >
-                        <VStack   >
+                        <VStack gap={[0, 0, 12, 12]}  >
                             <Image height={250} width={250} src={GptPic} />
 
                             <HStack>
@@ -151,14 +151,14 @@ function Instagram() {
                 </GridItem>
                 <GridItem py={2} shadow='xl' rounded={'lg'} borderWidth={'thin'}  >
                     <Box alignItems={'flex-end'} gap={4} display={['', '', 'flex', 'flex']} px={'4'} py={2}  >
-                        <VStack   >
+                        <VStack  >
                             <Image height={200} width={200} src={UpworkPic} />
 
                             <HStack>
-                                <Link isExternal href='https://gpt-woad.vercel.app/' _hover={{ decoration: 'none' }}>
+                                {/* <Link isExternal href='https://gpt-woad.vercel.app/' _hover={{ decoration: 'none' }}>
                                     <Button size={'sm'} leftIcon={<CgWebsite />}  > Demo</Button>
-                                </Link>
-                                <Link isExternal href='https://github.com/surendhar-palanisamy/gpt' _hover={{ decoration: 'none' }}>
+                                </Link> */}
+                                <Link isExternal href='https://github.com/surendhar-palanisamy/clone-backend' _hover={{ decoration: 'none' }}>
                                     <Button size={'sm'} leftIcon={<FaGithubAlt />} >Github</Button></Link>
                             </HStack>
 

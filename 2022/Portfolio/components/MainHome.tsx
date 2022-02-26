@@ -3,14 +3,16 @@ import React from 'react'
 import Intro from './Intro/Intro'
 import Navbar from './Navbar/Navbar'
 import Projects from './Projects/Projects'
+import SkillIndex from './Skills/SkillIndex'
 
 function MainHome() {
     return (
-        <Box px={['3', '3', '36', '36']} py={'4'}>
+        <Stack gap={6} px={['3', '3', '32', '32']} py={'4'}>
             <Navbar />
             <Intro />
             <Projects />
-        </Box>
+            <SkillIndex />
+        </Stack>
     )
 }
 

@@ -8,7 +8,7 @@ function Projects() {
     return (
         <Box>
             <Dividers />
-            <Text fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Projects</Text>
+            <Text ml={['2', '2', '2', '2']} fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Projects</Text>
             <Instagram />
 
         </Box >
