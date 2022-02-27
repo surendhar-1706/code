@@ -11,7 +11,7 @@ function Intro() {
             <GridItem >
                 <Stack fontSize={'xl'} fontFamily={'mono'}>
                     <Text>Hello There 👋, I am</Text>
-                    <Text fontWeight={'bold'} textColor={'#0001FE'}>Surendhar Palanisamy</Text>
+                    <Text fontWeight={'bold'} textColor={'#0001FE'}>Surendhar Palanisamy.</Text>
                     <Text >I am fullStack Web developer.</Text>
                 </Stack>
             </GridItem>

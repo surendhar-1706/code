@@ -6,7 +6,7 @@ import Instagram from './Instagram'
 
 function Projects() {
     return (
-        <Box>
+        <Box id='projects'>
             <Dividers />
             <Text ml={['2', '2', '2', '2']} fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Projects</Text>
             <Instagram />

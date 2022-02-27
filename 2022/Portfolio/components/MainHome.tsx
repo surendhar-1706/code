@@ -1,5 +1,6 @@
 import { Box, Stack } from '@chakra-ui/react'
 import React from 'react'
+import ContactIndex from './Contact/ContactIndex'
 import Intro from './Intro/Intro'
 import Navbar from './Navbar/Navbar'
 import Projects from './Projects/Projects'
@@ -12,6 +13,7 @@ function MainHome() {
             <Intro />
             <Projects />
             <SkillIndex />
+            <ContactIndex />
         </Stack>
     )
 }

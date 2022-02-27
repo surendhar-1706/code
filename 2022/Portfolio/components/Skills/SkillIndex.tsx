@@ -7,9 +7,10 @@ import {
 
 } from '@chakra-ui/react'
 import { Grid, GridItem } from '@chakra-ui/react'
+
 function SkillIndex() {
     return (
-        <Stack gap={2}>
+        <Stack id='skills' gap={2}>
             <Dividers />
             <Text fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Skills</Text>
 
