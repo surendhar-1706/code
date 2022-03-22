@@ -9,14 +9,17 @@ function Intro() {
             alignItems={'center'}
         >
             <GridItem >
-                <Stack fontSize={'xl'} fontFamily={'mono'}>
+                <Stack
+
+                    data-aos="fade-up-right"
+                    fontSize={'xl'} fontFamily={'mono'}>
                     <Text>Hello There 👋, I am</Text>
                     <Text fontWeight={'bold'} textColor={'#0001FE'}>Surendhar Palanisamy.</Text>
                     <Text >I am fullStack Web developer.</Text>
                 </Stack>
             </GridItem>
             <GridItem>
-                <Image height={500} width={500} src={Coder} />
+                <Image data-aos="fade-up-left" alt="Picture of coder" height={500} width={500} src={Coder} />
             </GridItem>
         </Grid>
     )

@@ -18,19 +18,19 @@ function ContactIndex() {
                 <Grid w={['', '', '150px', '150px']} templateColumns={['repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(3, 1fr)']} gap={4}>
                     <GridItem>
                         <Link _hover={{ decoration: 'none' }} isExternal href='https://twitter.com/juz_ren'>
-                            <Box as='button'><Image height={30} width={30} src={TwitterPic} /></Box>
+                            <Box as='button'><Image alt="Picture of icon" height={30} width={30} src={TwitterPic} /></Box>
 
 
                         </Link>
                     </GridItem>
                     <GridItem>
                         <Link isExternal href='https://github.com/surendhar-palanisamy'>
-                            <Box as='button'>   <Image height={30} width={30} src={GithubPic} /></Box>
+                            <Box as='button'>   <Image alt="Picture of icon" height={30} width={30} src={GithubPic} /></Box>
                         </Link>
                     </GridItem>
                     <GridItem>
                         <Link isExternal href='https://www.linkedin.com/in/surendhar-palanisamy-30945b178/'>
-                            <Box as='button'> <Image height={25} width={25} src={LinkedInPic} /></Box>
+                            <Box as='button'> <Image alt="Picture of icon" height={25} width={25} src={LinkedInPic} /></Box>
 
                         </Link>
                     </GridItem>

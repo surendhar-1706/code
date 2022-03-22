@@ -1,0 +1,6 @@
+{
+"integrationFolder": "cypress/integration/custom",
+"baseUrl":"http://localhost:3000",
+"ignoreTestFiles":"**/examples/*"
+
+}

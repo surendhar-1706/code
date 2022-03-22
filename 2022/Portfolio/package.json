@@ -1,18 +1,25 @@
 {
+  "homepage": "https://surendhar-palanisamy.github.io/portfolio",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build ",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "predeploy": "npm run build",
+    "noice": "gh-pages -d out"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@types/aos": "^3.0.4",
+    "aos": "^2.3.4",
     "framer-motion": "^6",
+    "gh-pages": "^3.2.3",
     "next": "12.1.0",
     "next-auth": "^4.2.1",
     "react": "17.0.2",

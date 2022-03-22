@@ -24,21 +24,21 @@ function Navbar() {
             <Text fontSize={'3xl'} fontWeight={'medium'} textColor={'#8A2BE2'} fontFamily={'cursive'}>Suren</Text>
             <Box display={['none', 'none', 'flex', 'flex']} gap={3} fontWeight={'bold'} fontSize={'xl'}>
                 <HStack >
-                    <Image height={20} width={20} src={Brush} />
+                    <Image alt="Picture of icon" height={20} width={20} src={Brush} />
                     <Link _hover={{ decoration: 'none' }} href='#projects'><Text >Projects</Text></Link>
                 </HStack>
                 <HStack>
-                    <Image height={20} width={20} src={Brain} />
+                    <Image alt="Picture of icon" height={20} width={20} src={Brain} />
                     <Link _hover={{ decoration: 'none' }} href='#skills'>
                         <Text>Skills</Text></Link>
                 </HStack>
                 <HStack>
-                    <Image height={20} width={20} src={User} />
+                    <Image alt="Picture of icon" height={20} width={20} src={User} />
                     <Link _hover={{ decoration: 'none' }} href='#contact'>     <Text>Contact</Text></Link>
                 </HStack>
             </Box>
             <Box ref={btnRef} onClick={onOpen} display={['flex', 'flex', 'none', 'none',]}>
-                <Image height={20} width={20} src={Menu} />
+                <Image alt="Picture of icon" height={20} width={20} src={Menu} />
             </Box>
 
             <Drawer
@@ -58,16 +58,16 @@ function Navbar() {
                     <DrawerBody >
                         <VStack fontSize={'xl'} fontWeight='semibold' mt={'8'} gap={6}>
                             <HStack >
-                                <Image height={20} width={20} src={Brush} />
+                                <Image alt="Picture of icon" height={20} width={20} src={Brush} />
                                 <Link _hover={{ decoration: 'none' }} href='#projects'><Text >Projects</Text></Link>
                             </HStack>
                             <HStack>
-                                <Image height={20} width={20} src={Brain} />
+                                <Image alt="Picture of icon" height={20} width={20} src={Brain} />
                                 <Link _hover={{ decoration: 'none' }} href='#skills'>
                                     <Text>Skills</Text></Link>
                             </HStack>
                             <HStack>
-                                <Image height={20} width={20} src={User} />
+                                <Image alt="Picture of icon" height={20} width={20} src={User} />
                                 <Link _hover={{ decoration: 'none' }} href='#contact'>     <Text>Contact</Text></Link>
                             </HStack>
                         </VStack>

@@ -11,6 +11,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 function SkillIndex() {
     return (
         <Stack id='skills' gap={2}>
+
             <Dividers />
             <Text fontFamily={'cursive'} fontSize={'3xl'} fontWeight={'semibold'}>Skills</Text>
 
@@ -50,7 +51,21 @@ function SkillIndex() {
                     <GridItem>  <Tag>
                         <TagLabel>Redux</TagLabel>
                     </Tag></GridItem>
-
+                    <GridItem >
+                        <Tag >
+                            <TagLabel>RTL</TagLabel>
+                        </Tag>
+                    </GridItem>
+                    <GridItem >
+                        <Tag >
+                            <TagLabel>Jest</TagLabel>
+                        </Tag>
+                    </GridItem>
+                    <GridItem >
+                        <Tag >
+                            <TagLabel>Cypress</TagLabel>
+                        </Tag>
+                    </GridItem>
                 </Grid>
 
             </Stack>

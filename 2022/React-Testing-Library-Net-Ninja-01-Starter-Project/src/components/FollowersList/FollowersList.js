@@ -18,17 +18,22 @@ export default function FollowersList() {
   return (
     <div className="followerslist-container">
       <div>
-        {followers.map((follower, index) => (
-          <div data-testid={`follower-item-${index}`} className="follower-item">
-            <img src={follower.picture.large} />
-            <div className="followers-details">
-              <div className="follower-item-name">
-                <h4>{follower.name.first}</h4> <h4>{follower.name.last}</h4>
+        {followers &&
+          followers.map((follower, index) => (
+            <div
+              key={index}
+              data-testid={`follower-item-${index}`}
+              className="follower-item"
+            >
+              <img src={follower.picture.large} />
+              <div className="followers-details">
+                <div className="follower-item-name">
+                  <h4>{follower.name.first}</h4> <h4>{follower.name.last}</h4>
+                </div>
+                <p>{follower.login.username}</p>
               </div>
-              <p>{follower.login.username}</p>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="todo-footer">
         <Link to="/">Go Back</Link>
