@@ -5,6 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import { Tokens } from './types/index.type';
 import { JwtService } from '@nestjs/jwt';
 import { throwError } from 'rxjs';
+import { UpdateAuthDto } from './dto/update-auth.dto';
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtservice: JwtService) {}
@@ -73,6 +74,23 @@ export class AuthService {
     const dummy = await this.updatehash(user.id, tokens.refresh_token);
     return tokens;
   }
-  signout() {}
-  refreshtokens() {}
+  async signout(userId: number) {
+    const user = await this.prisma.user.updateMany({
+      where: { id: userId, hashedRt: { not: null } },
+      data: { hashedRt: null },
+    });
+  }
+  async refreshtokens(userId: number, rt: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      throw new ForbiddenException('No user found');
+    }
+    const rtMatches = await bcrypt.compare(rt, user.hashedRt);
+    if (!rtMatches) {
+      throw new ForbiddenException('refresh tokens dont match');
+    }
+    const tokens = await this.getTokens(user.id, user.email);
+    const dummy = await this.updatehash(user.id, tokens.refresh_token);
+    return tokens;
+  }
 }

@@ -3,10 +3,10 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class CreateAuthDto {
   @IsNotEmpty()
   @IsString()
-  // @IsEmail()
+  @IsEmail()
   email: string;
 
-  @IsNotEmpty()
+  // @IsNotEmpty()
   @IsString()
   name: string;
 
