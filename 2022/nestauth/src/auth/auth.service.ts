@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import * as bcrypt from 'bcryptjs';
 import { Tokens } from './types/index.type';
 import { JwtService } from '@nestjs/jwt';
+import { throwError } from 'rxjs';
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtservice: JwtService) {}
@@ -59,7 +60,19 @@ export class AuthService {
     const dummy = await this.updatehash(user.id, tokens.refresh_token);
     return tokens;
   }
-  signin() {}
+  async signin(dto: CreateAuthDto): Promise<Tokens> {
+    const user = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+    if (!user) throw new ForbiddenException('No user found :((');
+    const checkpassword = await bcrypt.compare(dto.password, user.hash);
+    if (!checkpassword)
+      throw new ForbiddenException('password not matching !!!!');
+    Logger.log(checkpassword, 'printing true or false');
+    const tokens = await this.getTokens(user.id, user.email);
+    const dummy = await this.updatehash(user.id, tokens.refresh_token);
+    return tokens;
+  }
   signout() {}
   refreshtokens() {}
 }
