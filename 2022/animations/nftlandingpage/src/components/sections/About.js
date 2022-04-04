@@ -11,7 +11,7 @@ function About() {
         color={"#616060"}
         fontSize={18}
       >
-        <Typography>Home</Typography>
+        <Typography>About</Typography>
       </Box>
     </div>
   );

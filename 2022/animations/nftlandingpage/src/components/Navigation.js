@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import styles from "./Navigation.module.css";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -24,6 +24,7 @@ function Navigation() {
             sx={{
               "&:hover": {
                 transform: "scale(1.1)",
+                textDecoration: "outline",
               },
               transition: "ease 0.2s",
             }}
@@ -39,8 +40,9 @@ function Navigation() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            gap: 4,
+            gap: 3,
             cursor: "pointer",
+            mt: 2,
           }}
         >
           <Box
@@ -99,7 +101,31 @@ function Navigation() {
             Faq
           </Typography>
         </Box>
-        <Box>Button</Box>
+        <Box
+          sx={{
+            mt: 2,
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{
+              borderRadius: 28,
+              backgroundColor: "black",
+              transition: "all ease 0.2s",
+              py: 1.2,
+              px: 5,
+              textTransform: "none",
+
+              "&:hover": {
+                background: "black",
+                transform: "scale(0.9)",
+              },
+            }}
+            disableElevation
+          >
+            <Typography fontSize={16}> Connect Wallet</Typography>
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
