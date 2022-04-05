@@ -1,14 +1,17 @@
 import { Typography, Button, Box } from "@mui/material";
 import React from "react";
 import Typewriter from "typewriter-effect";
-import RoundTextBlack from "../../assets/Rounded.png";
+
 import nftvideo from "../../assets/Home Video.mp4";
+// import Arrow from "../../assets/Arrow.svg";
+import { BsFillArrowDownCircleFill } from "react-icons/bs";
+
 function Home() {
   return (
     <Box>
       <Box
         sx={{
-          height: "80vh",
+          height: "70vh",
           width: "100vw",
           display: "flex",
           alignItems: "center",
@@ -95,9 +98,6 @@ function Home() {
             loop
           ></video>
         </Box>
-      </Box>
-      <Box sx={{}}>
-        <img height={100} width={100} alt="" src={RoundTextBlack} />
       </Box>
     </Box>
   );
