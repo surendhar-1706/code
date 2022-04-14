@@ -7,16 +7,14 @@ import Showcase from "./components/sections/Showcase";
 import Wheel from "./components/Wheel";
 function App() {
   return (
-    <div>
+    <Box>
       <Navigation />
       <Home />
-      <Box sx={{ display: "flex", alignItems: "center", mx: 5, mt: 1 }}>
-        <Wheel />
-      </Box>
-      {/* <About />
+
+      <About />
       <Roadmap />
-      <Showcase /> */}
-    </div>
+      <Showcase />
+    </Box>
   );
 }
 

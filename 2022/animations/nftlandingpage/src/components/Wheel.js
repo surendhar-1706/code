@@ -13,17 +13,19 @@ function Wheel() {
     }
   `;
   return (
-    <Box sx={{ position: "relative", transform: "scale(0.7)" }}>
+    <Box sx={{ transform: "scale(0.9)" }}>
       <Box
-        sx={{
-          position: "absolute",
-          left: 29,
-          top: 32,
-        }}
+        sx={
+          {
+            // position: "absolute",
+            // left: 28,
+            // top: 28,
+          }
+        }
       >
         {" "}
         {/* <img src={Arrow} /> */}
-        <BsFillArrowDownCircleFill size={60} />
+        <BsFillArrowDownCircleFill size={50} />
       </Box>
       <Box
         sx={{
@@ -34,7 +36,7 @@ function Wheel() {
         }}
       >
         {" "}
-        <img styles={{}} height={120} width={120} alt="" src={RoundTextBlack} />
+        <img styles={{}} height={100} width={100} alt="" src={RoundTextBlack} />
       </Box>
     </Box>
   );

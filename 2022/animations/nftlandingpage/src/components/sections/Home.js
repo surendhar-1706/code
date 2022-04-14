@@ -5,13 +5,18 @@ import Typewriter from "typewriter-effect";
 import nftvideo from "../../assets/Home Video.mp4";
 // import Arrow from "../../assets/Arrow.svg";
 import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import Wheel from "../Wheel";
 
 function Home() {
   return (
-    <Box>
+    <Box
+      sx={{
+        position: "relative",
+      }}
+    >
       <Box
         sx={{
-          height: "70vh",
+          height: "80vh",
           width: "100vw",
           display: "flex",
           alignItems: "center",
@@ -90,7 +95,7 @@ function Home() {
           }}
         >
           <video
-            height={"100%"}
+            height={"70%"}
             width={"100%"}
             src={nftvideo}
             autoPlay
@@ -99,6 +104,9 @@ function Home() {
           ></video>
         </Box>
       </Box>
+      {/* <Box sx={{ mt: 8, width: "100vw", display: "flex", ml: 7 }}>
+        <Wheel />
+      </Box> */}
     </Box>
   );
 }

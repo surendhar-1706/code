@@ -3,17 +3,18 @@ import React from "react";
 
 function About() {
   return (
-    <div>
-      About
-      <Box
-        fontFamily={"sans-serif"}
-        variant={"h6"}
-        color={"#616060"}
-        fontSize={18}
-      >
-        <Typography>About</Typography>
-      </Box>
-    </div>
+    <Box
+      sx={{
+        height: "80vh",
+        width: "100ww",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        backgroundColor: "lightblue",
+      }}
+    >
+      <Typography>About</Typography>
+    </Box>
   );
 }
 
