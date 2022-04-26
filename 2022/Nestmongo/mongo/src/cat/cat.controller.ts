@@ -15,10 +15,10 @@ import { UpdateCatDto } from './dto/update-cat.dto';
 export class CatController {
   constructor(private readonly catService: CatService) {}
 
-  @Post()
-  create(@Body() createCatDto: CreateCatDto) {
-    return this.catService.create(createCatDto);
-  }
+  // @Post()
+  // create(@Body() createCatDto: CreateCatDto) {
+  //   return this.catService.create(createCatDto);
+  // }
 
   // @Get()
   // findAll() {
