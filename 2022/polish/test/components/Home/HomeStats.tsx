@@ -7,8 +7,7 @@ import CryptoHome from '../Crypto/CryptoHome';
 import NewsHome from '../News/NewsHome';
 
 function HomeStats() {
-    const { data, isFetching } = useGetCryptosQuery('/coins');
-
+    const { data, isFetching } = useGetCryptosQuery(10);
     if (isFetching)
         return <div>Loading</div>
     console.log(data.data.stats)
@@ -58,7 +57,7 @@ function HomeStats() {
                 <Text fontSize={'2xl'} fontWeight='semibold'>Top 10 Cryptocurrencies in the world</Text>
                 <Link href={'/crypto'}><a> <Text fontSize={'2xl'} fontWeight='semibold' textColor={'blue'}>Show More</Text></a></Link>
             </HStack>
-            <CryptoHome />
+            <CryptoHome simplified />
             <HStack py={8} justifyContent={'space-between'}>
                 <Text fontSize={'2xl'} fontWeight='semibold'>Latest Crypto News</Text>
                 <Link href={'/news'}><a> <Text fontSize={'2xl'} fontWeight='semibold' textColor={'blue'}>Show More</Text></a></Link>

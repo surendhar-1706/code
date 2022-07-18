@@ -27,7 +27,7 @@ function Layout(props: Layouttype) {
         </GridItem>
         <GridItem rowSpan={1} colSpan={4} overflowY='auto'  > {props.childcomponent}</GridItem>
 
-        <GridItem rowSpan={1} colSpan={5}><Footer /></GridItem>
+        {/* <GridItem rowSpan={1} colSpan={5}><Footer /></GridItem> */}
 
     </Grid>
 
