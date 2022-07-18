@@ -1,8 +1,9 @@
 import React from 'react'
+import CryptoHome from '../components/Crypto/CryptoHome'
 
 function crypto() {
     return (
-        <div>crypto</div>
+        <div><CryptoHome /></div>
     )
 }
 

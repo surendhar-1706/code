@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react'
+import { Box, Flex, HStack, Stack } from '@chakra-ui/react'
 import React from 'react'
 
 import Footer from './Footer'
@@ -8,14 +8,23 @@ type Layouttype = {
 }
 function Layout(props: Layouttype) {
     return (
-        <HStack>
-            <Box>
-                <Navbar />
-                <Footer />
-            </Box>
-            <Box>{props.childcomponent}</Box>
+        <Flex
+            w={'100vw'}
+            h={'100vh'}
+            flexDir={'row'}
+            justifyItems='flex-start'
+        >
 
-        </HStack>
+
+            <Box h={'full'} >
+                <Navbar />
+            </Box>
+            <Box w={'full'}>
+                {props.childcomponent}
+                <Box><Footer /></Box>
+            </Box>
+
+        </Flex >
     )
 }
 
