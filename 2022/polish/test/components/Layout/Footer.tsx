@@ -5,18 +5,12 @@ import React from 'react'
 function Footer() {
     return (
         <Box >
-
-
-
-            <VStack textColor={'white'} bgColor={'blue.800'}>
+            <VStack spacing={0} textColor={'white'} bgColor={'blue.900'}>
                 <Text>Cryptoverse</Text>
                 <Text>All rights reserved</Text>
-                <HStack>
+                <HStack >
                     <Link href={'/'}>
                         <a>
-
-
-
                             <Text>Home</Text></a></Link>
                     <Link href={'/crypto'}>
                         <a>

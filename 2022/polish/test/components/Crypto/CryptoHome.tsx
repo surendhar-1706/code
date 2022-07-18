@@ -11,9 +11,10 @@ function CryptoHome() {
         <div>
             {
                 cryptos.map((currency: any) => {
-                    return (<div>
-                        {currency.name}
-                    </div>)
+                    return (
+                        <div>
+                            {currency.name}
+                        </div>)
                 })
             }
 
