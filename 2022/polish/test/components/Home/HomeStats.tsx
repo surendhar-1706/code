@@ -10,7 +10,7 @@ function HomeStats() {
     const { data, isFetching } = useGetCryptosQuery(10);
     if (isFetching)
         return <div>Loading</div>
-    console.log(data.data.stats)
+
     return (
         <Box px={7} bgColor='white' >
             <Text py={6} fontWeight={'semibold'} fontSize={'2xl'}>Global Crypto Stats</Text>
@@ -63,7 +63,7 @@ function HomeStats() {
                 <Link href={'/news'}><a> <Text fontSize={'2xl'} fontWeight='semibold' textColor={'blue'}>Show More</Text></a></Link>
 
             </HStack>
-            <NewsHome />
+            <NewsHome simplified />
         </Box>
     )
 }
