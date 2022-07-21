@@ -14,7 +14,7 @@ function CryptoHome(props: any) {
     // useEffect(() => {
     //     setcryptos(data)
     // }, [searchterm, cryptos])
-
+    console.log(data)
     if (isFetching) return <div>Loading</div>
 
 
@@ -29,7 +29,7 @@ function CryptoHome(props: any) {
                 {data?.data?.coins?.map((currency: any) => {
                     return (
                         <GridItem p={'3'} shadow='xl' key={currency.uuid} rounded='lg' _hover={{ bgColor: 'gray.50' }}>
-                            <Link href={`/crypto/${currency.rank}`}>
+                            <Link href={`/crypto/${currency.uuid}`}>
                                 <a>
                                     <HStack pt={2} pb={'6'} justifyContent={'space-between'}>
                                         <Text fontWeight={'semibold'}>{currency.rank}.   {currency.name}</Text>

@@ -21,7 +21,7 @@ function NewsHome(props: any) {
                 onChange={(e: any) => set_select_Value(e.target.value)}
                 value={select_value} my={3} w={'40'} placeholder='Select currency'>
 
-                {fetched_coin_data.data.coins.map((coin: any) => {
+                {fetched_coin_data?.data?.coins.map((coin: any) => {
 
                     return (
 
