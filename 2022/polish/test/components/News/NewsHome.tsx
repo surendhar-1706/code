@@ -46,7 +46,7 @@ function NewsHome(props: any) {
                                     <Image h={100} w={100} src={news.image?.thumbnail?.contentUrl} fallbackSrc='https://academy-public.coinmarketcap.com/optimized-uploads/50d421f67d8e403583dec37af2878442.jpg' />
                                 </HStack>
 
-                                <Text h={'150'}>
+                                <Text h={'250'}>
                                     {news.description > 100 ? `${news.description.substring(0, 100)}...` : news.description}
                                 </Text>
 

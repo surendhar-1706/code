@@ -1,5 +1,5 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Box, Divider, Grid, GridItem, HStack, Link, Select, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, GridItem, HStack, Link, Select, Stack, Text, VStack } from '@chakra-ui/react'
 import HTMLReactParser from 'html-react-parser'
 import millify from 'millify'
 
@@ -7,21 +7,22 @@ import Router, { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Cryptochart from '../../components/Crypto/Cryptochart'
 import { useGetDetailsQuery } from '../../services/cryptodetailsapi'
+import { useGetHistoryQuery } from '../../services/cryptohistory'
 
 function Cryptodetail() {
     const router = useRouter()
-    const [timeframe, settimeframe] = useState('24h')
+    const id = router.query.id
+    const time = ['1h', '3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y']
+    const [timePeriod, settimeframe] = useState('7d')
     const { data, isFetching } = useGetDetailsQuery(router.query.id)
-    const { data: coinhistory, isFetching: isHistoryFetching } = useGetDetailsQuery({ id: router.query.id, timeframe })
+    const { data: coinhistory, isFetching: isHistoryFetching } = useGetHistoryQuery({ id, timePeriod })
     if (isFetching) return (<div>Loading</div>)
-    const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y']
-    console.log(data)
     return (
-        <Box>
+        <Box py={5}>
 
-            {data.data.coin.symbol}
+            <Flex fontSize={'xx-large'} fontWeight={'semibold'} justifyContent={'center'}> {data.data.coin.name}  Details</Flex>
 
-            <Select size={'sm'} w='40'>
+            <Select ml={[0, 0, 20, 20]} onChange={(e: any) => { settimeframe(e.target.value) }} size={'sm'} w='40'>
 
                 {time.map((period: any) => {
                     return (
@@ -29,7 +30,16 @@ function Cryptodetail() {
                     )
                 })}
             </Select>
-            <Grid rowGap={12} justifyContent={'space-between'} templateColumns='repeat(2, 1fr)' >
+
+            <Grid rowGap={12} justifyContent={'space-between'} templateColumns={['repeat(2, 1fr)']} >
+                <GridItem mx={['', '', '', '20']} colSpan={2} >
+
+
+                    <Cryptochart history={coinhistory} price={millify(data.data.coin.price)} name={data.data.coin.name} />
+
+
+
+                </GridItem>
                 <GridItem colSpan={1} >
                     <VStack>
                         <Stack gap={4}>
@@ -128,7 +138,6 @@ function Cryptodetail() {
                     </Stack>
                 </VStack>
             </Grid>
-            <Cryptochart history={history} price={data.data.coin.price} name={data.data.coin.name} />
         </Box>
     )
 }

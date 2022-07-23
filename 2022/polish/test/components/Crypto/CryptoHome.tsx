@@ -14,7 +14,7 @@ function CryptoHome(props: any) {
     // useEffect(() => {
     //     setcryptos(data)
     // }, [searchterm, cryptos])
-    console.log(data)
+    // console.log(data)
     if (isFetching) return <div>Loading</div>
 
 

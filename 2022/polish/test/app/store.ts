@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cryptoApi } from "../services/cryptoapi";
 import { cryptoDetailsApi } from "../services/cryptodetailsapi";
+import { coinHistoryApi } from "../services/cryptohistory";
 
 import { cryptoNewsApi } from "../services/newsapi";
 
@@ -9,6 +10,7 @@ export const store = configureStore({
     [cryptoApi.reducerPath]: cryptoApi.reducer,
     [cryptoNewsApi.reducerPath]: cryptoNewsApi.reducer,
     [cryptoDetailsApi.reducerPath]: cryptoDetailsApi.reducer,
+    [coinHistoryApi.reducerPath]: coinHistoryApi.reducer,
   },
 });
 
