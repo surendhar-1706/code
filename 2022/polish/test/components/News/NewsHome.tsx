@@ -32,7 +32,7 @@ function NewsHome(props: any) {
                     )
                 })}
             </Select>
-            <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+            <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={6}>
                 {data.value.map((news: any, i: any) => {
                     return (
                         <GridItem p={5} shadow={'lg'} key={i}>
@@ -41,12 +41,12 @@ function NewsHome(props: any) {
 
 
                             <Stack rowGap={3}>
-                                <HStack h={'150'} alignItems={'flex-start'} justifyContent={'space-between'}>
+                                <HStack h={['', '', '', '150']} alignItems={'flex-start'} justifyContent={'space-between'}>
                                     <Text fontSize={'md'} fontWeight={'semibold'}>{news.name}</Text>
-                                    <Image h={100} w={100} src={news.image?.thumbnail?.contentUrl} fallbackSrc='https://academy-public.coinmarketcap.com/optimized-uploads/50d421f67d8e403583dec37af2878442.jpg' />
+                                    <Image h={[50, 50, 50, 100]} w={[50, 50, 50, 100]} src={news.image?.thumbnail?.contentUrl} fallbackSrc='https://academy-public.coinmarketcap.com/optimized-uploads/50d421f67d8e403583dec37af2878442.jpg' />
                                 </HStack>
 
-                                <Text h={'250'}>
+                                <Text h={['', '', '', '250']}>
                                     {news.description > 100 ? `${news.description.substring(0, 100)}...` : news.description}
                                 </Text>
 

@@ -31,8 +31,8 @@ function Cryptodetail() {
                 })}
             </Select>
 
-            <Grid rowGap={12} justifyContent={'space-between'} templateColumns={['repeat(2, 1fr)']} >
-                <GridItem mx={['', '', '', '20']} colSpan={2} >
+            <Grid rowGap={12} justifyContent={'space-between'} templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} >
+                <GridItem mx={['', '', '', '20']} colSpan={[1, 1, 2, 2]} >
 
 
                     <Cryptochart history={coinhistory} price={millify(data.data.coin.price)} name={data.data.coin.name} />
@@ -40,12 +40,12 @@ function Cryptodetail() {
 
 
                 </GridItem>
-                <GridItem colSpan={1} >
+                <GridItem colSpan={[1, 1, 1, 1]} >
                     <VStack>
                         <Stack gap={4}>
                             <Stack gap={0} py={1}>
-                                <Text fontWeight={'semibold'} fontSize={"xl"}>Bitcoin Value Statistics</Text>
-                                <Text fontSize={'sm'}>An overview showing the stats of the Bitcoin</Text>
+                                <Text fontWeight={'semibold'} fontSize={"xl"}>{data.data.coin.name} Value Statistics</Text>
+                                <Text fontSize={'sm'}>An overview showing the stats of the {data.data.coin.name}</Text>
                             </Stack>
                             <HStack justifyContent={'space-between'}>
                                 <Text>Price to USD</Text>
@@ -78,7 +78,7 @@ function Cryptodetail() {
                         <Stack gap={4}>
                             <Stack gap={0} py={1}>
                                 <Text fontSize={'xl'} fontWeight='semibold'>Other Statistics of {data.data.coin.name}</Text>
-                                <Text fontSize={'sm'} >An overview showing the stats of the Bitcoin</Text>
+                                <Text fontSize={'sm'} >An overview showing the stats of the {data.data.coin.name}</Text>
 
                             </Stack>
 
@@ -104,7 +104,7 @@ function Cryptodetail() {
                 </GridItem>
                 <GridItem >
                     <VStack>
-                        <Stack pl={['', '', '', '32']} fontSize={'sm'} >
+                        <Stack w={['72', '96', 'fit-content', 'fit-content']} pl={['', '', '', '32']} fontSize={'sm'} >
                             <Text fontSize={'xl'} fontWeight={'semibold'}>What is {data.data.coin.name}?</Text>
                             <Text className='primary'
                             >{HTMLReactParser(data.data.coin.description)}

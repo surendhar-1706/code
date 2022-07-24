@@ -35,16 +35,17 @@ function Cryptochart({ history, price, name }: any) {
 
     console.log(history, price, name)
     return (
-        <Box>
-            <HStack fontWeight={'semibold'} py={6} justifyContent={'space-between'}>
-                <Text fontSize={'xl'} textColor={'blue.500'}>{name} Price Chart</Text>
-                <HStack  >
+        <Box >
+            <HStack display={['none', 'none', 'flex', 'flex']} fontWeight={'semibold'} py={6} justifyContent={'space-between'}>
+                <Text alignItems={'center'} fontSize={'xl'} textColor={'blue.500'}>{name} Price Chart</Text>
+                <HStack >
                     <Text>{history?.data.change}%</Text>
                     <Text>Current Price : ${price}</Text>
                 </HStack>
 
             </HStack>
-            <Line data={data} />
+            <Box w={['100vw', 'full', 'full', '']}> <Line data={data} /></Box>
+
         </Box>
     )
 }

@@ -12,7 +12,7 @@ function HomeStats() {
         return <div>Loading</div>
 
     return (
-        <Box px={7} bgColor='white' >
+        <Box px={[2, 2, 7, 7]} bgColor='white' >
             <Text py={6} fontWeight={'semibold'} fontSize={'2xl'}>Global Crypto Stats</Text>
             <Grid rowGap={8} templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} columnGap={60}>
                 <GridItem colSpan={1} >
@@ -54,7 +54,7 @@ function HomeStats() {
             </Grid>
 
             <HStack py={8} justifyContent={'space-between'} >
-                <Text fontSize={'2xl'} fontWeight='semibold'>Top 10 Cryptocurrencies in the world</Text>
+                <Text fontSize={['2xl', '2xl', '2xl', '2xl']} fontWeight='semibold'>Top 10 Cryptocurrencies in the world</Text>
                 <Link href={'/crypto'}><a> <Text fontSize={'2xl'} fontWeight='semibold' textColor={'blue'}>Show More</Text></a></Link>
             </HStack>
             <CryptoHome simplified />

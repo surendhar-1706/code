@@ -22,7 +22,7 @@ function CryptoHome(props: any) {
     return (
         <Box>
 
-            <Grid templateColumns='repeat(3, 1fr)' gap={3}>
+            <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap={3}>
                 {/* {!props.simplified && <GridItem p={4} colSpan={3} borderColor={'gold'}>
                     <VStack> <Input placeholder='Search' w={40} onChange={(e: any) => setsearchterm(e.target.value)} /> </VStack>
                 </GridItem>} */}
