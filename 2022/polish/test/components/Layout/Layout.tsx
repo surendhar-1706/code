@@ -8,7 +8,7 @@ type Layouttype = {
 }
 function Layout(props: Layouttype) {
     return (<Grid
-        h={'100vh'}
+        h={['', '', '', '100vh']}
         templateRows='repeat(1, 1fr)'
         templateColumns='repeat(5, 1fr)'
     >
@@ -25,7 +25,7 @@ function Layout(props: Layouttype) {
 
 
         </GridItem>
-        <GridItem rowSpan={1} colSpan={4} overflowY='auto'  > {props.childcomponent}</GridItem>
+        <GridItem rowSpan={1} colSpan={4} overflowY={['unset', 'unset', 'unset', 'auto']}  > {props.childcomponent}</GridItem>
 
         {/* <GridItem rowSpan={1} colSpan={5}><Footer /></GridItem> */}
 

@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -7,7 +7,17 @@ import Cryptologo from '../../public/cryptocurrency.png'
 import { Icon } from '@chakra-ui/react'
 import { AiOutlineHome } from "react-icons/ai";
 import { BiBitcoin, BiNews } from "react-icons/bi"; import { RiExchangeLine } from "react-icons/ri";
+import {
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+} from '@chakra-ui/react'
 function Navbar() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
 
         <VStack>
@@ -52,6 +62,22 @@ function Navbar() {
 
                 </Link>
             </Stack>
+            <Button colorScheme='blue' onClick={onOpen}>
+                Open
+            </Button>
+            <Drawer placement={'right'} onClose={onClose} isOpen={isOpen}>
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
+                    <DrawerBody>
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                        <p>Some contents...</p>
+                    </DrawerBody>
+                </DrawerContent>
+            </Drawer>
+
+
         </VStack>
 
 
