@@ -1,15 +1,21 @@
+import { Box } from '@mui/material'
 import React from 'react'
+import Footer from './Footer'
 import Navbar from './Navbar'
 type Layouttype = {
     childcomponent?: React.ReactNode
 }
 function Layout(props: Layouttype) {
     return (
-        <div>
+        <Box
+            sx={{
+                px: 7
+            }}>
             <Navbar />
-            Layout
+
             {props.childcomponent}
-        </div>
+            <Footer />
+        </Box>
     )
 }
 
