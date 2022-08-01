@@ -1,3 +1,4 @@
+import { Box } from '@mui/system'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -14,9 +15,13 @@ const Home: NextPage = () => {
         <meta name="description" content="Fitness app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HeroBanner />
-      <SearchExercise />
-      <Exercises />
+      <Box sx={{
+        backgroundColor: '  '
+      }}>
+        <HeroBanner />
+        <SearchExercise />
+        <Exercises />
+      </Box>
 
 
 

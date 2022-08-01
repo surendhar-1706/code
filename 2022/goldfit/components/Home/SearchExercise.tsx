@@ -1,7 +1,34 @@
-import { Box, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { useQuery } from '@tanstack/react-query';
 
+import React, { useState } from 'react'
+import HorizontalBar from './HorizontalBar';
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': 'c7fa8235d3msh1ddce5b747c5aa0p1da4e0jsne5df34823909',
+        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+    }
+};
+const fetchExercises = async () => {
+    const fetched_data = await fetch('https://exercisedb.p.rapidapi.com/exercises', options)
+    const json_data = await fetched_data.json()
+    console.log('printing data from api', json_data)
+    return json_data
+}
+const fetchBodyparts = async () => {
+    const fetched_data = await fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', options)
+    const json_data = await fetched_data.json()
+    console.log('printing data from bodypats', json_data)
+    return json_data
+}
 function SearchExercise() {
+    const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
+    const [search, setsearch] = useState('')
+    const { data, refetch } = useQuery(['exercises'], fetchExercises, { enabled: false })
+    const { data: bodyparts, isFetching } = useQuery(['bodyparts'], fetchBodyparts, {
+        staleTime: twentyFourHoursInMs,
+    })
     return (
         <Box>
             <Stack
@@ -31,13 +58,33 @@ function SearchExercise() {
                     Should Know</Typography>
 
 
-                <TextField sx={{
-                    width: '100%'
+                <Stack
+                    sx={{
 
-                }} placeholder='Search Exercises'>
+                    }} direction={'row'}>
+                    <TextField
+                        value={search}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            console.log(search)
+                            setsearch(e.target.value.toLowerCase())
+                        }}
+                        size='small'
+                        sx={{
+                            input: {
+                                border: 'none',
+                                borderRadius: '200px'
+                            },
+                            width: {
+                                lg: '900px',
 
-                </TextField>
+                            },
 
+                        }} placeholder='Search Exercises'>
+
+                    </TextField>
+                    <Button onClick={() => { refetch() }} variant='contained' color='error'>Search</Button>
+                </Stack>
+                {!isFetching && <HorizontalBar data={bodyparts} />}
             </Stack>
         </Box>
     )
