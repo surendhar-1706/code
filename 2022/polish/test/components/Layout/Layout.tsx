@@ -92,10 +92,10 @@ function Layout(props: Layouttype) {
                                             <Text> Cryptocurrencies</Text>
                                         </HStack>
                                     </a></Link>
-                                <Link href={'/exchange'}>
+                                {/* <Link href={'/exchange'}>
                                     <a>
                                         <HStack><RiExchangeLine />
-                                            <Text>Exchanges</Text></HStack></a></Link>
+                                            <Text>Exchanges</Text></HStack></a></Link> */}
 
                                 <Link href={'/news'}>
                                     <a>

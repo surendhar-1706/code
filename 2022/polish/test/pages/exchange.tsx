@@ -1,8 +1,13 @@
 import React from 'react'
+import ExchangeError from '../components/Exchange/ExchangeError'
+import ExchangeHome from '../components/Exchange/ExchangeHome'
 
 function exchange() {
     return (
-        <div>exchange</div>
+        <div>
+            {/* <ExchangeHome /> */}
+            <ExchangeError />
+        </div>
     )
 }
 

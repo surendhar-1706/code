@@ -10,7 +10,6 @@ function App() {
     <Box>
       <Navigation />
       <Home />
-
       <About />
       <Roadmap />
       <Showcase />
