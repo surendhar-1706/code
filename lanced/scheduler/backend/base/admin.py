@@ -3,7 +3,6 @@ from .models import *
 # Register your models here.
 admin.site.register(Profile)
 admin.site.register(Team)
-admin.site.register(AssignedRole)
 admin.site.register(MeetingsAssigned)
 admin.site.register(TeamMember)
 # @admin.register(AssignedRole)
