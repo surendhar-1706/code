@@ -38,72 +38,24 @@ class MeetingsAssigned (models.Model):
     team_id = models.ForeignKey(Team,on_delete=CASCADE,related_name='meeting_team_id')
    
 
-
-
-
-
 class AssignedRole(models.Model):
-    Role_CHOICES =[   
-        ('Member','Member'),
-        ('Primary member','Primary member'),
-        ('Secondary member','Secondary member'),
-        ('Teritary member','Teritary member'),
-        ('Primary lead','Primary lead'),
-        ('Secondary lead','Secondary lead'),
-        ('Manager','Manager')
-    ]
     meeting = models.ForeignKey(MeetingsAssigned,on_delete=CASCADE,related_name='assigned_meeting')
-    members = models.ManyToManyField(Profile,related_name='team_members') #primary key
-    roles = models.CharField(max_length=60,choices=Role_CHOICES)
+    team_manager = models.ManyToManyField(Profile,related_name="team_manager",blank=True)
+    team_lead_primary = models.ManyToManyField(Profile,related_name="team_leader_primary",blank=True)
+    team_lead_secondary = models.ManyToManyField(Profile,related_name="team_leader_secondary",blank=True)
+    member_primary = models.ManyToManyField(Profile,related_name="member_primary",blank=True)
+    member_secondary = models.ManyToManyField(Profile,related_name="member_secondary",blank=True)
+    member_teritary = models.ManyToManyField(Profile,related_name="member_teritary",blank=True)
  
 
 
-
-#meetings assigned
-#team_id
-#time
-#roles
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#team
-#team_id
-#lead,manager,member
-#
-
-# class Roles(models.Model):
-#     Role_CHOICES =[
-#         ('primary','primary'),
-#         ('secondary','secondary'),
-#         ('teritary','teritary')
-#     ]
-#     team_id = models.ManyToManyField(Team)
-    #
-
-
-
-#meeting
-
-
-
-#   team_manager = models.ManyToManyField(User,related_name="team_manager",blank=True)
-#     team_lead_primary = models.ManyToManyField(User,related_name="team_leader_primary",blank=True)
-#     team_lead_secondary = models.ManyToManyField(User,related_name="team_leader_secondary",blank=True)
-#     member_primary = models.ManyToManyField(User,related_name="member_primary",blank=True)
-#     member_secondary = models.ManyToManyField(User,related_name="member_secondary",blank=True)
-#     member_teritary = models.ManyToManyField(User,related_name="member_teritary",blank=True)
+    # Role_CHOICES =[   
+    #     ('Member','Member'),
+    #     ('Primary member','Primary member'),
+    #     ('Secondary member','Secondary member'),
+    #     ('Teritary member','Teritary member'),
+    #     ('Primary lead','Primary lead'),
+    #     ('Secondary lead','Secondary lead'),
+    #     ('Manager','Manager')
+    # ]
+    #roles = models.CharField(max_length=60,choices=Role_CHOICES)
