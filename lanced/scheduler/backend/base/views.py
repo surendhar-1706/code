@@ -20,3 +20,7 @@ def meeting(request):
             form.save()
     context ={'form':form}
     return render(request,'base/meetingform.html',context)
+
+
+def return_scheduled_meets(request):
+    return JsonResponse({'scheduled_meets':'scheduled_meets'})
