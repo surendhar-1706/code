@@ -6,9 +6,9 @@
  <form method ='post'>
   {% csrf_token %} 
   <div> <input placeholder='Enter team name' id="team"></div>
- <div> {{form.date}}</div>
+ <div id='datetimepicker1'> {{form.date}}</div>
  <button id='search_meets' class='search_meets'>search</button>
-<div class='meet_data'  data-url="{% url 'scheduled_meets' %}">
+<div class='meet_data'>
   data comes hrere
 </div>
  <div>{{form.start_time}}</div> 

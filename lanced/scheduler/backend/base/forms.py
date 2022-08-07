@@ -13,9 +13,9 @@ class MeetingForm(ModelForm):
         model = MeetingsAssigned
         fields = ['date','start_time','end_time','team_manager','team_lead_primary',  'team_lead_secondary','member_primary',
       'member_secondary', 'member_teritary' ]
-        widgets={
-            'date':AdminDateWidget(attrs={'type': 'date'}),
-            'start_time':AdminTimeWidget(attrs={'type': 'time'}),
-            'end_time':AdminTimeWidget(attrs={'type': 'time'}),
+        # widgets={
+        #     'date':AdminDateWidget(attrs={'type': 'date'}),
+        #     'start_time':AdminTimeWidget(attrs={'type': 'time'}),
+        #     'end_time':AdminTimeWidget(attrs={'type': 'time'}),
        
-        }
+        # }

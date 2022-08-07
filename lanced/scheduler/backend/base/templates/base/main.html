@@ -30,14 +30,20 @@ search_button.addEventListener('click'.function(e){
 }) {% endcomment %}
 
         $('.search_meets').on('click',function(e){
+         
           e.preventDefault();
+          var team_name = $("#team").val(); 
+       
+
+          console.log(team_name)
+
           $.ajax({
-            url:$('.meet_data').data('url'),
+            url:"{% url 'scheduled_meets' %}",
             type:'GET',
             dataType:'json',
             success:function(resp){
               console.log(resp)
-              $('.meet_data').html(resp)
+             
             },
             error:function(resp){
               console.log('something went wrong fetching meets')
