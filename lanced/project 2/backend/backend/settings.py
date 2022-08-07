@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_spectacular', #swagger documentation library
-    'base',
+    'base', #django app
     'dj_rest_auth',
-    'dj_rest_auth.registration',# register user
+    'dj_rest_auth.registration',# register user in django library
 ]
 
 MIDDLEWARE = [
@@ -136,8 +136,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #drf_spectacular library configuarion to generate schema automatically
 REST_FRAMEWORK = {
     # YOUR SETTINGS
-      'DATE_INPUT_FORMATS': ["%d/%m/%Y"],
+    #  'DATE_INPUT_FORMATS': ["%d/%m/%Y"],
 
+    # 'DATE_FORMAT': '%d/%m/%Y',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
@@ -145,7 +146,7 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'ACME Volcano Insurance',
     'DESCRIPTION': 'ACME Volcano Insurance', 
     'VERSION': '1.0.0',
-    'COMPONENT_SPLIT_REQUEST': True,
+    'COMPONENT_SPLIT_REQUEST': True, #allows mutliform usage in drf-spectacular
    
 }
 SITE_ID = 1

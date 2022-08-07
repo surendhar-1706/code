@@ -7,8 +7,11 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 router = routers.DefaultRouter()
 #include viewset urls
 
-# router.register(r'rater',RaterViewSet,basename='calculate_price') # endpoint to get prices based on id
+router.register(r'checkout',CheckoutViewSet,basename='calculate_price') # endpoint to get prices based on id
 router.register(r'quote',QuoteViewSet,basename='quote' ) #endpoint to create quote object
+
+#the previous url contains view has serializer that returns quote number the below has serializer that doesnt return quote_nubmer
+router.register(r'quoteview',QuoteOtherEndPointsViewSet,basename='quotes' ) #endpoint to retrive,delete quote object
 
 urlpatterns = [
 	

@@ -4,8 +4,19 @@ from .models import *
 
 
 class QuoteSerializer(serializers.HyperlinkedModelSerializer):
-    # effective_date = serializers.DateField(format='%d-%m-%Y')
 # convert all Quote data to json
+
+        
+
     class Meta:
         model = Quote
-        fields = ['effective_date','previous_policy_cancelled','owns_property','state','zip',]
+        read_only_fields = [('quote_number')]
+        fields = ['id','quote_number','effective_date','previous_policy_cancelled','owns_property','state','zip',]
+
+
+# class QuoteSerializer_without_quote(serializers.HyperlinkedModelSerializer):
+    
+# # convert all Quote data to json
+#     class Meta:
+#         model = Quote
+#         fields = ['id','effective_date','previous_policy_cancelled','owns_property','state','zip',]
