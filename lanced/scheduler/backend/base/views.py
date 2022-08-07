@@ -15,12 +15,21 @@ def meeting(request):
     form = MeetingForm()
     if request.method == 'POST':
         print(request.POST)
-        form = MeetingForm(request.POST)
-        if form.is_valid():
-            form.save()
+        # form = MeetingForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
     context ={'form':form}
     return render(request,'base/meetingform.html',context)
 
 
 def return_scheduled_meets(request):
     return JsonResponse({'scheduled_meets':'scheduled_meets'})
+
+
+def return_team_members(request):
+    if 'team_name' in request.GET:
+        team_name = request.GET.get('team_name')
+        team = Team.objects.filter(team_name__icontains=team_name).first()
+        obj =  Profile.objects.filter(team = team)
+        print('yup-----',obj)
+    return JsonResponse({'team_members':'team_members'})

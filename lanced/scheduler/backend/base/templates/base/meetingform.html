@@ -3,21 +3,29 @@
 {% block content %}
 
 
+
+
+
+
+
+// backend meeting creation form
  <form method ='post'>
   {% csrf_token %} 
   <div> <input placeholder='Enter team name' id="team"></div>
  <p>Date: <input type="text" id="datepicker"></p>
- <button id='search_meets' class='search_meets'>search</button>
- <div>Trying new stuff</div>
-
- <input  class='timepicker' style="width: 120px;">
-{% comment %} {{form.start_time}} {% endcomment %}
-
-
+ 
+ <p>Start time <input  class='timepicker' style="width: 120px;"></p>
+ <p>End time <input  class='timepicker2' style="width: 120px;"></p>
+<p>Team Manager : {{form.team_manager}}</p>
    <input type='submit'> 
  </form> 
-   
 
+
+
+
+  // get data from db based on current date and time
+ <div> <input placeholder='Enter team name' id="team"></div>
+ <button id='search_meets' class='search_meets'>search</button>
 {% endblock %}
 
 

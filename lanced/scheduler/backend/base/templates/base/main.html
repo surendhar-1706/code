@@ -42,6 +42,15 @@ $('.timepicker').timepicker({
     
   
   });
+  $('.timepicker2').timepicker({
+    timeFormat: 'h:mm p',
+    interval:30,
+    dynamic: true,
+    dropdown: true,
+    scrollbar: false,
+  
+
+});
 $(function() {
   $("#datepicker").datepicker();
 });
@@ -52,11 +61,13 @@ $(function() {
           var team_name = $("#team").val(); 
        
           var date_is = $('#datepicker').val()
-          var time_is = $('.timepicker').val()
+          var start_time = $('.timepicker').val()
+          var end_time = $('.timepicker2').val()
          
           console.log(team_name)
           console.log(date_is)
-          console.log(time_is)
+          console.log(start_time)
+          console.log(end_time)
           $.ajax({
             url:"{% url 'scheduled_meets' %}",
             type:'GET',
@@ -74,12 +85,45 @@ $(function() {
 
 
         $( function() {
-          var teams = [
-           ]
+          
           $( "#team" ).autocomplete({
             source: '{% url 'meeting_form' %}'
           });
         } );
+
+
+
+
+
+
+$("#team").change(function () {
+          const url = "{% url 'team_members' %}"  
+          const team_name = $('#team').val(); 
+          console.log(team_name) 
+  
+           $.ajax({                      
+              url: url,                    
+              data: {
+                  'team_name': team_name       
+              },
+              success: function (data) {   
+                  $("#id_team_manager").html(data); 
+                
+                  let html_data = '<option value="">---------</option>';
+                  data.forEach(function (city) {
+                      html_data += `<option value="${city.id}">${city.name}</option>`
+                  });
+                  console.log(html_data);
+                  $("#id_city").html(html_data);
+                
+              },
+              error:function()
+              {
+                console.log('error ')
+              }
+          });  
+  
+      });
       </script>
      <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
