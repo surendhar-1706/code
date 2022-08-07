@@ -6,12 +6,14 @@
  <form method ='post'>
   {% csrf_token %} 
   <div> <input placeholder='Enter team name' id="team"></div>
- <div id='datetimepicker1'> {{form.date}}</div>
+ <p>Date: <input type="text" id="datepicker"></p>
  <button id='search_meets' class='search_meets'>search</button>
-<div class='meet_data'>
-  data comes hrere
-</div>
- <div>{{form.start_time}}</div> 
+ <div>Trying new stuff</div>
+
+ <input  class='timepicker' style="width: 120px;">
+{% comment %} {{form.start_time}} {% endcomment %}
+
+
    <input type='submit'> 
  </form> 
    

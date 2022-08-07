@@ -1,0 +1,5 @@
+#complete backend meeting creation form 
+#write views to process data and store in db
+
+
+#retrive data from db and display when entered team id for the current day
