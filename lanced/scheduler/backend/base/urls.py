@@ -2,7 +2,7 @@ from django.urls import path,include
 from .views import *
 from rest_framework import routers
 router = routers.DefaultRouter()
-router.register(r'checkout',MeetingAssignedViewSet,basename='calculate_price')
+router.register(r'meet',MeetingAssignedViewSet,basename='meet')
 urlpatterns = [
    	path('api/', include(router.urls)),
     path('', meeting, name='meeting_form'),

@@ -9,7 +9,7 @@
 
 
 // backend meeting creation form
- <form method ='post'>
+ <form id='meeting_creation_form' method ='post'>
   {% csrf_token %} 
   <div> <input placeholder='Enter team name' id="team"></div>
  <p>Date: <input type="text" id="datepicker"></p>
@@ -23,7 +23,7 @@
 <p>Member secondary: {{form.member_secondary}}</p>
 <p>Member teritary : {{form.member_teritary}}</p>
 
-   <input type='submit'> 
+   <input id='submit_button' type='submit'> 
  </form> 
 
 
@@ -32,7 +32,9 @@
   // get data from db based on current date and time
  <div> <input placeholder='Enter team name' id="team"></div>
  <button id='search_meets' class='search_meets'>search</button>
+
+ <div id='all_meet'></div>
 {% endblock %}
 
-
-#task 1 : when user select team and date click search then return the slot
+#task 0 : make a post request to register meeting and create meeting object
+#task 1 : when user select team get current date automatically and show who is primary now

@@ -26,7 +26,7 @@ def return_team_members(request):
         team_name = request.GET.get('team_name')
         team = Team.objects.filter(team_name__icontains=team_name).first()
         obj =  Profile.objects.filter(team = team)
-        print('yup-----',obj)
+       
     return JsonResponse(list(obj.values('id','user_id')),safe=False)
 
 

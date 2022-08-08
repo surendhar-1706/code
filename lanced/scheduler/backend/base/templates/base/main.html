@@ -32,7 +32,79 @@
 
 
   <script>
-     
+meetinglist()
+createmeeting()
+function meetinglist()
+{
+  var url = "{% url 'meet-list' %}" 
+ 
+  fetch(url)
+  .then((res)=>res.json())
+  .then(function(data){
+    console.log(data)
+    var list = data
+    for (var i in list)
+    {
+      var item = `
+      <div id="data-row-${i}">
+<span>${list[i].date}</span>
+
+      </div>
+
+      `
+      all_meet.innerHTML +=item
+    }
+  })
+}
+
+function createmeeting(){
+  var form = document.getElementById('submit_button')
+  form.addEventListener('click',function(e){
+    e.preventDefault();
+    console.log('form submited')
+    var url = "http://localhost:8000/api/meet/" 
+    var team_name = $('#team').val(); 
+    var date = $('#datepicker').val()
+    var start_time =$('.timepicker').val()
+    var end_time =$('.timepicker2').val()
+    var team_manager =$('#id_team_manager').val()
+    var team_lead_primary=$('#id_team_lead_primary').val()
+     var team_lead_secondary =$('#id_team_lead_secondary').val()
+     var member_primary =$('#id_member_primary').val()
+     var member_secondary =$('#id_member_secondary').val()
+     var member_teritary =$('#id_member_teritary').val()
+     let form_data =  {
+      'date':date,
+      'start_time':start_time,
+      'end_time':end_time,
+      'team_manager':team_manager,
+      'team_lead_primary':team_lead_primary,
+      'team_lead_secondary':team_lead_secondary,
+      'member_primary':member_primary,
+      'member_secondary':member_secondary,
+      'member_teritary':member_teritary
+    }
+   console.log(team_manager,team_lead_primary,team_lead_secondary,member_primary,member_secondary,member_teritary,date,start_time,end_time)
+    console.log(url)
+  fetch(url,{
+
+    method : 'post',
+    headers :{ 'Content-Type' : 'application/json'},
+    body : JSON.stringify(form_data)
+
+
+
+
+  }).then(function(){
+    meetinglist()
+  })
+
+  })}
+    
+  
+
+
+
 $('.timepicker').timepicker({
       timeFormat: 'h:mm p',
       interval:30,
@@ -81,6 +153,9 @@ $(function() {
             }
           })
         })
+
+
+
 
 
 
