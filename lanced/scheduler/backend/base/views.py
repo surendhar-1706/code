@@ -46,16 +46,8 @@ class MeetingCreateView(APIView):
         member_primary = Profile.objects.filter(user_id = request.data['member_primary']).first()
         member_secondary = Profile.objects.filter(user_id = request.data['member_secondary']).first()
         member_teritary = Profile.objects.filter(user_id = request.data['member_teritary']).first()
-        # obj = MeetingsAssigned.objects.create( 
-        # team_manager = team_manager,
-        # team_lead_primary = team_lead_primary,
-        # team_lead_secondary =team_lead_secondary ,
-        # member_primary =member_primary ,
-        # member_secondary = member_secondary,
-        # member_teritary = member_teritary,
-
-        # )
-        date = datetime.datetime.strptime(request.data['date'], "%m/%d/%Y").strftime("%Y-%m-%d")
+        
+        date = datetime.datetime.strptime(request.data['date'], "%d-%m-%Y").strftime("%Y-%m-%d")
         start_time = datetime.datetime.strptime(request.data['start_time'], "%I:%M %p")
         start_time = datetime.datetime.strftime(start_time, "%H:%M")
         end_time = datetime.datetime.strptime(request.data['end_time'], "%I:%M %p")
@@ -65,7 +57,20 @@ class MeetingCreateView(APIView):
             date = date,
             start_time =start_time ,
             end_time = end_time,
-            team_id = Team.objects.filter(team_name = request.data['team_name']).first()
+            team_id = Team.objects.filter(team_name = request.data['team_name']).first(),
+        
         )
+        obj.team_manager.add(team_manager)
+        obj.team_lead_primary.add(team_lead_primary)
+        obj.team_lead_secondary.add(team_lead_secondary)
+        obj.member_primary.add(member_primary)
+        obj.member_primary.add(member_primary)
+        obj.member_primary.add(member_primary)
+        #    team_manager = team_manager,
+        #     team_lead_primary = team_lead_primary,
+        #     team_lead_secondary =team_lead_secondary ,
+        #     member_primary =member_primary ,
+        #     member_secondary = member_secondary,
+        #     member_teritary = member_teritary,
         # print(obj)
         return JsonResponse({'error':'error'})

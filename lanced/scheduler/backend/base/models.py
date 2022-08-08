@@ -19,7 +19,7 @@ class Profile(models.Model):
     home_number = models.BigIntegerField(blank=True,null=True)
     team = models.ManyToManyField(Team)
     def __str__(self):
-        return str(self.user_id)
+        return str(self.first_name)
 
 
 
