@@ -99,7 +99,7 @@ $(function() {
 $("#team").change(function () {
           const url = "{% url 'team_members' %}"  
           const team_name = $('#team').val(); 
-          console.log(team_name) 
+         
   
            $.ajax({                      
               url: url,                    
@@ -107,14 +107,15 @@ $("#team").change(function () {
                   'team_name': team_name       
               },
               success: function (data) {   
-                  $("#id_team_manager").html(data); 
-                
-                  let html_data = '<option value="">---------</option>';
-                  data.forEach(function (city) {
-                      html_data += `<option value="${city.id}">${city.name}</option>`
-                  });
-                  console.log(html_data);
-                  $("#id_city").html(html_data);
+                console.log('success',data)
+               
+                let html_data = '<option value="">-------</option>'
+                data.forEach(function(d){
+                  html_data +=`<option value="${d.user_id}">${d.user_id}</option>`
+                 
+                })
+                console.log(html_data)
+                $('#id_team_manager').html(html_data)
                 
               },
               error:function()

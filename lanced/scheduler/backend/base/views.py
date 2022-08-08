@@ -32,4 +32,4 @@ def return_team_members(request):
         team = Team.objects.filter(team_name__icontains=team_name).first()
         obj =  Profile.objects.filter(team = team)
         print('yup-----',obj)
-    return JsonResponse({'team_members':'team_members'})
+    return JsonResponse(list(obj.values('id','user_id')),safe=False)
