@@ -32,12 +32,29 @@
 
 
   <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  var csrftoken = getCookie('csrftoken');
 meetinglist()
 createmeeting()
 function meetinglist()
 {
   var url = "{% url 'meet-list' %}" 
- 
+ var wrapper = document.getElementById('all_meet') 
+ wrapper.innerHTML =''
   fetch(url)
   .then((res)=>res.json())
   .then(function(data){
@@ -52,7 +69,7 @@ function meetinglist()
       </div>
 
       `
-      all_meet.innerHTML +=item
+      wrapper.innerHTML +=item
     }
   })
 }
@@ -62,7 +79,7 @@ function createmeeting(){
   form.addEventListener('click',function(e){
     e.preventDefault();
     console.log('form submited')
-    var url = "http://localhost:8000/api/meet/" 
+    var url = "http://localhost:8000/post/data" 
     var team_name = $('#team').val(); 
     var date = $('#datepicker').val()
     var start_time =$('.timepicker').val()
@@ -75,6 +92,7 @@ function createmeeting(){
      var member_teritary =$('#id_member_teritary').val()
      let form_data =  {
       'date':date,
+      'team_name':team_name,
       'start_time':start_time,
       'end_time':end_time,
       'team_manager':team_manager,
@@ -89,14 +107,17 @@ function createmeeting(){
   fetch(url,{
 
     method : 'post',
-    headers :{ 'Content-Type' : 'application/json'},
+    headers :{ 
+      'Content-Type' : 'application/json',
+      'X-CSRFToken':csrftoken,
+    },
     body : JSON.stringify(form_data)
 
 
 
 
   }).then(function(){
-    meetinglist()
+   meetinglist()
   })
 
   })}
