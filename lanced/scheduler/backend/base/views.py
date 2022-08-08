@@ -1,7 +1,9 @@
 
 from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework import viewsets
 
+from .serializers import MeetingAssignedSerializer
 from .forms import MeetingForm
 from .models import *
 # Create your views here.
@@ -13,18 +15,11 @@ def meeting(request):
             name_list.append(team.team_name)
         return JsonResponse(name_list,safe=False)
     form = MeetingForm()
-    if request.method == 'POST':
-        print(request.POST)
-        # form = MeetingForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
     context ={'form':form}
     return render(request,'base/meetingform.html',context)
 
-
 def return_scheduled_meets(request):
     return JsonResponse({'scheduled_meets':'scheduled_meets'})
-
 
 def return_team_members(request):
     if 'team_name' in request.GET:
@@ -33,3 +28,8 @@ def return_team_members(request):
         obj =  Profile.objects.filter(team = team)
         print('yup-----',obj)
     return JsonResponse(list(obj.values('id','user_id')),safe=False)
+
+
+class MeetingAssignedViewSet(viewsets.ModelViewSet):
+    queryset = MeetingsAssigned.objects.all()
+    serializer_class = MeetingAssignedSerializer
