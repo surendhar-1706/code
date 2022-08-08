@@ -48,9 +48,44 @@
       return cookieValue;
   }
   var csrftoken = getCookie('csrftoken');
-meetinglist()
+
 createmeeting()
-function meetinglist()
+get_oncall()
+
+function get_oncall()
+{
+var search = document.getElementById('search_oncall')
+
+search.addEventListener('click',function(e){
+  var team_name = $('#team2').val(); 
+  var url =`http://localhost:8000/current_meeting/${team_name}`
+  e.preventDefault();
+  fetch(url)
+.then((res)=>res.json())
+.then(function(data){
+console.log(data)
+})
+})
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} function meetinglist()
 {
   var url = "{% url 'meet-list' %}" 
  var wrapper = document.getElementById('all_meet') 
@@ -58,7 +93,7 @@ function meetinglist()
   fetch(url)
   .then((res)=>res.json())
   .then(function(data){
-    console.log(data)
+
     var list = data
     for (var i in list)
     {
@@ -72,7 +107,7 @@ function meetinglist()
       wrapper.innerHTML +=item
     }
   })
-}
+} {% endcomment %}
 
 function createmeeting(){
   var form = document.getElementById('submit_button')
@@ -82,6 +117,7 @@ function createmeeting(){
     var url = "http://localhost:8000/post/data" 
     var team_name = $('#team').val(); 
     var date = $('#datepicker').val()
+    var date2 = $('#datepicker2').val()
     var start_time =$('.timepicker').val()
     var end_time =$('.timepicker2').val()
     var team_manager =$('#id_team_manager').val()
@@ -92,6 +128,7 @@ function createmeeting(){
      var member_teritary =$('#id_member_teritary').val()
      let form_data =  {
       'date':date,
+      'date2':date2,
       'team_name':team_name,
       'start_time':start_time,
       'end_time':end_time,
@@ -116,8 +153,12 @@ function createmeeting(){
 
 
 
-  }).then(function(){
-   meetinglist()
+  }).then(function(res){
+var json_res = res.json()
+console.log(json_res,'cool')
+ 
+   document.getElementById('meeting_creation_form').reset()
+  
   })
 
   })}
@@ -147,12 +188,14 @@ $('.timepicker').timepicker({
 $(function() {
   $("#datepicker").datepicker({ dateFormat: 'dd-mm-yy'});
 });
+$(function() {
+  $("#datepicker2").datepicker({ dateFormat: 'dd-mm-yy'});
+});
 
- $('.search_meets').on('click',function(e){
+ {% comment %} $('.search_meets').on('click',function(e){
         
           e.preventDefault();
           var team_name = $("#team").val(); 
-       
           var date_is = $('#datepicker').val()
           var start_time = $('.timepicker').val()
           var end_time = $('.timepicker2').val()
@@ -173,7 +216,7 @@ $(function() {
               console.log('something went wrong fetching meets')
             }
           })
-        })
+        }) {% endcomment %}
 
 
 
@@ -187,7 +230,12 @@ $(function() {
           });
         } );
 
-
+        $( function() {
+          
+          $( "#team2" ).autocomplete({
+            source: '{% url 'meeting_form' %}'
+          });
+        } );
 
 
 

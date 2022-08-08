@@ -19,12 +19,13 @@ class Profile(models.Model):
     home_number = models.BigIntegerField(blank=True,null=True)
     team = models.ManyToManyField(Team)
     def __str__(self):
-        return str(self.first_name)
+        return str(self.user_id)
 
 
 
 class MeetingsAssigned (models.Model):
     date = models.DateField(blank=True,null=True)
+    date2 = models.DateField(blank=True,null=True)
     start_time = models.TimeField(blank=True,null=True)
     end_time = models.TimeField(blank=True,null=True)
     team_id = models.ForeignKey(Team,on_delete=CASCADE,related_name='meeting_team_id')
