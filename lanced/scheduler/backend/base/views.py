@@ -62,7 +62,7 @@ class MeetingRetrive(generics.RetrieveAPIView):
         
 class MeetingCreateView(APIView):
     def post(self, request):
-     try:
+   
         team_manager = Profile.objects.filter(user_id = request.data['team_manager']).first()
         team_lead_primary = Profile.objects.filter(user_id = request.data['team_lead_primary']).first()
         team_lead_secondary = Profile.objects.filter(user_id = request.data['team_lead_secondary']).first()
@@ -72,25 +72,42 @@ class MeetingCreateView(APIView):
         
         date = datetime.datetime.strptime(request.data['date'], "%d-%m-%Y").strftime("%Y-%m-%d")
         date2 = datetime.datetime.strptime(request.data['date2'], "%d-%m-%Y").strftime("%Y-%m-%d")
-        start_time = datetime.datetime.strptime(request.data['start_time'], "%I:%M %p")
-        start_time = datetime.datetime.strftime(start_time, "%H:%M")
-        end_time = datetime.datetime.strptime(request.data['end_time'], "%I:%M %p")
-        end_time = datetime.datetime.strftime(end_time, "%H:%M")
-       
-        obj = MeetingsAssigned.objects.create(
-            date = date,
-            date2=date2,
-            start_time =start_time ,
-            end_time = end_time,
-            team_id = Team.objects.filter(team_name = request.data['team_name']).first(),
+
+        temp_start_time = datetime.datetime.strptime(request.data['start_time'], "%I:%M %p")
+        start_time = datetime.datetime.strftime(temp_start_time, "%H:%M")
+
+        temp_end_time = datetime.datetime.strptime(request.data['end_time'], "%I:%M %p")
+        end_time = datetime.datetime.strftime(temp_end_time, "%H:%M")
+
+        str_2_date = datetime.datetime.strptime(date,"%Y-%m-%d")
+        str_2_start_time =  datetime.datetime.strptime(start_time, '%H:%M').time()
+
+        str_2_date2 = datetime.datetime.strptime(date2,"%Y-%m-%d")
+        str_2_end_time =  datetime.datetime.strptime(end_time, '%H:%M').time()
+
+        start_date_time = datetime.datetime.combine(str_2_date,str_2_start_time)
+        end_date_time = datetime.datetime.combine(str_2_date2,str_2_end_time)
         
-        )
-        obj.team_manager.add(team_manager)
-        obj.team_lead_primary.add(team_lead_primary)
-        obj.team_lead_secondary.add(team_lead_secondary)
-        obj.member_primary.add(member_primary)
-        obj.member_secondary.add(member_secondary)
-        obj.member_teritary.add(member_teritary)
-        return Response({'success':'success'})
-     except:
-        return JsonResponse({'failed':'failed'})
+        qs = MeetingsAssigned.objects.all()
+        queryset = qs.filter(date__lt=start_date_time,
+                               date2__gt=end_date_time)
+        print(qs)
+        if(qs.count()==0):    
+            obj = MeetingsAssigned.objects.create(
+                date = date,
+                date2=date2,
+                start_time =start_time ,
+                end_time = end_time,
+                team_id = Team.objects.filter(team_name = request.data['team_name']).first(),
+            
+            )
+            obj.team_manager.add(team_manager)
+            obj.team_lead_primary.add(team_lead_primary)
+            obj.team_lead_secondary.add(team_lead_secondary)
+            obj.member_primary.add(member_primary)
+            obj.member_secondary.add(member_secondary)
+            obj.member_teritary.add(member_teritary)
+            return Response({'success':'success'})
+        else:
+            return Response({'slot_taken':'slot taken'})
+ 
