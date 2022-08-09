@@ -49,13 +49,15 @@ class MeetingRetrive(generics.RetrieveAPIView):
         obj = Team.objects.filter(team_name =pk).first()
         queryset = queryset.filter(team_id=obj)
         current_date_time = datetime.datetime.combine(currentDay,currentTime)
-        queryset = queryset.filter(date__lte=current_date_time,
-                                date2__gte=current_date_time)
-        
-        print(current_date_time)
-        print(queryset)
-        queryset = queryset.filter(start_time__lte=currentTime)
-        queryset = queryset.filter(end_time__gte = currentTime)
+        queryset = queryset.filter(start_date_time__lte=current_date_time,
+                                end_date_time__gte=current_date_time)
+        # print(queryset)
+        # print(current_date_time,'current date time')
+     
+        # queryset = queryset.filter(start_time__lte=currentTime)
+        # print(queryset,'currenttimelte')
+        # queryset = queryset.filter(end_time__lte = currentTime)
+        # print(queryset,'current time gte')
     
         serializer = MeetingAssignedSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -89,24 +91,28 @@ class MeetingCreateView(APIView):
         end_date_time = datetime.datetime.combine(str_2_date2,str_2_end_time)
         
         qs = MeetingsAssigned.objects.all()
-        queryset = qs.filter(date__lte=start_date_time,
-                               date2__gte=end_date_time)
-        print(queryset)
-        queryset = queryset.filter(start_time__lte=str_2_start_time)
-        print(queryset)
-        queryset = queryset.filter(end_time__gte = str_2_end_time)
-        print(queryset)
-        print(start_date_time,end_date_time)
+        # queryset = qs.filter(date__lte=start_date_time,
+        #                        date2__gte=end_date_time)
+        # print(queryset)
+        # queryset = queryset.filter(start_time__lte=str_2_start_time)
+        # print(queryset)
+        # queryset = queryset.filter(end_time__gte = str_2_end_time)
+        # print(queryset)
+        # print(start_date_time,end_date_time)
 
-        if(queryset.count()==0):    
+        queryset = qs.filter(start_date_time__lte=start_date_time,
+                                end_date_time__gte=end_date_time)
+        print(queryset)
+        if(queryset.count() == 0):
             obj = MeetingsAssigned.objects.create(
-                date = date,
-                date2=date2,
-                start_time =start_time ,
-                end_time = end_time,
-                team_id = Team.objects.filter(team_name = request.data['team_name']).first(),
-            
-            )
+                    date = date,
+                    date2=date2,
+                    start_time =start_time ,
+                    end_time = end_time,
+                    team_id = Team.objects.filter(team_name = request.data['team_name']).first(),
+                    start_date_time = start_date_time,
+                    end_date_time = end_date_time
+                )
             obj.team_manager.add(team_manager)
             obj.team_lead_primary.add(team_lead_primary)
             obj.team_lead_secondary.add(team_lead_secondary)
@@ -115,5 +121,6 @@ class MeetingCreateView(APIView):
             obj.member_teritary.add(member_teritary)
             return Response({'success':'success'})
         else:
-            return Response({'slot_taken':'slot taken'})
+            return Response({'error':'error'})
+     
  

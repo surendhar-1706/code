@@ -37,6 +37,8 @@ class MeetingsAssigned (models.Model):
     member_secondary = models.ManyToManyField(Profile,related_name="member_secondary",blank=True,default = "")
     member_teritary = models.ManyToManyField(Profile,related_name="member_teritary",blank=True)
     member = models.ManyToManyField(Profile,related_name="members",blank=True)
+    start_date_time = models.DateTimeField(blank=True,null=True)
+    end_date_time = models.DateTimeField(blank=True,null=True)
  
 
 
