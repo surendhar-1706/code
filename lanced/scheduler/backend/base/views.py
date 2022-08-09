@@ -89,10 +89,16 @@ class MeetingCreateView(APIView):
         end_date_time = datetime.datetime.combine(str_2_date2,str_2_end_time)
         
         qs = MeetingsAssigned.objects.all()
-        queryset = qs.filter(date__lt=start_date_time,
-                               date2__gt=end_date_time)
-        print(qs)
-        if(qs.count()==0):    
+        queryset = qs.filter(date__lte=start_date_time,
+                               date2__gte=end_date_time)
+        print(queryset)
+        queryset = queryset.filter(start_time__lte=str_2_start_time)
+        print(queryset)
+        queryset = queryset.filter(end_time__gte = str_2_end_time)
+        print(queryset)
+        print(start_date_time,end_date_time)
+
+        if(queryset.count()==0):    
             obj = MeetingsAssigned.objects.create(
                 date = date,
                 date2=date2,
