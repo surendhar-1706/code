@@ -4,22 +4,23 @@ from .models import *
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
-        fields =('team_name',)
+        fields =('team_name','team_id')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # team = TeamSerializer(many=True)
+    
     class Meta:
         model = Profile
         fields = '__all__'
 
 class MeetingAssignedSerializer(serializers.ModelSerializer):
-    team_manager = ProfileSerializer(many=True)
-    team_lead_primary = ProfileSerializer(many=True)
-    team_lead_secondary = ProfileSerializer(many=True)
-    member_primary = ProfileSerializer(many=True)
-    member_secondary = ProfileSerializer(many=True)
-    member_teritary = ProfileSerializer(many=True)
+    team_id = TeamSerializer()
+    # team_manager = ProfileSerializer(many=True)
+    # team_lead_primary = ProfileSerializer(many=True)
+    # team_lead_secondary = ProfileSerializer(many=True)
+    # member_primary = ProfileSerializer(many=True)
+    # member_secondary = ProfileSerializer(many=True)
+    # member_teritary = ProfileSerializer(many=True)
     class Meta:
         model = MeetingsAssigned
         fields =  '__all__'

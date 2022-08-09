@@ -48,9 +48,12 @@ class MeetingRetrive(generics.RetrieveAPIView):
         queryset = self.get_queryset()
         obj = Team.objects.filter(team_name =pk).first()
         queryset = queryset.filter(team_id=obj)
-        queryset = queryset.filter(date=currentDay)
+        queryset = queryset.filter(date__lte=currentDay,
+                                date2__gte=currentDay)
+        print(queryset)
         queryset = queryset.filter(start_time__lte=currentTime)
-        # queryset = queryset.filter(end_time__lte = currentTime)
+        queryset = queryset.filter(end_time__gte = currentTime)
+    
         serializer = MeetingAssignedSerializer(queryset, many=True)
         return Response(serializer.data)
         
