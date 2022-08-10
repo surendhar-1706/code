@@ -25,7 +25,7 @@ const fetchBodyparts = async () => {
 function SearchExercise() {
     const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
     const [search, setsearch] = useState('')
-    const { data, refetch } = useQuery(['exercises'], fetchExercises, { enabled: false })
+    const { data, refetch } = useQuery(['exercises'], fetchExercises, {staleTime:twentyFourHoursInMs})
     const { data: bodyparts, isFetching } = useQuery(['bodyparts'], fetchBodyparts, {
         staleTime: twentyFourHoursInMs,
     })

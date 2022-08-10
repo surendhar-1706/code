@@ -58,9 +58,9 @@ function HeroBanner() {
                         lg: '5px'
                     }
                 }}>
-                    Sweat,Smile <br /> and Repeat
+                    Sweat,  Smile <br /> and Repeat
                 </Typography>
-                <Typography py={2}>Check out the most effective exercises</Typography>
+                <Typography py={2}>Check out the most effective exercises personalised to you</Typography>
                 <Button variant="contained" color='error' sx={{
                     my: {
                         lg: '3px'
@@ -81,7 +81,7 @@ function HeroBanner() {
 
                 },
                 width: {
-                    lg: '500px',
+                    lg: '480px',
 
                     md: '500px',
                     sm: '400px'

@@ -9,7 +9,8 @@ function Layout(props: Layouttype) {
     return (
         <Box
             sx={{
-                px: 7
+                pr:7,
+                pl:15
             }}>
             <Navbar />
 

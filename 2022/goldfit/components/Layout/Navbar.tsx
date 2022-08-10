@@ -9,9 +9,9 @@ function Navbar() {
         <Box>
             <Stack
 
-                spacing={4}
+               
                 sx={{
-
+columnGap:20
                 }}
                 direction="row"
                 alignItems={'center'}
@@ -19,7 +19,11 @@ function Navbar() {
             >
                 <Image src={LogoImage} />
 
-                <Link href={'/'} passHref>
+            <Stack direction={'row'} sx={{
+                    columnGap:5,
+                    alignItems:'center'                
+            }}>
+            <Link href={'/'} passHref>
                     <a style={{ textDecoration: 'none', }} >
                         <Typography sx={{
                             borderBottom: 2,
@@ -43,6 +47,7 @@ function Navbar() {
                         <Typography color={'black'}>Exercises</Typography>
                     </a>
                 </Link>
+            </Stack>
             </Stack>
         </Box>
     )

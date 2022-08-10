@@ -50,7 +50,7 @@ function HorizontalBar({ data }: any) {
                     data.map((part: any) => {
                         return (
                             <Stack flexDirection={'column'} sx={{
-                                ml: 1, mr: {
+                                ml: 2, mr: {
                                     lg: 4
                                 },
                                 height: {
@@ -60,7 +60,14 @@ function HorizontalBar({ data }: any) {
                                 p: {
                                     lg: 6,
                                     xs: 3
-                                }, border: 1, borderColor: 'grey.100', alignItems: 'center', boxShadow: 1,
+                                }, 
+                                border: 1, 
+                                
+                                borderColor: 'grey.100', 
+                                alignItems: 'center',
+                                 boxShadow: 1,
+                             
+                              
                             }} >
                                 <Box position={'relative'} sx={{
                                     border: '', width: {
@@ -74,11 +81,18 @@ function HorizontalBar({ data }: any) {
                                     },
                                     mb: {
                                         xs: 5
-                                    }
+                                    },
+                                    transition: "transform 0.15s ease-in-out",
+                                    "&:hover":{transform: "scale3d(1.5, 1.5, 1.5)" }
                                 }}>
                                     <Image objectFit='contain' layout='fill' src={Gym} />
                                 </Box>
-                                <Typography sx={{}}> {part}</Typography>
+                                <Typography sx={{
+textTransform:"capitalize",
+fontWeight: 'Bold',
+fontFamily:'sans-serif'
+
+                                }}> {part}</Typography>
                             </Stack>
                         )
                     })
