@@ -1,14 +1,14 @@
 import { Box, Grid, Stack, Typography } from '@mui/material'
 import Image from 'next/image'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 import Gym from '../../public/icons/gym.png'
 import RightArrow from '../../public/icons/right-arrow.png';
 import LeftArrow from '../../public/icons/left-arrow.png'
 
-function HorizontalBar({ data }: any) {
-
-
+function HorizontalBar({ data,searchedExercises,setsearch }: any) {
+   
+    const [bodypart,setbodypart]= useState('')
     const rightarrow = () => {
         const { scrollNext } = useContext(VisibilityContext)
         return (<div onClick={() => { scrollNext() }}>
@@ -49,7 +49,14 @@ function HorizontalBar({ data }: any) {
                 {
                     data.map((part: any) => {
                         return (
-                            <Stack flexDirection={'column'} sx={{
+                            <Stack
+                            onClick={()=>{
+
+                                console.log('box clicked',part)
+                                setsearch(part)
+                               
+                            }}
+                            key={part} flexDirection={'column'} sx={{
                                 ml: 2, mr: {
                                     lg: 4
                                 },
@@ -68,8 +75,13 @@ function HorizontalBar({ data }: any) {
                                  boxShadow: 1,
                              
                               
-                            }} >
-                                <Box position={'relative'} sx={{
+                            }}
+                            
+                            >
+                                <Box
+                               
+                                 position={'relative'}
+                                  sx={{
                                     border: '', width: {
                                         lg: '150px',
                                         xs: '100px'

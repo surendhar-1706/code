@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       }}>
         <HeroBanner />
         <SearchExercise />
-        <Exercises />
+    
       </Box>
 
 

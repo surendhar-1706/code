@@ -1,7 +1,8 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query';
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Exercises from './Exercises';
 import HorizontalBar from './HorizontalBar';
 const options = {
     method: 'GET',
@@ -19,16 +20,32 @@ const fetchExercises = async () => {
 const fetchBodyparts = async () => {
     const fetched_data = await fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', options)
     const json_data = await fetched_data.json()
-    console.log('printing data from bodypats', json_data)
+    // console.log('printing data from bodypats', json_data)
     return json_data
 }
 function SearchExercise() {
     const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
     const [search, setsearch] = useState('')
-    const { data, refetch } = useQuery(['exercises'], fetchExercises, {staleTime:twentyFourHoursInMs})
+    const [search_filtered_exercises,set_search_filtered_exercises]= useState<any>()
+    const { data:exercises, refetch } = useQuery(['exercises'], fetchExercises, {staleTime:twentyFourHoursInMs})
     const { data: bodyparts, isFetching } = useQuery(['bodyparts'], fetchBodyparts, {
         staleTime: twentyFourHoursInMs,
     })
+   
+    const searchedExercises = ()=>{
+   const filtered_content =  exercises.filter(
+            (item:any) => item.name.toLowerCase().includes(search)
+                   || item.target.toLowerCase().includes(search)
+                   || item.equipment.toLowerCase().includes(search)
+                   || item.bodyPart.toLowerCase().includes(search),
+          );
+          console.log(filtered_content,'filtered content from search exersies')
+          set_search_filtered_exercises(filtered_content)
+    }
+   useEffect(()=>{
+    searchedExercises()
+   },[search])
+     
     return (
         <Box>
             <Stack
@@ -82,10 +99,17 @@ function SearchExercise() {
                         }} placeholder='Search Exercises'>
 
                     </TextField>
-                    <Button onClick={() => { refetch() }} variant='contained' color='error'>Search</Button>
+                    <Button onClick={(e:any) => { 
+                  
+                        searchedExercises();
+                        
+                     }} variant='contained' color='error'>Search</Button>
                 </Stack>
-                {!isFetching && <HorizontalBar data={bodyparts} />}
+                {!isFetching && <HorizontalBar data={bodyparts} searchedExercises={searchedExercises} setsearch={setsearch} />}
+
+
             </Stack>
+            {search_filtered_exercises&& <Exercises data={search_filtered_exercises}/>}
         </Box>
     )
 }
