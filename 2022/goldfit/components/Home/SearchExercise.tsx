@@ -26,6 +26,7 @@ const fetchBodyparts = async () => {
 function SearchExercise() {
     const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
     const [search, setsearch] = useState('')
+    const [search_field,set_search_field]= useState('')
     const [search_filtered_exercises,set_search_filtered_exercises]= useState<any>()
     const { data:exercises, refetch } = useQuery(['exercises'], fetchExercises, {staleTime:twentyFourHoursInMs})
     const { data: bodyparts, isFetching } = useQuery(['bodyparts'], fetchBodyparts, {
@@ -33,14 +34,18 @@ function SearchExercise() {
     })
    
     const searchedExercises = ()=>{
-   const filtered_content =  exercises.filter(
-            (item:any) => item.name.toLowerCase().includes(search)
-                   || item.target.toLowerCase().includes(search)
-                   || item.equipment.toLowerCase().includes(search)
-                   || item.bodyPart.toLowerCase().includes(search),
-          );
-          console.log(filtered_content,'filtered content from search exersies')
-          set_search_filtered_exercises(filtered_content)
+
+   if(exercises)
+   {
+    const filtered_content =  exercises.filter(
+        (item:any) => item.name.toLowerCase().includes(search)
+               || item.target.toLowerCase().includes(search)
+               || item.equipment.toLowerCase().includes(search)
+               || item.bodyPart.toLowerCase().includes(search),
+      );
+      console.log(filtered_content,'filtered content from search exersies')
+      set_search_filtered_exercises(filtered_content)
+   }
     }
    useEffect(()=>{
     searchedExercises()
@@ -80,10 +85,11 @@ function SearchExercise() {
 
                     }} direction={'row'}>
                     <TextField
-                        value={search}
+                        value={search_field}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            console.log(search)
-                            setsearch(e.target.value.toLowerCase())
+                         
+                         
+                            set_search_field(e.target.value.toLowerCase())
                         }}
                         size='small'
                         sx={{
@@ -100,8 +106,9 @@ function SearchExercise() {
 
                     </TextField>
                     <Button onClick={(e:any) => { 
-                  
-                        searchedExercises();
+                        
+                       setsearch(search_field)
+                       console.log('search_field_value',search_field)
                         
                      }} variant='contained' color='error'>Search</Button>
                 </Stack>
