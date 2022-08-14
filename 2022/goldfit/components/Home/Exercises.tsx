@@ -7,23 +7,35 @@ function Exercises({data}:any) {
     // console.log(data,'data is printed from exercises')
     return (
         <Box bgcolor={''}>
-<Typography pt={4} fontSize={"40px"} fontWeight={'bold'}>Showing Results</Typography>
-<Grid container spacing={8}>
+<Typography pt={4} fontSize={"40px"} pb={4} fontWeight={'bold'}>Showing Results</Typography>
+<Grid container spacing={1}>
 {data.map((exercise:any,id:any)=>{
     return (
        <Grid item xs={6}>
-         <Box  border={2}
+         <Box  border={3}
         borderBottom={0}
         borderLeft={0}
         borderRight={0}
         borderColor="red"
         mb={2}
         mx={20}
+        my={2}
          key={exercise.name}
          >
-        <Box><Image width={180} height={180} src={exercise.gifUrl} loading='lazy'/></Box>
+        <Box><Image width={500} height={500} src={exercise.gifUrl} loading='lazy'/></Box>
 
-       <Button> {exercise.bodyPart}</Button>
+       <Button
+        sx={{
+        borderRadius:24,
+        px:2,
+        py:0.5,
+        backgroundColor:'#F9EB9D'
+        
+       }}
+   
+       variant="contained"> 
+       {exercise.bodyPart}
+       </Button>
          <Button>{exercise.target}</Button>
         <Typography> { exercise.name}</Typography>
 
