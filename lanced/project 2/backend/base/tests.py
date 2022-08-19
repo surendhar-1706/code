@@ -1,12 +1,33 @@
-
+test_obj = None 
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
 from .models import Quote
-import json
+from django.http import JsonResponse
 from .rating_algo import checkout_algo
+import requests
+from unittest import mock
+from requests.models import Response
+import json
+
+def mocked_requests_get(*args, **kwargs):
+    response_content = None
+    request_url = kwargs.get('url', None)
+    if request_url == 'http://127.0.0.1:8000/checkout/'+test_obj.quote_number+'':
+        response_content = checkout_algo(test_obj)
+        return response_content
+    if request_url == 'http://127.0.0.1:8000/checkout/'+'xyz321aab422':
+        error = {'error':'No data found'}
+        response_content = json.dumps(error)
+        return response_content
+   
+   
+  
+
+
+
 # test data
 quote_1 ={
 		"effective_date":"2022-06-09","state":"Alaska","previous_policy_cancelled":False,"owns_property":False,'zip':123123}
@@ -90,3 +111,48 @@ class QuoteTests(APITestCase):
         self.assertEqual(calculate['additional_fee_per_month'],'$1.50')
         self.assertEqual(calculate['total_discount'],'$11.99')
         self.assertEqual(calculate['total_discount_per_month'],'$2.00')
+    
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_fetch_correct(self, mock_get): 
+        user = User.objects.create_user(username='testuser', password='12345')
+        obj = Quote.objects.create(
+            effective_date = quote_4["effective_date"],
+            state = quote_4['state'],
+            previous_policy_cancelled = quote_4["previous_policy_cancelled"],
+            owns_property = quote_4["owns_property"],
+            zip = quote_4['zip'],
+            owner=user)
+        checkout_url = 'http://127.0.0.1:8000/checkout/'+obj.quote_number+''
+        global test_obj
+        test_obj = obj
+        response = requests.get(url=checkout_url)
+        self.assertEqual(response['base_premium'],'$59.94')
+        self.assertEqual(response['total_premium'],'$56.94') #check total_premium
+        self.assertEqual(response['total_premium_per_month'],'$9.49')
+        self.assertEqual(response['total_additional_fee'],'$8.99')
+        self.assertEqual(response['additional_fee_per_month'],'$1.50')
+        self.assertEqual(response['total_discount'],'$11.99')
+        self.assertEqual(response['total_discount_per_month'],'$2.00')
+
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_fetch_wrong(self, mock_get): 
+        user = User.objects.create_user(username='testuser', password='12345')
+        obj = Quote.objects.create(
+            effective_date = quote_4["effective_date"],
+            state = quote_4['state'],
+            previous_policy_cancelled = quote_4["previous_policy_cancelled"],
+            owns_property = quote_4["owns_property"],
+            zip = quote_4['zip'],
+            owner=user)
+        checkout_url = 'http://127.0.0.1:8000/checkout/'+obj.quote_number+''
+        global test_obj
+        test_obj = obj
+        checkout_url = 'http://127.0.0.1:8000/checkout/'+'xyz321aab422'
+        if(test_obj.quote_number !='xyz321aab422'):
+        
+            response = requests.get(url=checkout_url)
+            error = {'error':'No data found'}
+            response_content = json.dumps(error)
+            self.assertEqual(response,response_content)
+            
+        

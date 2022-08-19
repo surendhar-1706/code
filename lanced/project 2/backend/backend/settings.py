@@ -139,7 +139,12 @@ REST_FRAMEWORK = {
     #  'DATE_INPUT_FORMATS': ["%d/%m/%Y"],
 
     # 'DATE_FORMAT': '%d/%m/%Y',
+    
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    # 'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+]
 }
 
 SPECTACULAR_SETTINGS = {

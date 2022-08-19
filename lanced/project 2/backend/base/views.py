@@ -25,7 +25,7 @@ class QuoteViewSet(mixins.CreateModelMixin,viewsets.GenericViewSet):
            else:       #else send quote created by authenticaed user
             self.qs = Quote.objects.filter(owner=self.request.user)
            return self.qs
-       
+    
     queryset = get_queryset
     serializer_class = QuoteSerializer
     def perform_create(self, serializer_class):
@@ -35,27 +35,28 @@ class QuoteViewSet(mixins.CreateModelMixin,viewsets.GenericViewSet):
     list=extend_schema(
         summary="List all quotes created by authenticaed user"
     ),
-    create=extend_schema(
-        summary="Create quotes"
-    ),
-    retrieve=extend_schema(summary='Retrive quote created by authenticated user based on id'),
-    destroy=extend_schema(
-        summary= 'Delete Update quote created by authenticated user based on id'
-    )
     
     )
-class QuoteOtherEndPointsViewSet(mixins.ListModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
+class QuoteOtherEndPointsViewSet(mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
     qs=None
     permission_classes=[IsAuthenticated]
     def get_queryset(self):
+           print(self.kwargs['pk'],'This prints the pk')
            if self.request.user.is_superuser:  #if user is superuser send all quote data
-                   self.qs = Quote.objects.all()
+                   self.qs = Quote.objects.filter(quote_number = self.kwargs['pk'])
+                   print(self.qs)
+                   return (self.qs)
            else:       #else send quote created by authenticaed user
-            self.qs = Quote.objects.filter(owner=self.request.user)
-           return self.qs
-       
-    queryset = get_queryset
+             obj = Quote.objects.filter(owner=self.request.user)
+             self.qs = obj.filter(quote_number = self.kwargs['pk'])
+             print(self.qs)
+             return self.qs
+    lookup_field = 'quote_number'
+    lookup_url_kwarg ='pk'
+    # queryset = get_queryset
     serializer_class = QuoteSerializer
+
+
 
 
 class CheckoutViewSet(viewsets.ViewSet):
@@ -75,7 +76,7 @@ class CheckoutViewSet(viewsets.ViewSet):
         try:
             quote.previous_policy_cancelled
         except:
-            return JsonResponse({'error':"No data found"})  #retrive based on pk(id) and select first result because filter method returns an array
+            return JsonResponse({'error':"No data0 found"})  #retrive based on pk(id) and select first result because filter method returns an array
         serializer = QuoteSerializer(quote,context={'request': request})
         checkout = checkout_algo(quote) # call calculator function pass quote object,serialized data of quote object
         return Response(checkout) # return the response
