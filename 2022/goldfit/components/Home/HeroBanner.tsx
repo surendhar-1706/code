@@ -11,7 +11,6 @@ function HeroBanner() {
         }}>
             <Box
                 sx={{
-
                 }}>
                 <Typography
 
@@ -31,6 +30,7 @@ function HeroBanner() {
                     Sweat,  Smile <br /> and Repeat
                 </Typography>
                 <Typography py={2}>Check out the most effective exercises personalised to you</Typography>
+				
                 <Button variant="contained" color='error' sx={{
                     my: {
                         lg: '3px'

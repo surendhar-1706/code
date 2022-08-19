@@ -15,7 +15,8 @@ function Layout(props: Layouttype) {
             <Navbar />
 
             {props.childcomponent}
-            <Footer />
+         
+            <Footer/>
         </Box>
     )
 }

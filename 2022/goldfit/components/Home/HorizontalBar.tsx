@@ -16,6 +16,7 @@ function HorizontalBar({ data,searchedExercises,setsearch }: any) {
         </div>)
     }
     const leftarrow = () => {
+        
         const { scrollPrev } = useContext(VisibilityContext)
         return (<div onClick={() => { scrollPrev() }}>
             <Image height={20} width={20} src={LeftArrow} />

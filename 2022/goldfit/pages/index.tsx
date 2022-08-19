@@ -7,6 +7,7 @@ import HeroBanner from '../components/Home/HeroBanner'
 import SearchExercise from '../components/Home/SearchExercise'
 
 
+
 const Home: NextPage = () => {
   return (
     <div >
@@ -16,11 +17,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box sx={{
-        backgroundColor: '  '
       }}>
         <HeroBanner />
         <SearchExercise />
-    
+
       </Box>
 
 
