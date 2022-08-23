@@ -42,7 +42,7 @@ columnGap:20
 
 
 
-                <Link href='/test'>
+                <Link href='/exercisedetail?exercise=boss' as={'exercisedetail'}>
                     <a style={{ textDecoration: 'none' }}>
                         <Typography color={'black'}>Exercises</Typography>
                     </a>
