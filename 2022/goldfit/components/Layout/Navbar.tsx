@@ -11,7 +11,8 @@ function Navbar() {
 
                
                 sx={{
-columnGap:20
+columnGap:20,
+pt:3
                 }}
                 direction="row"
                 alignItems={'center'}

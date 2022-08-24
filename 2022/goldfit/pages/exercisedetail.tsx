@@ -3,12 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react'
 import Detail from '../components/Details/Detail';
+import RelatedYt from '../components/Details/RelatedYt';
 import { options } from '../components/options';
 const execise_db_by_id_url = 'https://exercisedb.p.rapidapi.com/exercises/exercise'
-const youtube_db_url = 'https://youtube-search-and-download.p.rapidapi.com/'
-import BodyPartImage from '../public/icons/body-part.png'
-import EquipmentImage from '../public/icons/equipment.png'
-import TargetImage from '../public/icons/target.png'
+
+
 
 function exercisedetail() {
 var router = useRouter();
@@ -25,11 +24,8 @@ const { data,isFetched} = useQuery([`${exercise_id}`],fetch_exercise_by_id,{stal
 
   return (
     <div>
-      <Typography>
-        
-      Why am i here just to suffer doing {exercise_id}
-      </Typography>
       {isFetched && <Detail exercise={data}/>}
+      {isFetched && <RelatedYt exercise={data}/>}
        </div>
   )
 }
