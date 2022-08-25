@@ -20,7 +20,17 @@ function ExerciseCard({exercise}:any) {
     }}
      key={exercise.name}
      >
-    <Box><Image width={500} height={500} src={exercise.gifUrl} loading='lazy'/></Box>
+    <Box>
+
+  <Link href={`/exercisedetail?id=${exercise.id}`}>
+  <a >
+        
+        <Image width={500} height={500} src={exercise.gifUrl} loading='lazy'/>
+        
+        </a></Link>
+      
+      
+      </Box>
 
   <Stack columnGap={1} sx={{
     flexDirection:'row',

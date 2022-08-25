@@ -1,10 +1,12 @@
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import LogoImage from '../../public/images/Logo.png'
 function Navbar() {
+    const router = useRouter()
     return (
         <Box>
             <Stack
@@ -18,7 +20,7 @@ pt:3
                 alignItems={'center'}
 
             >
-                <Image src={LogoImage} />
+                <Image onClick={()=>{router.push('/')}} src={LogoImage} />
 
             <Stack direction={'row'} sx={{
                     columnGap:5,
@@ -43,11 +45,11 @@ pt:3
 
 
 
-                <Link href='/exercisedetail?exercise=boss' as={'exercisedetail'}>
+                <Button disabled={true} >
                     <a style={{ textDecoration: 'none' }}>
-                        <Typography color={'black'}>Exercises</Typography>
+                        <Typography textTransform={'capitalize'} color={'black'}>Exercises</Typography>
                     </a>
-                </Link>
+            </Button>
             </Stack>
             </Stack>
         </Box>

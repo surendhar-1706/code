@@ -1,4 +1,5 @@
-import { Typography } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import React from 'react'
@@ -17,16 +18,34 @@ const fetch_yt_video = async () => {
 const { data,isFetched} = useQuery([`${exercise.name}`],fetch_yt_video,{staleTime:twentyFourHoursInMs})
 
   return (
-    <div>Watch {exercise.name} videos
-{isFetched && data.contents.map((data:any)=>{
+    <div>
+      
+<Stack flexDirection={'row'} columnGap={1} pb={6}>
+  
+  <Typography variant='h4'>Watch {``}</Typography> 
+  <Typography variant='h4' color={'error'}>{   exercise.name}</Typography>
+  <Typography variant='h4'> videos</Typography>
+</Stack>
+<Grid container flexDirection={'row'} columnGap={15}>
+{isFetched && data.contents?.slice(0,6).map((data:any)=>{
     return (
-        <div key={data.video.title}>
-<Image src={data.video.thumbnails[0].url} width={250} height={250}/>
+        <Grid item xs={3}  sx={{
+py:3,
+          transition: "transform 0.30s ease-in-out",
+          "&:hover":{transform: "scale3d(1.1, 1.1, 1.1)"},
+
+
+        }}  key={data.video.title} >
+          <a target={'_blank'} href={`https://www.youtube.com/watch?v=${data.video.videoId}`}>
+<Image src={data.video.thumbnails[0].url} width={250} height={250}/></a>
+
+
+<Typography textTransform={'capitalize'} width={'250px'} height={'40px'} fontSize={'12px'}>{data.video.title}</Typography>
 <Typography>{data.video.channelName}</Typography>
-<Typography>{data.video.title}</Typography>
-        </div>
+        </Grid>
     )
 })}
+</Grid>
 
 
     </div>

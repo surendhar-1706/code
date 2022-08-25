@@ -1,10 +1,12 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 function Footer() {
 
     return (
         <div>
-        <div>Footer</div>
+         
+       <Typography py={4} textAlign={'center'}>Made with 💖 by Suren</Typography>
 
         </div>
     )

@@ -9,7 +9,7 @@ function Detail({exercise}:any) {
     console.log(exercise)
   return (
     <Stack flexDirection={'row'}>
-<Image src={exercise.gifUrl} width={600} height={800}/>
+<Image src={exercise.gifUrl} width={600} height={700}/>
 <Stack sx={{rowGap:5,pt:10,pl:5}}>
 
 <Typography textTransform={'capitalize'} variant='h4'>
