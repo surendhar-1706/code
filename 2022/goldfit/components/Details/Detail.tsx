@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, Grid, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Image from 'next/image'
 import React from 'react'
@@ -8,9 +8,24 @@ import TargetImage from '../../public/icons/target.png'
 function Detail({exercise}:any) {
     console.log(exercise)
   return (
-    <Stack flexDirection={'row'}>
-<Image src={exercise.gifUrl} width={600} height={700}/>
-<Stack sx={{rowGap:5,pt:10,pl:5}}>
+    <Grid container flexDirection={'row'}>
+<Grid item><Image src={exercise.gifUrl} width={600} height={700}/></Grid>
+<Stack
+
+sx={{
+  
+  rowGap:5,
+  pt:{
+    lg:10,
+    xs:5
+  },
+  pl:{
+    lg:5,
+    xs:1
+  }
+  
+  
+  }}>
 
 <Typography textTransform={'capitalize'} variant='h4'>
 {exercise.name}
@@ -36,7 +51,7 @@ function Detail({exercise}:any) {
 <Typography textTransform={'capitalize'}>{exercise.equipment}</Typography>
 </Stack>
 </Stack>
-    </Stack>
+    </Grid>
   )
 }
 

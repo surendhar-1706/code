@@ -1,11 +1,19 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
+// import component 👇
+import Drawer from 'react-modern-drawer'
 
+//import styles 👇
+import 'react-modern-drawer/dist/index.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import LogoImage from '../../public/images/Logo.png'
 function Navbar() {
+    const [isOpen, setIsOpen] = React.useState(false)
+    const toggleDrawer = () => {
+        setIsOpen((prevState) => !prevState)
+    }
     const router = useRouter()
     return (
         <Box>
@@ -48,6 +56,27 @@ pt:3
                     </a>
             </Button>
             </Stack>
+            <Box
+            sx={{
+                display:{
+                    xs:'none',
+                    lg:'none'
+                },
+                
+            }}
+            > 
+            <div onClick={toggleDrawer}>Show</div>
+                <Drawer
+                open={isOpen}
+                onClose={toggleDrawer}
+                direction='top'
+                style={{"height" : "100%"}}
+             
+            >
+             <div onClick={toggleDrawer}>Exit</div>
+            </Drawer>
+            
+            </Box>
             </Stack>
         </Box>
     )

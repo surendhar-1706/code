@@ -29,8 +29,17 @@ const { data,isFetched} = useQuery([`${exercise.name}`],fetch_yt_video,{staleTim
 <Grid container flexDirection={'row'} columnGap={15}>
 {isFetched && data.contents?.slice(0,6).map((data:any)=>{
     return (
-        <Grid item xs={3}  sx={{
-py:3,
+        <Grid item xs={12} lg={3} sx={{
+py:{
+  lg:3,
+  xs:3
+},
+
+pl:{
+  lg:0,
+  xs:6
+},
+
           transition: "transform 0.30s ease-in-out",
           "&:hover":{transform: "scale3d(1.1, 1.1, 1.1)"},
 
