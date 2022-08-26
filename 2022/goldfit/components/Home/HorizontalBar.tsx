@@ -29,11 +29,11 @@ function HorizontalBar({ data,searchedExercises,setsearch }: any) {
                 xs: '100vw'
             }, mt: 10,
             px: {
-                xs: 5
+                xs: 0
             },
             mx:
             {
-                xs: 5
+                xs: 0
             }
 
         }}>

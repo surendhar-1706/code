@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
     <Layout childcomponent={<Component {...pageProps} />} />
-    <ReactQueryDevtools position='top-left' initialIsOpen={false} />
+    {/* <ReactQueryDevtools position='bottom-left' initialIsOpen={false} /> */}
   </QueryClientProvider>
 }
 

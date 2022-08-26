@@ -11,19 +11,22 @@ function ExerciseCard({exercise}:any) {
     borderRight={0}
     borderColor="red"
     mb={1}
-    mx={20}
+ 
     mt={2}
     sx={{
         transition: "transform 0.30s ease-in-out",
         "&:hover":{transform: "scale3d(1.1, 1.1, 1.1)" },
-        my:3
+        my:3,
+        mx:{
+          lg:20
+        }
     }}
      key={exercise.name}
      >
     <Box>
 
   <Link href={`/exercisedetail?id=${exercise.id}`}>
-  <a >
+  <a>
         
         <Image width={500} height={500} src={exercise.gifUrl} loading='lazy'/>
         

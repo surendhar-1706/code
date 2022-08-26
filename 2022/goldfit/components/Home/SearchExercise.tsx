@@ -56,8 +56,15 @@ function SearchExercise() {
             <Stack
                 sx={{
 
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    justifyContent: {
+                        lg:'center'
+                    },
+                    alignItems: {
+                        lg:'center'
+                    },
+                    rowGap:{
+                        xs:1
+                    }
                 }}
             >
                 <Typography

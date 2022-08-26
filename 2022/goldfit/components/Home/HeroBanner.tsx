@@ -5,7 +5,10 @@ import HeroBannerImage from '../../public/images/banner.png'
 function HeroBanner() {
     return (
         <Box sx={{
-            paddingTop: '100px',
+            pt: {
+                lg:'100px',
+                xs:5
+            },
             position: 'relative',
 
         }}>
@@ -24,16 +27,23 @@ function HeroBanner() {
                 <Typography fontWeight={700} sx={{
                     fontSize: '30px',
                     py: {
-                        lg: '5px'
+                        lg: '5px',
+                        xs:'4px'
                     }
                 }}>
                     Sweat,  Smile <br /> and Repeat
                 </Typography>
-                <Typography py={2}>Check out the most effective exercises personalised to you</Typography>
+                <Typography sx={{
+                    py:{
+                        lg:2,
+                        xs:2
+                    }
+                }}>Check out the most effective exercises personalised to you</Typography>
 				
                 <Button variant="contained" color='error' sx={{
                     my: {
-                        lg: '3px'
+                        lg: '3px',
+                        xs:1
                     }
 
                 }}>Explore Exercises</Button>

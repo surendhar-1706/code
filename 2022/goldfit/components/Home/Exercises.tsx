@@ -23,7 +23,7 @@ function Exercises({data}:any) {
 <Grid container spacing={0}>
 {current_exercise.map((exercise:any,id:any)=>{
     return (
-       <Grid key={exercise.name} item xs={6} >
+       <Grid key={exercise.name} item xs={12} lg={6} >
         <ExerciseCard exercise={exercise}/>
        </Grid>
     )

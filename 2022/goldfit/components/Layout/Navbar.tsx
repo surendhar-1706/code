@@ -24,7 +24,11 @@ pt:3
 
             <Stack direction={'row'} sx={{
                     columnGap:5,
-                    alignItems:'center'                
+                    alignItems:'center' , 
+                    display:{
+                        xs:'none',
+                        lg:'flex'
+                    }              
             }}>
             <Link href={'/'} passHref>
                     <a style={{ textDecoration: 'none', }} >
@@ -33,19 +37,12 @@ pt:3
                             borderColor: 'error.main',
                             color: 'black'
 
-
-
-
-
                         }} >Home
                         </Typography> </a>
                 </Link>
-
-
-
-
-
-                <Button disabled={true} >
+                <Button sx={{
+                   
+                }} disabled={true} >
                     <a style={{ textDecoration: 'none' }}>
                         <Typography textTransform={'capitalize'} color={'black'}>Exercises</Typography>
                     </a>
