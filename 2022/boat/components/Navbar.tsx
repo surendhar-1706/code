@@ -7,10 +7,10 @@ function Navbar() {
     
 <Box mx={3}>
 
-    <HStack justify={'space-between'} >
-<Text>Phanox shop</Text>
+  <HStack justify={'space-between'} >
+  <Text>Phanox shop</Text>
   <Box position={'relative'} display={'flex'} >
-  <Box >
+  <Box cursor={'pointer'}>
     <HiOutlineShoppingBag  size={22}/>
   </Box>
   <Badge position={'absolute'} left='3'   fontSize='0.6em'  bgColor={'red.500'} rounded='full' variant={'solid'}>9</Badge>

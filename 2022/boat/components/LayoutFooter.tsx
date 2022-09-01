@@ -3,11 +3,13 @@ import React from 'react'
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 function LayoutFooter() {
   return (
-    <VStack>
+    <VStack pb={6}>
 
         <Text fontWeight={'semibold'}>2022.Phanox All rights reserved</Text>
-      <HStack>  <AiFillInstagram/>
-        <AiOutlineTwitter/></HStack>
+      <HStack> 
+        <AiFillInstagram/>
+        <AiOutlineTwitter/>
+      </HStack>
     </VStack>
   )
 }

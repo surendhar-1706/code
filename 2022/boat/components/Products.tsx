@@ -7,7 +7,7 @@ function Products({products}:any) {
   // console.log(products[2]['slug'].current,'from product component')
   return (
     <VStack >
-      <Text align={'center'}>Best Seller Products</Text>
+      <Text my={5} fontWeight={'bold'} fontSize={'3xl'} textColor={'blue.700'} align={'center'}>Best Seller Products</Text>
     <Grid  templateColumns='repeat(4, 1fr)' columnGap={5} >
     {
       products.map((product:any)=>{
@@ -19,10 +19,9 @@ function Products({products}:any) {
           {/* {product['slug'].current}<br/> */}
          
           {/* <Image src={`${urlFor( product.image[0])}`} height={700} width={700}/> */}
-       <Box bgColor={'blackAlpha.100'} height={'40'} width={'40'}><Image src={`${urlFor( product.image[0])}`}/></Box>
+       <Box px={1} rounded={'xl'} bgColor={'blackAlpha.100'} height={'44'} width={'44'}><Image src={`${urlFor( product.image[0])}`}/></Box>
        <Text fontWeight={'semibold'}>{product.name}</Text>
        <Text fontWeight={'bold'}>${product.price}</Text>
-
         </Box>) 
       })}
     </Grid>

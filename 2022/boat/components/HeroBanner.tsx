@@ -9,8 +9,8 @@ function HeroBanner({data}:any) {
     <Grid mx={'36'} templateColumns='repeat(5, 1fr)' bgColor={'blackAlpha.200'} px={4} rounded='xl'>
         <GridItem  colSpan={2} pt={8} >
          <Text fontWeight={'semibold'} >{data.smallText}</Text>
-         <Text fontWeight={'bold'} fontSize={'5xl'}>{data.midText}</Text>
-         <Text fontWeight={'bold'} fontSize={'7xl'} textColor={"white"}>{data.largeText1}</Text>
+         <Text  fontWeight={'bold'} fontSize={'5xl'}>{data.midText}</Text>
+         <Text  fontWeight={'bold'} fontSize={'7xl'} textColor={"white"}>{data.largeText1}</Text>
          <Button mb={4} colorScheme={'red'} rounded={'xl'}>{data.buttonText}</Button>
 
         </GridItem>
@@ -23,8 +23,6 @@ function HeroBanner({data}:any) {
           <Text fontWeight={'thin'}>{data.desc}</Text>
             </Stack>
           </GridItem>
-       
- 
     </Grid>
   )
 }
