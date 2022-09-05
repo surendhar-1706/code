@@ -1,4 +1,5 @@
-import { Badge, Box, HStack, Icon, Text } from '@chakra-ui/react'
+import { Badge, Box, HStack, Text } from '@chakra-ui/react'
+import Link from 'next/link';
 import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineShoppingBag } from "react-icons/hi";
@@ -8,7 +9,9 @@ function Navbar() {
 <Box mx={3}>
 
   <HStack justify={'space-between'} >
-  <Text>Phanox shop</Text>
+  <Link href='/'>
+    <a><Text>Phanox shop</Text></a>
+  </Link>
   <Box position={'relative'} display={'flex'} >
   <Box cursor={'pointer'}>
     <HiOutlineShoppingBag  size={22}/>

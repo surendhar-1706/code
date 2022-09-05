@@ -1,9 +1,11 @@
 import { Box, HStack, Stack, Text,Image, VStack, Grid } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 // import Image from 'next/image'
 import React from 'react'
 import { urlFor } from '../lib/client'
 
 function Products({products}:any) {
+  const router = useRouter();
   // console.log(products[2]['slug'].current,'from product component')
   return (
     <VStack >
@@ -15,7 +17,7 @@ function Products({products}:any) {
         <Box sx={{
           transition:' 0.4s ease-in-out',
           '&:hover':{transform:'scale(1.08)',cursor:'pointer'}, 
-        }}  key={product['slug'].current}>
+        }}  key={product['slug'].current} onClick={()=>{router.push(`products/${product['slug'].current}`)}}>
           {/* {product['slug'].current}<br/> */}
          
           {/* <Image src={`${urlFor( product.image[0])}`} height={700} width={700}/> */}
