@@ -1,4 +1,4 @@
-import { Box, Button, Image, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiFillCloseCircle, AiOutlineClose, AiOutlineCloseCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
@@ -29,45 +29,54 @@ function Cart() {
     return (
         <Box sx={{
             position: 'relative',
-            h: '96vh'
+
         }}>
 
+            <Box overflow={'auto'} sx={{
+                h: '86vh',
+
+
+            }}>
+                {
+                    cart_items.map((cart_item: any) => {
+                        return (
+                            <Box key={cart_item.product.name} display={'flex'} columnGap={10} py={4}>
+
+                                <VStack>
+                                    <Box px={1} rounded={'xl'} bgColor={'blackAlpha.100'} height={'24'} width={'24'}><Image src={`${urlFor(cart_item.product.image[0])}`} /></Box>
+                                    <Text >Qty: {cart_item.item}</Text>
+                                </VStack>
+                                <Stack>
+                                    <Text fontWeight={'bold'} textColor={'blue.800'} >  {cart_item.product.name}</Text>
+
+                                    <Text fontWeight={'bold'} textColor={'red.600'}>Price: ${cart_item.product.price}</Text>
+                                    {/* <AiOutlineCloseCircle color='red' /> */}
+                                </Stack>
+                            </Box>
+                        )
+                    })
+                }
+            </Box>
             {
-                cart_items.map((cart_item: any) => {
-                    return (
-                        <Box key={cart_item.product.name} display={'flex'} columnGap={10} py={4}>
-
-                            <VStack>
-                                <Box px={1} rounded={'xl'} bgColor={'blackAlpha.100'} height={'24'} width={'24'}><Image src={`${urlFor(cart_item.product.image[0])}`} /></Box>
-                                <Text >Qty: {cart_item.item}</Text>
-                            </VStack>
-                            <Stack>
-                                <Text fontWeight={'bold'} textColor={'blue.800'} >  {cart_item.product.name}</Text>
-
-                                <Text fontWeight={'bold'} textColor={'red.600'}>Price: ${cart_item.product.price}</Text>
-                                {/* <AiOutlineCloseCircle color='red' /> */}
-                            </Stack>
-                        </Box>
-                    )
-                })
+                cart_items.length < 1 && <VStack position={'absolute'} px={5} top={0} pt={10} ><Text>Oops!! No Items In the Cart  :(</Text></VStack>
             }
-            {
-                cart_items.length < 1 && <VStack pt={10} ><Text>Oops!! No Items In the Cart  :(</Text></VStack>
-            }
-            {
-                cart_items.length > 0 && <VStack position={'absolute'} bottom={0}>
-                    <Button onClick={() => {
-                        dispatch(empty_cart())
-                    }} >Emtpy Cart</Button>
-                </VStack>
-            }
+            <HStack columnGap={10} >
+                {
+                    cart_items.length > 0 && <VStack bottom={0}>
+                        <Button onClick={() => {
+                            dispatch(empty_cart())
+                            dispatch(cartvalue(0))
+                        }} >Emtpy Cart</Button>
+                    </VStack>
+                }
+                {cart_items.length > 0 &&
+                    <VStack bottom={0} right={0}>
 
-            <VStack position={'absolute'} bottom={0} right={0}>
-
-                <Text> ${
-                    total_price
-                }</Text>
-            </VStack>
+                        <Text>Total: ${
+                            total_price
+                        }</Text>
+                    </VStack>}
+            </HStack>
 
         </Box>
     )
