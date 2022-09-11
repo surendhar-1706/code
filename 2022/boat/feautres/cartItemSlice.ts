@@ -17,9 +17,16 @@ import type { PayloadAction } from '@reduxjs/toolkit'
          
       },
       increase_qty:(state,action:PayloadAction<any>)=>{
-        const {index,item} = action.payload
-        state.product[index].item = state.product[index].item + item
-        console.log('inside increse qty',state.product[index].item)
+        const {product,item} = action.payload
+console.log('send_product',action.payload)  
+        state.product.map((cart_item: any, index: any) => {    
+
+          if (product._id == cart_item.product._id) {
+            state.product[index].item = state.product[index].item + item
+            console.log('inside increse qty',state.product[index].item)
+          }
+        })
+       
       },
       decrease_qty:(state,action:PayloadAction<any>)=>{
         console.log('inside decrease qty')

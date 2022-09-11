@@ -91,11 +91,13 @@ function ProductDetail({ product, products }: any) {
                 cart_items.map((cart_item: any, index: any) => {
 
                   if (product._id === cart_item.product._id) {
-                    console.log('id match so qty increase panna pouthum', index)
-                    dispatch(increase_qty({ index, item }))
+                    console.log('id match so qty increase panna pouthum', product.name, cart_item.product.name)
+                    dispatch(increase_qty({ product, item }))
                   }
-                  else {
-                    console.log('new product wiht cart size greater than  one')
+                  if (product._id != cart_item.product._id) {
+                    console.log('new product wiht cart size greater than  one', product._id === cart_item.product._id)
+                    console.log(product.name, 'current page product', cart_item.name, 'cart_loop product')
+
                     dispatch(addtocart({ product, item }))
                   }
                 })
