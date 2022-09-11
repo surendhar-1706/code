@@ -15,11 +15,11 @@ function Cart() {
 
     var total = 0
     cart_items.map(async (cart_item: any) => {
-        console.log(cart_item.product.price, cart_item.item)
-        const wow = cart_item.product.price * cart_item.item
-        console.log(wow)
-        const wow2 = total + wow
-        total = wow2
+        // console.log(cart_item.product.price, cart_item.item)
+        // const wow = cart_item.product.price * cart_item.item
+        // console.log(wow)
+        // const wow2 = total + wow
+        // total = wow2
         // set_total_cost(wow2)
 
     })

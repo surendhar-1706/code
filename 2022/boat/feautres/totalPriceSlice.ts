@@ -8,7 +8,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 
   export const totalpriceSlice = createSlice({
-    name: 'cart_total_price',
+    name: 'cart_total_price', 
     initialState,
     reducers: {
       cartvalue: (state,action:PayloadAction<any>) => {

@@ -9,7 +9,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../app/store';
 import { togglecart } from '../../feautres/cartSlice';
 import { useToast } from '@chakra-ui/react'
+
 import { addtocart, increase_qty } from '../../feautres/cartItemSlice';
+import { cartvalue } from '../../feautres/totalPriceSlice';
 function ProductDetail({ product, products }: any) {
   // console.log(product, 'single product')
   const toast = useToast()
@@ -18,6 +20,7 @@ function ProductDetail({ product, products }: any) {
   const [index, setindex] = useState(0)
   const cart = useSelector((state: RootState) => state.showcart.value)
   const cart_items = useSelector((state: RootState) => state.addtocart.product)
+  const total_price = useSelector((state: RootState) => state.cart_total_price.total_price)
   const dispatch = useDispatch()
   return (
     <Box pt={6}>
@@ -104,6 +107,9 @@ function ProductDetail({ product, products }: any) {
                 isClosable: true,
                 position: 'top'
               })
+              const new_total = (product.price * item) + total_price
+              dispatch(cartvalue(new_total))
+
               console.log(cart_items, 'cart_items')
             }} colorScheme='red' px={'14'} variant={'outline'} size='md' rounded={'none'}>Add to Cart</Button>
             <Button onClick={() => {
