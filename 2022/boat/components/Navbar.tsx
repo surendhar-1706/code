@@ -5,12 +5,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../app/store';
+import Cart from './Cart';
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-  const cart_item = useSelector((state: RootState) => state.addtocart.product)
+  const cart_items = useSelector((state: RootState) => state.addtocart.product)
   const dispatch = useDispatch()
-  console.log(cart_item)
+  // console.log(cart_item)
   return (
 
     <Box mx={3} pt={4}>
@@ -23,7 +24,11 @@ function Navbar() {
           <Box >
             <HiOutlineShoppingBag size={22} />
           </Box>
-          <Badge position={'absolute'} left='3' fontSize='0.6em' bgColor={'red.500'} rounded='full' variant={'solid'}>9</Badge>
+          <Badge position={'absolute'} left='3' fontSize='0.6em' bgColor={'red.500'} rounded='full' variant={'solid'}>
+            {(cart_items.length == 0) ?
+              <div>0</div> : <div>{cart_items.length}</div>}
+
+          </Badge>
         </Box>
 
       </HStack>
@@ -40,7 +45,9 @@ function Navbar() {
             <DrawerCloseButton />
 
             <DrawerBody>
-              <Text>Hello there</Text>
+
+              <Cart />
+
             </DrawerBody>
 
           </DrawerContent>

@@ -79,15 +79,14 @@ function ProductDetail({ product, products }: any) {
           </Box>
           <Box pt={4} display={'flex'} columnGap={"4"} >
             <Button onClick={async () => {
-              console.log(cart_items, 'cart_items')
+
               const checkproductincart = await cart_items.find((cart_item: any) => {
 
                 const lol = cart_item.product._id === product._id
-                // console.log(lol)
+
                 return lol
               })
 
-              // console.log('product cartla irukuda bunda', checkproductincart)
 
               if (checkproductincart) {
                 dispatch(increase_qty({ checkproductincart, item }))
@@ -99,13 +98,13 @@ function ProductDetail({ product, products }: any) {
               }
               toast({
                 title: '',
-                description: "Item added to cart",
+                description: `${item} ${product.name} added to cart`,
                 status: 'success',
                 duration: 1000,
                 isClosable: true,
                 position: 'top'
               })
-
+              console.log(cart_items, 'cart_items')
             }} colorScheme='red' px={'14'} variant={'outline'} size='md' rounded={'none'}>Add to Cart</Button>
             <Button onClick={() => {
 
