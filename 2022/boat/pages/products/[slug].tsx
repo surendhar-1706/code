@@ -78,7 +78,25 @@ function ProductDetail({ product, products }: any) {
               }>+</Text></HStack>
           </Box>
           <Box pt={4} display={'flex'} columnGap={"4"} >
-            <Button onClick={() => {
+            <Button onClick={async () => {
+              console.log(cart_items, 'cart_items')
+              const checkproductincart = await cart_items.find((cart_item: any) => {
+
+                const lol = cart_item.product._id === product._id
+                // console.log(lol)
+                return lol
+              })
+
+              // console.log('product cartla irukuda bunda', checkproductincart)
+
+              if (checkproductincart) {
+                dispatch(increase_qty({ checkproductincart, item }))
+              }
+
+              else {
+                console.log('Adding new product')
+                dispatch(addtocart({ product, item }))
+              }
               toast({
                 title: '',
                 description: "Item added to cart",
@@ -87,25 +105,6 @@ function ProductDetail({ product, products }: any) {
                 isClosable: true,
                 position: 'top'
               })
-              if (cart_items.length >= 1) {
-                cart_items.map((cart_item: any, index: any) => {
-
-                  if (product._id === cart_item.product._id) {
-                    console.log('id match so qty increase panna pouthum', product.name, cart_item.product.name)
-                    dispatch(increase_qty({ product, item }))
-                  }
-                  if (product._id != cart_item.product._id) {
-                    console.log('new product wiht cart size greater than  one', product._id === cart_item.product._id)
-                    console.log(product.name, 'current page product', cart_item.name, 'cart_loop product')
-
-                    dispatch(addtocart({ product, item }))
-                  }
-                })
-              }
-              else {
-                console.log('Runs only once')
-                dispatch(addtocart({ product, item }))
-              }
 
             }} colorScheme='red' px={'14'} variant={'outline'} size='md' rounded={'none'}>Add to Cart</Button>
             <Button onClick={() => {

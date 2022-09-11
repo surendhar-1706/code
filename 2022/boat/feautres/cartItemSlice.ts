@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 
@@ -13,21 +13,20 @@ import type { PayloadAction } from '@reduxjs/toolkit'
       addtocart: (state,action:PayloadAction<any>) => {
        
         state.product.push(action.payload)   
-        console.log(state.product,'from rtk')
+      
          
       },
       increase_qty:(state,action:PayloadAction<any>)=>{
-        const {product,item} = action.payload
-console.log('send_product',action.payload)  
-        state.product.map((cart_item: any, index: any) => {    
-
-          if (product._id == cart_item.product._id) {
-            state.product[index].item = state.product[index].item + item
-            console.log('inside increse qty',state.product[index].item)
-          }
-        })
-       
-      },
+        const {checkproductincart,item} = action.payload
+        // console.log('that',current(state.product))
+state.product.map((single_product:any)=>{
+  // console.log(current(single_product),'single product')
+  // console.log(checkproductincart.product._id,'checkproductincart')
+ if(checkproductincart.product._id === single_product.product._id){
+  single_product.item = single_product.item + item
+ }
+})
+      }, 
       decrease_qty:(state,action:PayloadAction<any>)=>{
         console.log('inside decrease qty')
       },
