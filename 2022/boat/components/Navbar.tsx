@@ -14,11 +14,11 @@ function Navbar() {
   // console.log(cart_item)
   return (
 
-    <Box mx={3} pt={4}>
+    <Box mx={3} px={10} py={4}>
 
       <HStack justify={'space-between'} >
         <Link href='/'>
-          <a><Text>Phanox shop</Text></a>
+          <a><Text textTransform={'uppercase'}>Phanox shop</Text></a>
         </Link>
         <Box cursor={'pointer'} onClick={onOpen} position={'relative'} display={'flex'} >
           <Box >

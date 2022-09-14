@@ -112,10 +112,10 @@ function ProductDetail({ product, products }: any) {
 
               console.log(cart_items, 'cart_items')
             }} colorScheme='red' px={'14'} variant={'outline'} size='md' rounded={'none'}>Add to Cart</Button>
-            <Button onClick={() => {
+            {/* <Button onClick={() => {
 
               console.log(cart, 'shoba dei cart value da')
-            }} colorScheme='red' px={'14'} rounded={'none'} >Buy Now</Button>
+            }} colorScheme='red' px={'14'} rounded={'none'} >Buy Now</Button> */}
           </Box>
         </Box>
       </Box>

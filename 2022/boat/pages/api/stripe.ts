@@ -11,7 +11,12 @@ export default async function handler(req:any, res:any) {
         const params:any = {
           mode: 'payment',
           submit_type:'pay',
-          payment_method_type:['card'],
+          payment_method_types:['card',],
+          billing_address_collection:'auto',
+          shipping_options:[
+            {shipping_rate :'shr_1Lhrl0SJ9l0HYI2NvwyOwn0r'},
+            {shipping_rate :'shr_1Lhz4KSJ9l0HYI2NOfIO7kmk'}
+          ],
           
           line_items: req.body.map((item:any)=>{
             console.log('lol,,,,,',item.product.name)
@@ -35,8 +40,8 @@ minimum:1
        
           }),
          
-          success_url: `${req.headers.origin}/?success=true`,
-          cancel_url: `${req.headers.origin}/?canceled=true`,
+          success_url: `${req.headers.origin}/success`,
+          cancel_url: `${req.headers.origin}/canceled`,
         }
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create(params);
