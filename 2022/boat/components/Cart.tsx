@@ -1,31 +1,38 @@
 import { Box, Button, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { AiFillCloseCircle, AiOutlineClose, AiOutlineCloseCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 import { empty_cart } from '../feautres/cartItemSlice'
 import { cartvalue } from '../feautres/totalPriceSlice'
 import { urlFor } from '../lib/client'
-
+import { getStripe } from '../lib/getStripe'
 function Cart() {
     const cart_items = useSelector((state: RootState) => state.addtocart.product)
     const total_price = useSelector((state: RootState) => state.cart_total_price.total_price)
     const [total_cost, set_total_cost] = useState(0)
     const dispatch = useDispatch()
 
-    var total = 0
-    cart_items.map(async (cart_item: any) => {
-        // console.log(cart_item.product.price, cart_item.item)
-        // const wow = cart_item.product.price * cart_item.item
-        // console.log(wow)
-        // const wow2 = total + wow
-        // total = wow2
-        // set_total_cost(wow2)
 
-    })
+    const handleCheckout = async () => {
+        const stripe = await getStripe()
 
-    // set_total_cost(total)
+        const response: any = await fetch('/api/stripe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cart_items)
+        })
 
+        if (response.statusCode === 500) return;
+        const data = await response.json()
+        toast.loading('Redirecting...', {
+            duration: 1000
+        })
+        stripe.redirectToCheckout({ sessionId: data.id })
+    }
     return (
         <Box sx={{
             position: 'relative',
@@ -33,7 +40,7 @@ function Cart() {
         }}>
 
             <Box overflow={'auto'} sx={{
-                h: '86vh',
+                h: '80vh',
 
 
             }}>
@@ -77,7 +84,20 @@ function Cart() {
                         }</Text>
                     </VStack>}
             </HStack>
+            {cart_items.length > 0 &&
 
+                <VStack py={4}>
+                    <Button colorScheme={'red'} onClick={() => {
+
+                        console.log('pay with stripe clicked')
+                        handleCheckout()
+                    }} >
+                        Pay with Stripe
+                    </Button>
+                </VStack>
+
+
+            }
         </Box>
     )
 }
