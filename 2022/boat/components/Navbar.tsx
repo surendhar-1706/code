@@ -14,7 +14,7 @@ function Navbar() {
   // console.log(cart_item)
   return (
 
-    <Box mx={3} px={10} py={4}>
+    <Box mx={[0, 0, 0, 3]} px={[1, 1, 1, 10]} py={4}>
 
       <HStack justify={'space-between'} >
         <Link href='/'>

@@ -10,7 +10,7 @@ function Products({ products }: any) {
   return (
     <VStack >
       <Text my={5} fontWeight={'bold'} fontSize={'3xl'} textColor={'blue.700'} align={'center'}>Best Seller Products</Text>
-      <Grid templateColumns='repeat(4, 1fr)' columnGap={5} >
+      <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(4, 1fr)']} columnGap={5} >
         {
           products.map((product: any) => {
             return (
