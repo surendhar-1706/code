@@ -26,7 +26,7 @@ function ProductDetail({ product, products }: any) {
     <Box pt={6}>
 
 
-      <Box px={20} display={'flex'} columnGap={40} >
+      <Box px={[2, 0, 0, 20]} display={['', 'flex']} columnGap={40} >
         <Stack>
           <Box rounded={'xl'} bgColor={'blackAlpha.50'}> <Image height={80} width={80} src={`${urlFor(product.image && product.image[index])}`} /></Box>
           {/* mini gallery */}
@@ -47,7 +47,7 @@ function ProductDetail({ product, products }: any) {
         </Stack>
 
         {/* Product details data */}
-        <Box>
+        <Box py={[4, 0, 0, 0]}>
 
           <Text fontWeight={'bold'} textColor={'blue.800'} fontSize={'lg'}>{product.name}</Text>
           <HStack>

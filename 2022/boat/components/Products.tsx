@@ -14,7 +14,7 @@ function Products({ products }: any) {
         {
           products.map((product: any) => {
             return (
-              <Box sx={{
+              <Box py={[2, 0, 0, 0]} sx={{
                 transition: ' 0.4s ease-in-out',
                 '&:hover': { transform: 'scale(1.08)', cursor: 'pointer' },
               }} key={product['slug'].current} onClick={() => { router.push(`products/${product['slug'].current}`) }}>
