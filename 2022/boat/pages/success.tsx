@@ -2,7 +2,7 @@ import React from 'react'
 import confetti from 'canvas-confetti'
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-function success() {
+function Success() {
     const coolFireworks = () => {
         var duration = 5 * 1000;
         var animationEnd = Date.now() + duration;
@@ -29,7 +29,7 @@ function success() {
     const router = useRouter()
     return (
         <VStack height={'80vh'} alignItems='center' justifyContent={'center'}>
-            <Text fontWeight={'bold'} fontStyle='italic' fontSize={'6xl'}>Let's Continue Shopping</Text>
+            <Text fontWeight={'bold'} fontStyle='italic' fontSize={'6xl'}>Let{`'`}s Continue Shopping</Text>
             <Button onClick={() => {
                 router.push('/')
             }} colorScheme={'teal'}>
@@ -41,4 +41,4 @@ function success() {
     )
 }
 
-export default success
+export default Success

@@ -37,11 +37,10 @@ minimum:1
         },
         quantity:item.item
       }
-       
           }),
          
           success_url: `${req.headers.origin}/success`,
-          cancel_url: `${req.headers.origin}/canceled`,
+          cancel_url: `${req.headers.origin}/?canceled=true`,
         }
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create(params);
