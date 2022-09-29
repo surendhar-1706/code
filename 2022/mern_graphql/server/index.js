@@ -9,11 +9,11 @@ const schema = require('./schema/schema')
 var app = express();
 connectDB();
 app.use('/graphql',
-graphqlHTTP({
-schema,
-graphiql:true
-})
+    graphqlHTTP({
+        schema,
+        graphiql: true
+    })
 )
 
 
-app.listen(port,console.log('Server Running on ',port))
+app.listen(port, console.log('Server Running on ', port))
