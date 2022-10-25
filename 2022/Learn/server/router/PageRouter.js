@@ -1,8 +1,9 @@
 const express = require('express')
-const { CreatePageView } = require('../views/PageView')
+const { CreatePageView, GetPagesView } = require('../views/PageView')
 
 const router = express.Router()
 
-router.get('/', CreatePageView)
+router.post('/', CreatePageView)
+router.get('/', GetPagesView)
 
 module.exports = router

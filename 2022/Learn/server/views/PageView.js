@@ -1,11 +1,24 @@
+const Page = require("../models/Page")
 
 
 const CreatePageView = async (req, res) => {
-    console.log('Ran the createpage view')
-    res.json({ msg: 'hi' })
+    const { name } = req.body
+    console.log(name)
+    await Page.create({ name })
+    return res.json({ name: name })
 
 }
 
+const GetPagesView = async (req, res) => {
+
+    const data = await Page.find()
+    res.send(data)
+
+}
+
+
+
 module.exports = {
-    CreatePageView
+    CreatePageView,
+    GetPagesView
 }
