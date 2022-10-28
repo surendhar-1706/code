@@ -12,6 +12,7 @@ function Discover() {
           return <option key={item.value}>{item.title}</option>;
         })}
       </select>
+      <div></div>
     </div>
   );
 }

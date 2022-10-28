@@ -7,7 +7,7 @@ const options = {
 };
 
 export const getTopCharts = async () => {
-    const data = await fetch('https://shazam.p.rapidapi.com/charts/list', options)
+    const data = await fetch('https://shazam.p.rapidapi.com/charts/track', options)
     const json_data = await data.json()
     return json_data
 }
