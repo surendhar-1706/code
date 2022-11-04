@@ -16,7 +16,7 @@ export default function Home() {
         <div className=' px-20 pt-5'>
           <NavIndex />
         </div>
-        <div className='px-20'>
+        <div className='pl-20'>
           <HeroIndex />
         </div>
       </div>
