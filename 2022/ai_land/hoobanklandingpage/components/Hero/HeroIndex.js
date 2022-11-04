@@ -6,9 +6,9 @@ import HeroRight from './HeroRight'
 function HeroIndex() {
     return (
         <div className='flex justify-between'>
-            <div>
+            <div className='pt-20'>
                 <div className='flex items-center text-gray-400 space-x-2'>
-                    <Image src={Discount} />
+                    <Image height={30} width={30} className='m-0' src={Discount} />
                     <div className='text-white'>20%</div>
                     <div>DISCOUNT FOR</div>
                     <div className='text-white'>1 MONTH</div>

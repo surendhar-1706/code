@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import HeroIndex from '../components/Hero/HeroIndex'
+import HeroDownIndex from '../components/HeroDown/HeroDownIndex'
 import NavIndex from '../components/Navbar/NavIndex'
 import HooBank from '../public/HooBank.png'
 
@@ -16,8 +17,11 @@ export default function Home() {
         <div className=' px-20 pt-5'>
           <NavIndex />
         </div>
-        <div className='pl-20'>
+        <div className='pl-20 pt-10'>
           <HeroIndex />
+        </div>
+        <div className='pl-20'>
+          <HeroDownIndex />
         </div>
       </div>
 
