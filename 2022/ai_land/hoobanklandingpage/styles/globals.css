@@ -74,3 +74,15 @@
     #33bbcf 90.29%
   );
 }
+
+.gray_pink_gradient {
+  position: absolute;
+  width: 227px;
+  height: 216px;
+  left: 360px;
+  top: 1656px;
+
+  background: linear-gradient(110.53deg, #ffffff -265.46%, #14101d 96.75%);
+  box-shadow: 4px 6px 30px rgba(19, 36, 46, 0.25);
+  border-radius: 10px;
+}

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import EasyControl from '../components/EasyControl/EasyControl'
 import GetStartedIndex from '../components/GetStarted/GetStartedIndex'
 import HeroIndex from '../components/Hero/HeroIndex'
 import HeroDownIndex from '../components/HeroDown/HeroDownIndex'
@@ -21,11 +22,14 @@ export default function Home() {
         <div className='pl-20 pt-10'>
           <HeroIndex />
         </div>
-        <div className='pl-20'>
+        <div className='pl-20 pr-20'>
           <HeroDownIndex />
         </div>
-        <div className='pl-20 pt-40'>
+        <div className='pl-20 pt-40 pr-20'>
           <GetStartedIndex />
+        </div>
+        <div className='pl-20 pt-40 pr-20'>
+          <EasyControl />
         </div>
       </div>
 
