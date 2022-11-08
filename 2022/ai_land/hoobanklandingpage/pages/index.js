@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import GetStartedIndex from '../components/GetStarted/GetStartedIndex'
 import HeroIndex from '../components/Hero/HeroIndex'
 import HeroDownIndex from '../components/HeroDown/HeroDownIndex'
 import NavIndex from '../components/Navbar/NavIndex'
@@ -22,6 +23,9 @@ export default function Home() {
         </div>
         <div className='pl-20'>
           <HeroDownIndex />
+        </div>
+        <div className='pl-20 pt-40'>
+          <GetStartedIndex />
         </div>
       </div>
 
