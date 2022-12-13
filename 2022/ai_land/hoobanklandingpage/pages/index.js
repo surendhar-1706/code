@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Bettercard from '../components/BetterCard/Bettercard'
 import EasyControl from '../components/EasyControl/EasyControl'
 import GetStartedIndex from '../components/GetStarted/GetStartedIndex'
 import HeroIndex from '../components/Hero/HeroIndex'
@@ -30,6 +31,9 @@ export default function Home() {
         </div>
         <div className='pl-20 pt-40 pr-20'>
           <EasyControl />
+        </div>
+        <div className='pl-20 pt-40 pr-20'>
+          <Bettercard />
         </div>
       </div>
 
