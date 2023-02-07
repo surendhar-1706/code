@@ -1,5 +1,11 @@
-1) Types to variables
+1) No Type variable
+let variable; => typeof(any)
 
+Assing after colon
+
+2) Types to variables
 let variable:(varType) = variableValue
 
-2)
+3) Mutliple types to variable 
+let variable:(type1) | (type2) = value
+
