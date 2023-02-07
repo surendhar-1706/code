@@ -1,0 +1,5 @@
+1) Types to variables
+
+let variable:(varType) = variableValue
+
+2)
