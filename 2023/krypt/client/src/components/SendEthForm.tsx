@@ -14,34 +14,37 @@ export default function SendEthForm() {
 
   return (
     <form
-      className="flex flex-col rounded-lg w-52"
+      className="flex flex-col px-10 py-8 bg-white rounded-lg shadow-lg w-80 bg-opacity-20 backdrop-filter backdrop-blur-lg border-opacity-10 gap-y-8 placeholder:text-xs"
       onSubmit={handleSubmit(onSubmit)}
     >
       <input
-        className="border"
+        className="outline-none rounded border-[0.2px] py-1 px-2 placeholder:text-xs placeholder:text-gray-300"
         placeholder="Address to"
         defaultValue=""
         {...register("toAddress")}
       />
       <input
-        className="border"
+        className="outline-none rounded border-[0.2px] py-1 px-2 placeholder:text-xs placeholder:text-gray-300"
         placeholder="Amount Eth"
         defaultValue=""
         {...register("ethAmount")}
       />
       <input
-        className="border"
+        className="outline-none rounded border-[0.2px] py-1 px-2 placeholder:text-xs placeholder:text-gray-300"
         placeholder="Keyworld (Gif)"
         defaultValue=""
         {...register("gifKeyword")}
       />
       <input
-        className="border"
+        className="outline-none rounded border-[0.2px] py-1 px-2 placeholder:text-xs placeholder:text-gray-300"
         placeholder="Enter Message"
         defaultValue=""
         {...register("message")}
       />
-      <button className="border" type="submit">
+      <button
+        className="py-2 text-white transition-colors duration-300 bg-teal-400 border ease-intext-xs hover:bg-teal-500 rounded-xl"
+        type="submit"
+      >
         Send Now
       </button>
     </form>
