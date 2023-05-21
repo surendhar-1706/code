@@ -4,3 +4,7 @@ type sendEthFormType = {
   gifKeyword: string;
   message: string;
 };
+
+export type windows = {
+  ethereum: any;
+};
