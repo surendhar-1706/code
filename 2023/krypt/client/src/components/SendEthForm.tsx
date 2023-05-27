@@ -1,4 +1,7 @@
 "use client";
+import { accountAtom } from "@/atoms/app-atoms";
+import { sendEthFormType } from "@/types/formtypes";
+import { useAtom } from "jotai";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function SendEthForm() {
@@ -9,8 +12,7 @@ export default function SendEthForm() {
     formState: { errors },
   } = useForm<sendEthFormType>();
   const onSubmit: SubmitHandler<sendEthFormType> = (data) => console.log(data);
-
-  console.log(watch("gifKeyword")); // watch input value by passing the name of it
+  const [connectedUserAccount] = useAtom(accountAtom);
 
   return (
     <form

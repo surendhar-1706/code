@@ -6,6 +6,8 @@ import { ethers } from "ethers";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { accountAtom } from "@/atoms/app-atoms";
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
 // declare var window: any;
 declare global {
   interface Window {
@@ -51,15 +53,17 @@ export default function Home() {
     checkIfWallectConnected();
   }, []);
   return (
-    <div className="grid h-screen text-black bg-white place-items-center">
-      <button
-        onClick={() => {
-          connnectWallet();
-        }}
-      >
-        Connect Wallet
-      </button>
-      <SendEthForm />
+    <div className="h-screen bg-white">
+      <div className="flex mb-10 items-center justify-between px-20 pt-4 pb-4 border-b">
+        <div className="text-black text-xl">Krypt</div>
+        <AwesomeButton ripple={true} onPress={connnectWallet}>
+          Connect Wallet
+        </AwesomeButton>
+      </div>
+      <div className="grid place-items-center h-4/6">
+        {" "}
+        <SendEthForm />
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-type sendEthFormType = {
+export type sendEthFormType = {
   toAddress: string;
   ethAmount: string;
   gifKeyword: string;
