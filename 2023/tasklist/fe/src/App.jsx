@@ -8,6 +8,7 @@ import contractAbi from "../src/utils/TaskContract.json";
 function App() {
   const { ethereum } = window;
   const [userActiveAccount, setUserActiveAccount] = useState("");
+  const [tasks, setTasks] = useState("");
   const [formData, setFormData] = useState();
   const checkMetaMaskInstalled = () => {
     if (!ethereum) {
@@ -46,8 +47,26 @@ function App() {
       console.log(response);
     }
   };
+  const getAllTask = async () => {
+    if (ethereum) {
+      const provider = new ethers.BrowserProvider(ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractAbi.abi,
+        signer
+      );
+      contract.getAllTasks().then((response) => {
+        const plainObject = { ...response };
+        const plan2 = { ...plainObject };
+        setTasks(plan2);
+        console.log(plan2);
+      });
+    }
+  };
   useEffect(() => {
     fetchChainIdAndCheckSepolia();
+    getAllTask();
   }, []);
   return (
     <VStack rowGap={"40"}>
@@ -61,7 +80,9 @@ function App() {
         <Button onClick={addTask}>Add Task</Button>
       </HStack>
       <Box>{formData}</Box>
-      <Card p={"2"}>Connected Address : {userActiveAccount}</Card>
+      <Box>{userActiveAccount && "Connected"}</Box>
+      <Button onClick={getAllTask}>Fetch</Button>
+      <Card>{JSON.stringify(tasks)}</Card>
     </VStack>
   );
 }
