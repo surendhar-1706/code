@@ -1,3 +1,5 @@
+import LeftButton from '@devjobs/components/home/LeftButton'
+import RightButton from '@devjobs/components/home/RightButton'
 import { Stack } from 'expo-router'
 import React from 'react'
 import { SafeAreaView, ScrollView, Text, View } from 'react-native'
@@ -9,10 +11,10 @@ const Home = () => {
             <Stack.Screen
                 options={{
                     headerLeft: () => {
-                        return <Text>Left</Text>
+                        return <LeftButton />
                     },
                     headerRight: () => {
-                        return <Text>Right</Text>
+                        return <RightButton />
                     },
                     headerTitle: () => (<Text></Text>)
                 }}

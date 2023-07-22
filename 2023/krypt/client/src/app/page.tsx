@@ -40,6 +40,7 @@ export default function Home() {
   const connnectWallet = async () => {
     try {
       if (!ethereum) return alert("Please Install MetaMask!!");
+
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -56,20 +57,25 @@ export default function Home() {
     console.log("hi!!!!");
     const { ethAmount, gifKeyword, message, toAddress } = formData;
     const transactionContract = getEtherumcontract();
-    const parsedAmount = ethers.parseEther(ethAmount);
+    // console.log(typeof ethAmount);
+    let parsedAmount = ethers.parseUnits(ethAmount, "ether");
     //@ts-ignore
-    await ethereum.request({
+    console.log(parsedAmount, typeof parsedAmount);
+    //@ts-ignore
+
+    const response = await ethereum.request({
       method: "eth_sendTransaction",
       params: [
         {
           from: userAccounts,
           to: toAddress,
           gas: "0x5208",
-          amount: parsedAmount,
+          value: parsedAmount,
         },
       ],
     });
-    //@ts-ignore
+    console.log(response, "response");
+    // @ts-ignore
     // const transactionHash = await transactionContract.addToBlockChain(
     //   toAddress,
     //   parsedAmount,
