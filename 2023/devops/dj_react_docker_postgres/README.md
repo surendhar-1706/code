@@ -1,6 +1,6 @@
 # simple crud app built with drf-react and docker
 
-#### installtion
+## How to run this app  
 
 * install docker
 * docker compose up
