@@ -3,6 +3,7 @@ backports.zoneinfo==0.2.1
 black==23.7.0
 click==8.1.6
 Django==4.2.3
+django-cors-headers==4.2.0
 djangorestframework==3.14.0
 mypy-extensions==1.0.0
 packaging==23.1
