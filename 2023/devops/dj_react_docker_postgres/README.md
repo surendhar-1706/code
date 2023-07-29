@@ -3,5 +3,6 @@
 ## How to run this app  
 
 * install docker
-* docker compose up
+* make sure you are in the root directory (same as docker-compose.yml file)
+* In your terminal run `docker compose up`
 * wait for few seconds :)
