@@ -4,3 +4,4 @@
 
 * install docker
 * docker compose up
+* wait for few seconds :)
