@@ -9,6 +9,7 @@ packages = [{include = "poetry_docker_django_postgres"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^4.2.3"
+black = "^23.7.0"
 
 
 [build-system]
