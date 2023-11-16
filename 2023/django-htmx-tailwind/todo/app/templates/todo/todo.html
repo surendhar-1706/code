@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Form</title>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.8"
+      integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div>
+      <p>This is a form</p>
+      <form hx-post="/add_todo/" hx-target="#todos" hx-swap="afterend">
+        <input type="text" name="title" />
+        <button type="submit">Submit</button>
+      </form>
+      <div>
+        <div>List of todos</div>
+        {% for todo in todos %} {% include 'todo/partial/todo.html' %} 
+        {% endfor %}
+        <div id="todos"></div>
+      </div>
+    </div>
+    <script>
+      document.body.addEventListener("htmx:configRequest", (event) => {
+        event.detail.headers["X-CSRFToken"] = "{{ csrf_token }}";
+      });
+    </script>
+  </body>
+</html>
