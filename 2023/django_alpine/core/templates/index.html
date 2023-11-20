@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body class="p-40 w-[400px] border">
+    <div x-data="{ count:0 }">
+      <div x-text="count"></div>
+      <span class="text-red-500 border cursor-pointer" x-on:click="count++"
+        >Increment Counter</span
+      >
+    </div>
+    <div class="w-fit" x-data="{ open:false }">
+      <div x-text="open" x-on:click="open = !open"></div>
+      <div
+        x-data="{ posts: []}"
+        x-init="fetch('/todo').then((res)=>{return res.json()}).then((data)=>{
+            console.log(data)
+            posts = data
+        })"
+      >
+        <template x-for="post in posts">
+          <div class="flex">
+            <input x-model="post.title"></input>
+            <div  x-on:click="fetch(`/todo/${post.id}/`,{
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json' // Set Content-Type to JSON
+                  },
+                  body: JSON.stringify(post)
+              })" class="border py-3 px-2 my-3 cursor-pointer">submit</div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </body>
+</html>
